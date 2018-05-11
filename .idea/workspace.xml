@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa2d553-30c8-457c-a11d-123166fa7427" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Simulator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Query.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -214,16 +210,23 @@
       <updated>1525983478801</updated>
       <workItem from="1525983480229" duration="593000" />
       <workItem from="1525984555236" duration="31000" />
-      <workItem from="1525984607477" duration="962000" />
+      <workItem from="1525984607477" duration="1552000" />
     </task>
+    <task id="LOCAL-00001" summary="se agregan clases">
+      <created>1525985595215</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525985595215</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1586000" />
+    <option name="totallyTimeSpent" value="2176000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -259,6 +262,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="se agregan clases" />
+    <option name="LAST_COMMIT_MESSAGE" value="se agregan clases" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Application.java">
