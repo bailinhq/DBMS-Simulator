@@ -5,9 +5,9 @@ public abstract class Module {
     private int numberOfServers;
     private int occupability;
     private PriorityQueue<Event> queue;
+    private PriorityQueue<Event> globalQueue;
 
     public Module(){
-
     }
 
     public void processInput(){

@@ -6,13 +6,6 @@ public class Event implements Comparable<Event> {
         state = aState;
     }
 
-    private enum CurrentState{
-        CLIENT,
-        PROCESS,
-        QUERY,
-        STORAGE,
-        EXECUTOR
-    }
 
     @Override
     public int compareTo(Event o){

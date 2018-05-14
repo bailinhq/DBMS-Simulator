@@ -7,5 +7,4 @@ public class Query {
         time = aTime;
     }
 
-    public enum QueryType {SELECT, UPDATE, JOIN, DDL}
 }

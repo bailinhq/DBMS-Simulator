@@ -23,7 +23,9 @@ public class Simulator {
     }
 
     private Query generateQuery(){
-        return new Query(0, 0);
+        QueryType query_type = QueryType.DDL;
+        Query query = new Query(query_type, 0.0);
+        return query;
     }
 
     private void simulate(){
