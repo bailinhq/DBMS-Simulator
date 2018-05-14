@@ -2,8 +2,8 @@ import java.util.PriorityQueue;
 
 public class TransactionalStorageModule extends Module {
 
-    public TransactionalStorageModule(){
-
+    public TransactionalStorageModule(PriorityQueue<Event> global){
+        super(global);
     }
 
     @Override

@@ -1,9 +1,9 @@
-import java.util.Queue;
+import java.util.PriorityQueue;
 
 public class ProcessManagerModule extends Module {
 
-    public ProcessManagerModule(){
-
+    public ProcessManagerModule(PriorityQueue<Event> global){
+        super(global);
     }
 
     @Override

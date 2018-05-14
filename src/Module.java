@@ -7,7 +7,8 @@ public abstract class Module {
     private PriorityQueue<Event> queue;
     private PriorityQueue<Event> globalQueue;
 
-    public Module(){
+    public Module(PriorityQueue<Event> global){
+        globalQueue = global;
     }
 
     public void processInput(){

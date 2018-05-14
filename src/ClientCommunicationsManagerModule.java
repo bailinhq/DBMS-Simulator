@@ -1,7 +1,9 @@
+import java.util.PriorityQueue;
+
 public class ClientCommunicationsManagerModule extends Module{
 
-    public ClientCommunicationsManagerModule(){
-
+    public ClientCommunicationsManagerModule(PriorityQueue<Event> global){
+        super(global);
     }
 
     @Override

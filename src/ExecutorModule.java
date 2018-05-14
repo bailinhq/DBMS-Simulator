@@ -1,7 +1,9 @@
+import java.util.PriorityQueue;
+
 public class ExecutorModule extends Module {
 
-    public ExecutorModule(){
-
+    public ExecutorModule(PriorityQueue<Event> global){
+        super(global);
     }
 
     @Override

@@ -1,6 +1,8 @@
-public class QueryProcessorModule extends Module {
-    public QueryProcessorModule(){
+import java.util.PriorityQueue;
 
+public class QueryProcessorModule extends Module {
+    public QueryProcessorModule(PriorityQueue<Event> global){
+        super(global);
     }
 
     @Override
