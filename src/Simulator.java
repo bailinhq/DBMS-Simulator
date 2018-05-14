@@ -1,17 +1,25 @@
 public class Simulator {
-    private Interface anInterface;
     private RandomValueGenerator valueGenerator;
 
-    public Simulator(Interface anInterface){
+    private ClientCommunicationsManagerModule clientCommunicationsManagerModule;
+    private ProcessManagerModule processManagerModule;
+    private QueryProcessorModule queryProcessorModule;
+    private TransactionalStorageModule transactionalStorageModule;
+
+
+    public Simulator(){
         valueGenerator = new RandomValueGenerator();
-        this.anInterface = anInterface;
     }
 
     public void run(){
 
     }
-    
-    private void generateQuery(){
 
+    private Query generateQuery(){
+        return new Query(0, 0);
+    }
+
+    private void simulate(){
+        
     }
 }
