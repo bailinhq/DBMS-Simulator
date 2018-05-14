@@ -1,3 +1,5 @@
+import java.util.PriorityQueue;
+
 public class Simulator {
     private RandomValueGenerator valueGenerator;
 
@@ -5,7 +7,7 @@ public class Simulator {
     private ProcessManagerModule processManagerModule;
     private QueryProcessorModule queryProcessorModule;
     private TransactionalStorageModule transactionalStorageModule;
-
+    private PriorityQueue<Event> queue;
 
     public Simulator(){
         valueGenerator = new RandomValueGenerator();

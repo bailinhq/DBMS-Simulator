@@ -4,7 +4,12 @@ public class QueryProcessorModule extends Module {
     }
 
     @Override
-    public double processQuery(Query aQuery) {
-        return super.processQuery(aQuery);
+    public void processInput() {
+        super.processInput();
+    }
+
+    @Override
+    public void processOutput() {
+        super.processOutput();
     }
 }

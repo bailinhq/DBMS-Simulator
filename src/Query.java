@@ -1,9 +1,11 @@
 public class Query {
-    public int type; //1: SELECT - 2: UPDATE - 3:JOIN - 4:DDL
+    //public int type; //1: SELECT - 2: UPDATE - 3:JOIN - 4:DDL
     public double time;
-
+    public queryType type;
     public Query(int aType, double aTime){
         type = aType;
         time = aTime;
     }
+
+    public enum queryType{SELECT, UPDATE, JOIN, DDL}
 }

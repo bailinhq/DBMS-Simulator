@@ -10,6 +10,5 @@ public class Application {
     }
 
     public void showMenu(){
-
     }
 }

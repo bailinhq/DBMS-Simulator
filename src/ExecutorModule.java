@@ -1,6 +1,6 @@
-public class ClientCommunicationsManagerModule extends Module{
+public class ExecutorModule extends Module {
 
-    public ClientCommunicationsManagerModule(){
+    public ExecutorModule(){
 
     }
 
