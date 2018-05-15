@@ -1,18 +1,33 @@
 public class ModuleStatistics {
 
-    public int numberOfSELECT;
-    public int numberOfUPDATE;
-    public int numberOfJOIN;
-    public int numberOfDDL;
+    private int numberOfSELECT;
+    private int numberOfUPDATE;
+    private int numberOfJOIN;
+    private int numberOfDDL;
 
-    public double timeOfSELECT;
-    public double timeOfUPDATE;
-    public double timeOfJOIN;
-    public double timeOfDDL;
+    private double timeOfSELECT;
+    private double timeOfUPDATE;
+    private double timeOfJOIN;
+    private double timeOfDDL;
 
     public QueryType type;
 
     public ModuleStatistics(){
 
     }
+
+    public void increaseTimeOfQuery(QueryType query, double inputTime, double outputTime) {
+
+    }
+
+    public void increaseNumberOfQuery(QueryType query) {
+
+    }
+
+    public double setAverageTimeInModuleOfQuery(QueryType query) {
+
+        return 1.0;
+    }
+
+
 }
