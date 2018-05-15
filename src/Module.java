@@ -6,6 +6,7 @@ public abstract class Module {
     private int occupability;
     private PriorityQueue<Event> queue;
     private PriorityQueue<Event> globalQueue;
+    private ModuleStatistics statisticsOfModule;
 
     public Module(PriorityQueue<Event> global){
         globalQueue = global;
