@@ -1,5 +1,7 @@
 public class ModuleStatistics {
 
+    private int queueSize;
+
     private int numberOfSELECT;
     private int numberOfUPDATE;
     private int numberOfJOIN;
@@ -24,10 +26,14 @@ public class ModuleStatistics {
 
     }
 
-    public double setAverageTimeInModuleOfQuery(QueryType query) {
+    public double getAverageTimeInModuleOfQuery(QueryType query) {
 
         return 1.0;
     }
 
+    public double getAverageSizeQueue() {
+
+        return 1.0;
+    }
 
 }
