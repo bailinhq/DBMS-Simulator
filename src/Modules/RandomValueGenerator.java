@@ -1,3 +1,5 @@
+package Modules;
+
 public class RandomValueGenerator {
     public RandomValueGenerator(){
 

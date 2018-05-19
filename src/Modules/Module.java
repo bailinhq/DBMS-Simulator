@@ -1,3 +1,7 @@
+package Modules;
+
+import Statistics.ModuleStatistics;
+
 import java.util.PriorityQueue;
 
 public abstract class Module {
@@ -8,7 +12,7 @@ public abstract class Module {
     private PriorityQueue<Event> globalQueue;
     private ModuleStatistics statisticsOfModule;
 
-    public Module(PriorityQueue<Event> global){
+    Module(PriorityQueue<Event> global){
         globalQueue = global;
     }
 

@@ -2,13 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aa2d553-30c8-457c-a11d-123166fa7427" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CurrentState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/QueryType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Module.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Query.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Application.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ClientCommunicationsManagerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/ClientCommunicationsManagerModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CurrentState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/CurrentState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ExecutorModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/ExecutorModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Interface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Interface/Interface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Module.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Module.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ModuleStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Statistics/ModuleStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ProcessManagerModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/ProcessManagerModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Query.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/Query.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QueryProcessorModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/QueryProcessorModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/QueryType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/QueryType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RandomValueGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/RandomValueGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimulationStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Statistics/SimulationStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Simulator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Simulator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Simulator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SystemStatistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Statistics/SystemStatistics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TransactionalStorageModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modules/TransactionalStorageModule.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,95 +33,100 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ProcessManagerModule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ProcessManagerModule.java">
+      <file leaf-file-name="Simulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/Simulator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Application.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Model/Application.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RandomValueGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/RandomValueGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="40">
-              <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Main.java">
+      <file leaf-file-name="Query.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
+            <state relative-caret-position="40">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Simulator.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Simulator.java">
+      <file leaf-file-name="QueryType.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/QueryType.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+            <state relative-caret-position="40">
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Event.java">
+      <file leaf-file-name="ExecutorModule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/ExecutorModule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="80">
+              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Module.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/Module.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
               <folding>
-                <element signature="e#191#192#0" expanded="true" />
-                <element signature="e#221#222#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="CurrentState.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/CurrentState.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret selection-end-line="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Query.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Query.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryType.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/QueryType.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExecutorModule.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/ExecutorModule.java">
+        <entry file="file://$PROJECT_DIR$/src/Modules/CurrentState.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="40">
-              <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Module.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Module.java">
+      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Modules/Event.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+            <state relative-caret-position="40">
+              <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Statistics.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Statistics.java">
+      <file leaf-file-name="Interface.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Interface/Interface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="40">
+              <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#101#102#0" expanded="true" />
+                <element signature="e#144#145#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -147,6 +165,9 @@
         <option value="$PROJECT_DIR$/src/CurrentState.java" />
         <option value="$PROJECT_DIR$/src/Event.java" />
         <option value="$PROJECT_DIR$/src/Simulator.java" />
+        <option value="$PROJECT_DIR$/src/Modules/CurrentState.java" />
+        <option value="$PROJECT_DIR$/src/Model/Simulator.java" />
+        <option value="$PROJECT_DIR$/src/Interface/Interface.java" />
       </list>
     </option>
   </component>
@@ -160,10 +181,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="396" />
-    <option name="y" value="-17" />
-    <option name="width" value="975" />
-    <option name="height" value="1050" />
+    <option name="x" value="-9" />
+    <option name="width" value="978" />
+    <option name="height" value="1039" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -171,6 +191,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
@@ -185,11 +206,16 @@
               <item name="DBMS Simulator IO" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="DBMS Simulator IO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="DBMS Simulator IO" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Interface" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -285,6 +311,8 @@
       <workItem from="1526160854135" duration="5896000" />
       <workItem from="1526180365521" duration="732000" />
       <workItem from="1526317723526" duration="12182000" />
+      <workItem from="1526568666107" duration="20000" />
+      <workItem from="1526708478724" duration="1362000" />
     </task>
     <task id="LOCAL-00001" summary="se agregan clases">
       <created>1525985595215</created>
@@ -332,15 +360,14 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33251000" />
+    <option name="totallyTimeSpent" value="38106000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="7" />
-      <window_info anchor="bottom" id="Messages" order="0" weight="0.32965517" />
       <window_info anchor="right" id="Palette&#9;" order="8" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -352,7 +379,7 @@
       <window_info anchor="bottom" id="Terminal" order="9" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.12434896" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1261745" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -362,6 +389,7 @@
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32965517" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
@@ -383,97 +411,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="adds parameters" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/RandomNumberGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomValueGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="e#130#131#0" expanded="true" />
-            <element signature="e#156#157#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" lean-forward="true" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TransactionalStorageModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#257#258#0" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#342#343#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/Application">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>Application</OriginalElement>
-          <nodes>
-            <node x="" y="">ProcessManagerModule</node>
-            <node x="" y="">TransactionalStorageModule</node>
-            <node x="" y="">RandomNumberGenerator</node>
-            <node x="" y="">Query</node>
-            <node x="" y="">RandomValueGenerator</node>
-            <node x="" y="">QueryProcessorModule</node>
-            <node x="" y="">Module</node>
-            <node x="" y="">Simulator</node>
-            <node x="" y="">Application</node>
-            <node x="" y="">ClientCommunicationsManagerModule</node>
-            <node x="" y="">Main</node>
-            <node x="" y="">Interface</node>
-          </nodes>
-          <notes />
-          <edges />
-          <settings layout="Hierarchic Group" zoom="0.29321930360415394" x="1944.0" y="870.0" />
-          <SelectedNodes />
-          <Categories>
-            <Category>Methods</Category>
-            <Category>Properties</Category>
-            <Category />
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProcessManagerModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="12" column="5" lean-forward="true" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
-          <folding>
-            <element signature="e#189#190#0" expanded="true" />
-            <element signature="e#225#226#0" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-            <element signature="e#311#312#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ProcessManagerModule.java" />
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -481,77 +419,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Simulator.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Simulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QueryProcessorModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomNumberGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="8" column="8" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomValueGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/QueryProcessorModule.java" />
+    <entry file="file://$PROJECT_DIR$/src/RandomNumberGenerator.java" />
+    <entry file="file://$PROJECT_DIR$/src/Modules/RandomValueGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="e#130#131#0" expanded="true" />
-            <element signature="e#156#157#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/TransactionalStorageModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="12" column="8" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="42" />
-          <folding>
-            <element signature="e#257#258#0" expanded="true" />
-            <element signature="e#293#294#0" expanded="true" />
-            <element signature="e#342#343#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/TransactionalStorageModule.java" />
+    <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="24" selection-start-column="24" selection-end-column="24" />
-          <folding>
-            <element signature="e#119#120#0" expanded="true" />
-            <element signature="e#142#143#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Module.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface.java">
+    <entry file="file://$PROJECT_DIR$/src/Module.java" />
+    <entry file="file://$PROJECT_DIR$/src/Interface/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" selection-start-column="22" selection-end-column="22" />
@@ -565,35 +465,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="20">
           <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Simulator.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Simulator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" selection-start-column="22" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="24" selection-start-column="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Module.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface.java">
+    <entry file="file://$PROJECT_DIR$/src/Module.java" />
+    <entry file="file://$PROJECT_DIR$/src/Interface/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" selection-start-column="22" selection-end-column="22" />
@@ -607,28 +501,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Application.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="24" selection-start-column="24" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Module.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" selection-start-column="19" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface.java">
+    <entry file="file://$PROJECT_DIR$/src/Module.java" />
+    <entry file="file://$PROJECT_DIR$/src/Interface/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="22" selection-start-column="22" selection-end-column="22" />
@@ -642,7 +530,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
           <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
@@ -797,224 +685,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomNumberGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="uml://JAVA/Application">
-      <provider selected="true" editor-type-id="UmlEditorProvider">
-        <state>
-          <ID>JAVA</ID>
-          <OriginalElement>Application</OriginalElement>
-          <nodes>
-            <node x="279.73277777777787" y="276.0">ProcessManagerModule</node>
-            <node x="234.75166666666667" y="44.5">Query</node>
-            <node x="1486.7327777777778" y="287.5">RandomValueGenerator</node>
-            <node x="1264.7327777777778" y="287.5">QueryProcessorModule</node>
-            <node x="758.7327777777779" y="287.5">ClientCommunicationsManagerModule</node>
-            <node x="213.0" y="941.0">Statistics</node>
-            <node x="506.73277777777787" y="276.0">TransactionalStorageModule</node>
-            <node x="0.0" y="265.0">Event</node>
-            <node x="1065.7327777777778" y="287.5">ExecutorModule</node>
-            <node x="16.418333333333294" y="67.0">java.lang.Comparable</node>
-            <node x="782.6355555555556" y="0.0">Module</node>
-            <node x="520.482777777778" y="476.0">Simulator</node>
-            <node x="492.732777777778" y="755.0">Application</node>
-            <node x="0.0" y="941.0">Main</node>
-            <node x="299.4827777777779" y="531.5">Interface</node>
-          </nodes>
-          <notes />
-          <edges>
-            <edge source="Simulator" target="QueryProcessorModule">
-              <point x="90.74999999999989" y="-114.5" />
-              <point x="853.2327777777779" y="436.0" />
-              <point x="1365.7327777777778" y="436.0" />
-              <point x="0.0" y="48.0" />
-            </edge>
-            <edge source="ProcessManagerModule" target="Query">
-              <point x="-51.75" y="-59.5" />
-              <point x="331.48277777777787" y="245.0" />
-              <point x="360.75166666666667" y="245.0" />
-              <point x="42.0" y="48.0" />
-            </edge>
-            <edge source="ProcessManagerModule" target="Module">
-              <point x="51.75" y="-59.5" />
-              <point x="434.98277777777787" y="235.0" />
-              <point x="800.5355555555556" y="235.0" />
-              <point x="-71.60000000000002" y="92.5" />
-            </edge>
-            <edge source="TransactionalStorageModule" target="Module">
-              <point x="58.0" y="-59.5" />
-              <point x="680.7327777777779" y="245.0" />
-              <point x="836.3355555555556" y="245.0" />
-              <point x="-35.799999999999955" y="92.5" />
-            </edge>
-            <edge source="Application" target="Interface">
-              <point x="-44.25" y="-70.5" />
-              <point x="536.982777777778" y="730.0" />
-              <point x="399.9827777777779" y="730.0" />
-              <point x="0.0" y="59.0" />
-            </edge>
-            <edge source="ClientCommunicationsManagerModule" target="Module">
-              <point x="0.0" y="-48.0" />
-              <point x="902.2327777777779" y="245.0" />
-              <point x="872.1355555555556" y="245.0" />
-              <point x="0.0" y="92.5" />
-            </edge>
-            <edge source="TransactionalStorageModule" target="Query">
-              <point x="-58.0" y="-59.5" />
-              <point x="564.7327777777779" y="225.0" />
-              <point x="388.75166666666667" y="225.0" />
-              <point x="70.0" y="48.0" />
-            </edge>
-            <edge source="Simulator" target="RandomValueGenerator">
-              <point x="211.7499999999999" y="-114.5" />
-              <point x="974.2327777777779" y="456.0" />
-              <point x="1725.2327777777778" y="456.0" />
-              <point x="79.5" y="48.0" />
-            </edge>
-            <edge source="Event" target="java.lang.Comparable">
-              <point x="-76.66666666666674" y="-70.5" />
-              <point x="38.33333333333326" y="245.0" />
-              <point x="96.4183333333333" y="245.0" />
-              <point x="0.0" y="25.5" />
-            </edge>
-            <edge source="Application" target="Simulator">
-              <point x="44.25" y="-70.5" />
-              <point x="625.482777777778" y="730.0" />
-              <point x="762.482777777778" y="730.0" />
-              <point x="0.0" y="114.5" />
-            </edge>
-            <edge source="Event" target="Query">
-              <point x="76.66666666666674" y="-70.5" />
-              <point x="191.66666666666674" y="215.0" />
-              <point x="276.75166666666667" y="215.0" />
-              <point x="-42.0" y="48.0" />
-            </edge>
-            <edge source="Simulator" target="TransactionalStorageModule">
-              <point x="-30.250000000000114" y="-114.5" />
-              <point x="732.2327777777779" y="426.0" />
-              <point x="622.7327777777779" y="426.0" />
-              <point x="0.0" y="59.5" />
-            </edge>
-            <edge source="Simulator" target="Query">
-              <point x="-151.2500000000001" y="-114.5" />
-              <point x="611.2327777777779" y="446.0" />
-              <point x="269.23277777777787" y="446.0" />
-              <point x="269.23277777777787" y="235.0" />
-              <point x="332.75166666666667" y="235.0" />
-              <point x="14.0" y="48.0" />
-            </edge>
-            <edge source="Simulator" target="ProcessManagerModule">
-              <point x="-90.75000000000011" y="-114.5" />
-              <point x="671.7327777777779" y="436.0" />
-              <point x="383.23277777777787" y="436.0" />
-              <point x="0.0" y="59.5" />
-            </edge>
-            <edge source="Simulator" target="ClientCommunicationsManagerModule">
-              <point x="30.249999999999886" y="-114.5" />
-              <point x="792.7327777777779" y="426.0" />
-              <point x="902.2327777777779" y="426.0" />
-              <point x="0.0" y="48.0" />
-            </edge>
-            <edge source="QueryProcessorModule" target="Module">
-              <point x="0.0" y="-48.0" />
-              <point x="1365.7327777777778" y="235.0" />
-              <point x="943.7355555555556" y="235.0" />
-              <point x="71.60000000000002" y="92.5" />
-            </edge>
-            <edge source="ExecutorModule" target="Module">
-              <point x="-1.1368683772161603E-13" y="-48.0" />
-              <point x="1155.2327777777778" y="245.0" />
-              <point x="907.9355555555555" y="245.0" />
-              <point x="35.799999999999955" y="92.5" />
-            </edge>
-          </edges>
-          <settings layout="Hierarchic Group" zoom="0.6650197628458498" x="252.14338781575043" y="350.89153046062404" />
-          <SelectedNodes>
-            <node>Application</node>
-          </SelectedNodes>
-          <Categories>
-            <Category>Fields</Category>
-            <Category>Constructors</Category>
-            <Category>Methods</Category>
-            <Category>Properties</Category>
-          </Categories>
-          <SCOPE>All</SCOPE>
-          <VISIBILITY>private</VISIBILITY>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/TransactionalStorageModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="56" selection-start-line="2" selection-start-column="56" selection-end-line="2" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ClientCommunicationsManagerModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#165#166#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-            <element signature="e#250#251#0" expanded="true" />
-            <element signature="e#287#288#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/RandomValueGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
-          <folding>
-            <element signature="e#130#131#0" expanded="true" />
-            <element signature="e#156#157#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/QueryProcessorModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Interface.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="260">
-          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
-          <folding>
-            <element signature="e#101#102#0" expanded="true" />
-            <element signature="e#143#144#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
-          <folding>
-            <element signature="e#119#120#0" expanded="true" />
-            <element signature="e#142#143#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ProcessManagerModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/RandomNumberGenerator.java" />
+    <entry file="file://$PROJECT_DIR$/src/TransactionalStorageModule.java" />
+    <entry file="file://$PROJECT_DIR$/src/ProcessManagerModule.java" />
     <entry file="file://$PROJECT_DIR$/src/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
@@ -1022,62 +695,324 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ExecutorModule.java">
+    <entry file="file://$PROJECT_DIR$/src/Module.java" />
+    <entry file="file://$PROJECT_DIR$/src/Statistics.java" />
+    <entry file="file://$PROJECT_DIR$/src/ExecutorModule.java" />
+    <entry file="file://$PROJECT_DIR$/src/ModuleStatistics.java" />
+    <entry file="file://$PROJECT_DIR$/src/SystemStatistics.java" />
+    <entry file="file://$PROJECT_DIR$/src/SimulationStatistics.java" />
+    <entry file="file://$PROJECT_DIR$/src/QueryProcessorModule.java" />
+    <entry file="file://$PROJECT_DIR$/src/ClientCommunicationsManagerModule.java" />
+    <entry file="uml://JAVA/Application">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JAVA</ID>
+          <OriginalElement>Application</OriginalElement>
+          <nodes>
+            <node x="1234.375" y="1241.0">ProcessManagerModule</node>
+            <node x="10.5" y="310.5">Query</node>
+            <node x="110.375" y="1241.0">RandomValueGenerator</node>
+            <node x="1575.375" y="1241.0">QueryProcessorModule</node>
+            <node x="446.375" y="1241.0">ClientCommunicationsManagerModule</node>
+            <node x="1759.8807432432432" y="178.0">ModuleStatistics</node>
+            <node x="867.375" y="1241.0">TransactionalStorageModule</node>
+            <node x="2169.875" y="590.0">SimulationStatistics</node>
+            <node x="1395.75" y="289.0">CurrentState</node>
+            <node x="2214.375" y="998.5">SystemStatistics</node>
+            <node x="1281.25" y="644.5">Event</node>
+            <node x="1912.375" y="1241.0">ExecutorModule</node>
+            <node x="1330.0" y="921.0">Module</node>
+            <node x="207.42083333333323" y="0.0">QueryType</node>
+            <node x="1940.504504504504" y="1872.0">Application</node>
+            <node x="0.0" y="2059.0">Main</node>
+            <node x="148.20416666666642" y="1428.0">Simulator</node>
+            <node x="2100.875" y="1538.0">Interface</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="Simulator" target="QueryProcessorModule">
+              <point x="216.89999999999998" y="-192.0" />
+              <point x="606.1041666666664" y="1408.0" />
+              <point x="1733.875" y="1408.0" />
+              <point x="0.0" y="48.5" />
+            </edge>
+            <edge source="Simulator" target="Event">
+              <point x="-72.29999999999995" y="-192.0" />
+              <point x="316.90416666666647" y="1378.0" />
+              <point x="99.875" y="1378.0" />
+              <point x="99.875" y="861.0" />
+              <point x="1293.9166666666665" y="861.0" />
+              <point x="-101.33333333333337" y="71.0" />
+            </edge>
+            <edge source="Query" target="QueryType">
+              <point x="52.25" y="-48.5" />
+              <point x="167.25" y="158.0" />
+              <point x="259.42083333333323" y="158.0" />
+              <point x="0.0" y="59.0" />
+            </edge>
+            <edge source="ProcessManagerModule" target="Event">
+              <point x="-107.0" y="-48.5" />
+              <point x="1287.875" y="1171.0" />
+              <point x="1319.5" y="1171.0" />
+              <point x="1319.5" y="891.0" />
+              <point x="1369.9166666666665" y="891.0" />
+              <point x="-25.33333333333337" y="71.0" />
+            </edge>
+            <edge source="TransactionalStorageModule" target="Module">
+              <point x="0.0" y="-48.5" />
+              <point x="1040.875" y="1201.0" />
+              <point x="1393.75" y="1201.0" />
+              <point x="-63.75" y="115.0" />
+            </edge>
+            <edge source="Module" target="ModuleStatistics">
+              <point x="85.0" y="-115.0" />
+              <point x="1542.5" y="901.0" />
+              <point x="1568.75" y="901.0" />
+              <point x="1568.75" y="570.0" />
+              <point x="1849.1307432432432" y="570.0" />
+              <point x="-89.25" y="181.0" />
+            </edge>
+            <edge source="SimulationStatistics" target="ModuleStatistics">
+              <point x="0.0" y="-125.5" />
+              <point x="2346.375" y="570.0" />
+              <point x="2027.6307432432432" y="570.0" />
+              <point x="89.25" y="181.0" />
+            </edge>
+            <edge source="Module" target="Event">
+              <point x="-85.0" y="-115.0" />
+              <point x="1372.5" y="901.0" />
+              <point x="1395.25" y="901.0" />
+              <point x="0.0" y="71.0" />
+            </edge>
+            <edge source="Simulator" target="QueryType">
+              <point x="-216.89999999999998" y="-192.0" />
+              <point x="172.30416666666645" y="1408.0" />
+              <point x="0.0" y="1408.0" />
+              <point x="0.0" y="138.0" />
+              <point x="217.8208333333332" y="138.0" />
+              <point x="-41.60000000000002" y="59.0" />
+            </edge>
+            <edge source="Interface" target="Event">
+              <point x="0.0" y="-82.0" />
+              <point x="2203.875" y="871.0" />
+              <point x="1496.5833333333333" y="871.0" />
+              <point x="101.33333333333326" y="71.0" />
+            </edge>
+            <edge source="ClientCommunicationsManagerModule" target="Event">
+              <point x="-133.66666666666663" y="-48.5" />
+              <point x="513.2083333333334" y="871.0" />
+              <point x="1319.25" y="871.0" />
+              <point x="-76.0" y="71.0" />
+            </edge>
+            <edge source="Simulator" target="RandomValueGenerator">
+              <point x="-24.099999999999966" y="-192.0" />
+              <point x="365.1041666666664" y="1368.0" />
+              <point x="189.375" y="1368.0" />
+              <point x="-79.0" y="48.5" />
+            </edge>
+            <edge source="SystemStatistics" target="SimulationStatistics">
+              <point x="0.0" y="-37.5" />
+              <point x="0.0" y="125.5" />
+            </edge>
+            <edge source="Simulator" target="TransactionalStorageModule">
+              <point x="120.5" y="-192.0" />
+              <point x="509.7041666666664" y="1388.0" />
+              <point x="1040.875" y="1388.0" />
+              <point x="0.0" y="48.5" />
+            </edge>
+            <edge source="Simulator" target="ProcessManagerModule">
+              <point x="168.70000000000005" y="-192.0" />
+              <point x="557.9041666666665" y="1398.0" />
+              <point x="1394.875" y="1398.0" />
+              <point x="0.0" y="48.5" />
+            </edge>
+            <edge source="Simulator" target="ClientCommunicationsManagerModule">
+              <point x="72.30000000000007" y="-192.0" />
+              <point x="461.5041666666665" y="1378.0" />
+              <point x="646.875" y="1378.0" />
+              <point x="0.0" y="48.5" />
+            </edge>
+            <edge source="Interface" target="Application">
+              <point x="68.66666666666652" y="82.0" />
+              <point x="2272.5416666666665" y="1852.0" />
+              <point x="2093.629504504504" y="1852.0" />
+              <point x="65.625" y="-71.0" />
+            </edge>
+            <edge source="TransactionalStorageModule" target="Event">
+              <point x="-115.66666666666674" y="-48.5" />
+              <point x="925.2083333333333" y="881.0" />
+              <point x="1344.5833333333335" y="881.0" />
+              <point x="-50.66666666666663" y="71.0" />
+            </edge>
+            <edge source="Event" target="CurrentState">
+              <point x="85.5" y="-71.0" />
+              <point x="28.25" y="70.0" />
+            </edge>
+            <edge source="ProcessManagerModule" target="Module">
+              <point x="0.0" y="-48.5" />
+              <point x="1394.875" y="1221.0" />
+              <point x="1444.75" y="1221.0" />
+              <point x="-12.75" y="115.0" />
+            </edge>
+            <edge source="Application" target="Interface">
+              <point x="-21.875" y="-71.0" />
+              <point x="2006.129504504504" y="1832.0" />
+              <point x="2135.2083333333335" y="1832.0" />
+              <point x="-68.66666666666669" y="82.0" />
+            </edge>
+            <edge source="ClientCommunicationsManagerModule" target="Module">
+              <point x="0.0" y="-48.5" />
+              <point x="646.875" y="1181.0" />
+              <point x="1342.75" y="1181.0" />
+              <point x="-114.75" y="115.0" />
+            </edge>
+            <edge source="Application" target="Simulator">
+              <point x="-65.625" y="-71.0" />
+              <point x="1962.379504504504" y="1852.0" />
+              <point x="389.2041666666664" y="1852.0" />
+              <point x="0.0" y="192.0" />
+            </edge>
+            <edge source="Event" target="Query">
+              <point x="-28.5" y="-71.0" />
+              <point x="1366.75" y="560.0" />
+              <point x="193.375" y="560.0" />
+              <point x="78.375" y="48.5" />
+            </edge>
+            <edge source="ExecutorModule" target="Event">
+              <point x="93.66666666666652" y="-48.5" />
+              <point x="2146.5416666666665" y="1171.0" />
+              <point x="2015.7128378378375" y="1171.0" />
+              <point x="2015.7128378378375" y="881.0" />
+              <point x="1471.25" y="881.0" />
+              <point x="76.0" y="71.0" />
+            </edge>
+            <edge source="ModuleStatistics" target="QueryType">
+              <point x="89.25" y="-181.0" />
+              <point x="2027.6307432432432" y="148.0" />
+              <point x="301.02083333333314" y="148.0" />
+              <point x="41.599999999999966" y="59.0" />
+            </edge>
+            <edge source="QueryProcessorModule" target="Event">
+              <point x="105.66666666666663" y="-48.5" />
+              <point x="1839.5416666666665" y="891.0" />
+              <point x="1445.9166666666665" y="891.0" />
+              <point x="50.666666666666515" y="71.0" />
+            </edge>
+            <edge source="Simulator" target="Query">
+              <point x="-120.49999999999989" y="-192.0" />
+              <point x="268.70416666666654" y="1388.0" />
+              <point x="88.875" y="1388.0" />
+              <point x="-26.125" y="48.5" />
+            </edge>
+            <edge source="QueryProcessorModule" target="Module">
+              <point x="0.0" y="-48.5" />
+              <point x="1733.875" y="1201.0" />
+              <point x="1521.25" y="1201.0" />
+              <point x="63.75" y="115.0" />
+            </edge>
+            <edge source="ExecutorModule" target="Module">
+              <point x="-93.66666666666674" y="-48.5" />
+              <point x="1959.2083333333335" y="1191.0" />
+              <point x="1546.75" y="1191.0" />
+              <point x="89.25" y="115.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="0.20698012603005328" x="1252.0" y="1022.0" />
+          <SelectedNodes>
+            <node>Application</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>Fields</Category>
+            <Category>Constructors</Category>
+            <Category>Methods</Category>
+          </Categories>
+          <SCOPE>All</SCOPE>
+          <VISIBILITY>private</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Statistics/ModuleStatistics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="40">
-          <caret line="2" column="26" selection-start-line="2" selection-start-column="26" selection-end-line="2" selection-end-column="26" />
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Module.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/CurrentState.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="9" column="20" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        <state relative-caret-position="40">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Statistics.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/Event.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        <state relative-caret-position="40">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/QueryType.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/Query.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="1" column="29" selection-start-line="1" selection-start-column="29" selection-end-line="1" selection-end-column="29" />
+        <state relative-caret-position="40">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Event.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/QueryType.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="40">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/ExecutorModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Modules/Module.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="7" lean-forward="true" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
           <folding>
-            <element signature="e#191#192#0" expanded="true" />
-            <element signature="e#221#222#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Query.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Simulator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="5" lean-forward="true" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+        <state relative-caret-position="80">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/CurrentState.java">
+    <entry file="file://$PROJECT_DIR$/src/Model/Application.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="7" />
+        <state relative-caret-position="80">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Simulator.java">
+    <entry file="file://$PROJECT_DIR$/src/Modules/RandomValueGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="317">
-          <caret line="25" column="45" lean-forward="true" selection-start-line="25" selection-start-column="45" selection-end-line="25" selection-end-column="45" />
+        <state relative-caret-position="40">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Interface/Interface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#101#102#0" expanded="true" />
+            <element signature="e#144#145#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

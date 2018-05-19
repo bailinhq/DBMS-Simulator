@@ -1,3 +1,7 @@
+package Model;
+
+import Interface.Interface;
+
 public class Application {
     private Interface anInterface;
     private Simulator simulator;

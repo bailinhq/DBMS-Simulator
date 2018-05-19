@@ -1,5 +1,8 @@
+package Interface;
+import Model.Application;
+import Modules.*;
 public class Interface {
-    Application application;
+    private Application application;
     public Interface(Application anApplication){
         application = anApplication;
     }

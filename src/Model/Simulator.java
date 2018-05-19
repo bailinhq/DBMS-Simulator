@@ -1,3 +1,7 @@
+package Model;
+
+import Modules.*;
+
 import java.util.PriorityQueue;
 
 public class Simulator {

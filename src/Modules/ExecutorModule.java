@@ -1,8 +1,10 @@
+package Modules;
+
 import java.util.PriorityQueue;
 
-public class TransactionalStorageModule extends Module {
+public class ExecutorModule extends Module {
 
-    public TransactionalStorageModule(PriorityQueue<Event> global){
+    public ExecutorModule(PriorityQueue<Event> global){
         super(global);
     }
 

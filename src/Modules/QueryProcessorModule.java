@@ -1,8 +1,9 @@
+package Modules;
+
 import java.util.PriorityQueue;
 
-public class ProcessManagerModule extends Module {
-
-    public ProcessManagerModule(PriorityQueue<Event> global){
+public class QueryProcessorModule extends Module {
+    public QueryProcessorModule(PriorityQueue<Event> global){
         super(global);
     }
 

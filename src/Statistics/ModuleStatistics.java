@@ -1,3 +1,5 @@
+package Statistics;
+import Modules.*;
 public class ModuleStatistics {
 
     private int queueSize;

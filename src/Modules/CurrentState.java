@@ -1,3 +1,5 @@
+package Modules;
+
 public enum CurrentState {
     CLIENT,
     PROCESS,

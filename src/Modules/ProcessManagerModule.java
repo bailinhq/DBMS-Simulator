@@ -1,8 +1,10 @@
+package Modules;
+
 import java.util.PriorityQueue;
 
-public class ClientCommunicationsManagerModule extends Module{
+public class ProcessManagerModule extends Module {
 
-    public ClientCommunicationsManagerModule(PriorityQueue<Event> global){
+    public ProcessManagerModule(PriorityQueue<Event> global){
         super(global);
     }
 

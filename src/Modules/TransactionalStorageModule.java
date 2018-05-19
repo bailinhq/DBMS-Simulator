@@ -1,7 +1,10 @@
+package Modules;
+
 import java.util.PriorityQueue;
 
-public class QueryProcessorModule extends Module {
-    public QueryProcessorModule(PriorityQueue<Event> global){
+public class TransactionalStorageModule extends Module {
+
+    public TransactionalStorageModule(PriorityQueue<Event> global){
         super(global);
     }
 

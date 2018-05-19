@@ -1,3 +1,5 @@
+package Modules;
+
 public class Event implements Comparable<Event> {
     private Query query;
     private int type;

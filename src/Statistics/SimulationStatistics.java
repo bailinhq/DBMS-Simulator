@@ -1,3 +1,5 @@
+package Statistics;
+
 public class SimulationStatistics {
 
     private int discardedNumberOfQuerys;
