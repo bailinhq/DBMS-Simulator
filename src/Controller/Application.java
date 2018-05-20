@@ -7,10 +7,11 @@ public class Application {
     private Interface anInterface;
     private Simulator simulator;
     public Application(){
-        setUp();
+        this.setUp();
     }
 
-    public static void setUp(){
+    public void setUp(){
+        anInterface = new Interface(this);
     }
 
     public void showWindow(){
