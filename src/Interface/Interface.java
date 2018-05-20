@@ -1,5 +1,5 @@
 package Interface;
-import Model.Application;
+import Controller.Application;
 import Modules.*;
 public class Interface {
     private Application application;

@@ -1,6 +1,7 @@
-package Model;
+package Controller;
 
 import Interface.Interface;
+import Modules.Simulator;
 
 public class Application {
     private Interface anInterface;

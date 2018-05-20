@@ -1,4 +1,4 @@
-import Model.Application;
+import Controller.Application;
 
 import java.util.Random;
 
