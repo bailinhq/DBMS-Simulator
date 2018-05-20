@@ -13,6 +13,7 @@ public class Application {
     public static void setUp(){
     }
 
-    public void showMenu(){
+    public void showWindow(){
+
     }
 }
