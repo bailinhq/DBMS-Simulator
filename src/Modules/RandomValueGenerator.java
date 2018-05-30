@@ -21,8 +21,8 @@ public class RandomValueGenerator {
         return -(1/lambda)*Math.log10(Math.random());
     }
 
-    public double generateUniformDistributionValue(double a, double b){
-        return a + ((b - a) * Math.random());
+    public int generateUniformDistributionValue(int a, int b){
+        return (int) (a + ((b - a) * Math.random()));
     }
 
     public double generateDiscreteValues(){
