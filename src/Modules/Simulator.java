@@ -15,15 +15,29 @@ public class Simulator {
 
     private int numberOfSimulations;
     private double maxSimulationTime;
-    private int maxConcurrentConnections;
+    private boolean delay;
+    private int maxConcurrentConnectionsSystem;
+    private int maxConcurrentConnectionsQueries;
+    private int maxQueriesInTransactions;
+    private int maxQueriesInExecutor;
     private double timeout;
-    private int p;
+    private double clocktime;
 
     private Random randomGenerator;
 
-    public Simulator(){
+    public Simulator(Object parameters[]){
+        this.setUp(parameters);
+    }
+
+    public void setUp(Object parameters[]){
         randomGenerator = new Random(0);
         valueGenerator = new RandomValueGenerator();
+        clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this);
+        processManagerModule = new ProcessManagerModule(this);
+        queryProcessorModule = new QueryProcessorModule(this);
+        transactionalStorageModule = new TransactionalStorageModule(this);
+        queue = new PriorityQueue<>();
+        this.setParameters(parameters);
     }
 
     public void run(){
@@ -45,12 +59,29 @@ public class Simulator {
         return query;
     }
 
-//    private Event generateEvent(){
-//        Query query = new Query();
-//        Event event = new Event(query, EventType.ARRIVAL);
-//        return event;
-//    }
+    private Event generateEvent(){
+        Query query = generateQuery();
+        return new Event(query, clocktime, EventType.ARRIVAL, clientCommunicationsManagerModule);
+    }
 
+    private void simulate(){
+
+    }
+
+    public void setParameters(Object parameters[]){
+        numberOfSimulations = (Integer) parameters[0];
+        maxSimulationTime = (Double) parameters[1];
+        delay = (Boolean) parameters[2];
+        maxConcurrentConnectionsSystem = (Integer) parameters[3];
+        maxConcurrentConnectionsQueries = (Integer) parameters[4];
+        maxQueriesInTransactions = (Integer) parameters[5];
+        maxQueriesInExecutor = (Integer) parameters[6];
+        timeout = (Double) parameters[7];
+    }
+    
+    public void addEvent(Event event){
+        queue.offer(event);
+    }
 
     public RandomValueGenerator getValueGenerator() {
         return valueGenerator;
@@ -71,16 +102,5 @@ public class Simulator {
     public TransactionalStorageModule getTransactionalStorageModule() {
         return transactionalStorageModule;
     }
-
-    private void simulate(){
-        
-    }
-
-    public void setParameters(){
-
-    }
-
-    public void addEvent(Event event){
-        queue.offer(event);
-    }
 }
+
