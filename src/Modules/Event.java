@@ -6,6 +6,20 @@ public class Event implements Comparable<Event> {
     private Module currentModule;
     private double timeClock;
 
+
+    public Event(Query aQuery, double time, EventType aEventType, Module theCurrentModule) {
+        query = aQuery;
+        eventType = aEventType;
+        timeClock = time;
+        currentModule = theCurrentModule;
+    }
+
+    @Override
+    public int compareTo(Event o) {
+        return -1;
+    }
+
+
     public Query getQuery() {
         return query;
     }
@@ -37,22 +51,4 @@ public class Event implements Comparable<Event> {
     public void setTimeClock(double timeClock) {
         this.timeClock = timeClock;
     }
-
-    public Event(Query aQuery, double time, EventType aEventType, Module theCurrentModule){
-        query = aQuery;
-        eventType = aEventType;
-        timeClock = time;
-        currentModule = theCurrentModule;
-
-
-    }
-
-
-    @Override
-    public int compareTo(Event o){
-        return -1;
-    }
-
-
-
 }

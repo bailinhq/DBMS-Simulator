@@ -15,9 +15,13 @@ public class Simulator {
 
     private int numberOfSimulations;
     private double maxSimulationTime;
-    private int maxConcurrentConnections;
+    private boolean delay;
+    private int maxConcurrentConnectionsSystem;
+    private int maxConcurrentConnectionsQueries;
+    private int maxQueriesInTransactions;
+    private int maxQueriesInExecutor;
     private double timeout;
-    private int p;
+    private double clocktime;
 
     private Random randomGenerator;
 
@@ -45,14 +49,13 @@ public class Simulator {
         return query;
     }
 
-//    private Event generateEvent(){
-//        Query query = new Query();
-//        Event event = new Event(query, EventType.ARRIVAL);
-//        return event;
-//    }
+    private Event generateEvent(){
+        Query query = generateQuery();
+        return new Event(query, clocktime, EventType.ARRIVAL, clientCommunicationsManagerModule);
+    }
 
     private void simulate(){
-        
+
     }
 
     public void setParameters(){
