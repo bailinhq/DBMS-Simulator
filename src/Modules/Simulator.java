@@ -45,9 +45,6 @@ public class Simulator {
         return query;
     }
 
-    public void addEvent(Event event){
-        queue.offer(event);
-    }
 //    private Event generateEvent(){
 //        Query query = new Query();
 //        Event event = new Event(query, EventType.ARRIVAL);
@@ -60,45 +57,5 @@ public class Simulator {
 
     public void setParameters(){
 
-    }
-
-    public RandomValueGenerator getValueGenerator() {
-        return valueGenerator;
-    }
-
-    public void setValueGenerator(RandomValueGenerator valueGenerator) {
-        this.valueGenerator = valueGenerator;
-    }
-
-    public ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
-        return clientCommunicationsManagerModule;
-    }
-
-    public void setClientCommunicationsManagerModule(ClientCommunicationsManagerModule clientCommunicationsManagerModule) {
-        this.clientCommunicationsManagerModule = clientCommunicationsManagerModule;
-    }
-
-    public ProcessManagerModule getProcessManagerModule() {
-        return processManagerModule;
-    }
-
-    public void setProcessManagerModule(ProcessManagerModule processManagerModule) {
-        this.processManagerModule = processManagerModule;
-    }
-
-    public QueryProcessorModule getQueryProcessorModule() {
-        return queryProcessorModule;
-    }
-
-    public void setQueryProcessorModule(QueryProcessorModule queryProcessorModule) {
-        this.queryProcessorModule = queryProcessorModule;
-    }
-
-    public TransactionalStorageModule getTransactionalStorageModule() {
-        return transactionalStorageModule;
-    }
-
-    public void setTransactionalStorageModule(TransactionalStorageModule transactionalStorageModule) {
-        this.transactionalStorageModule = transactionalStorageModule;
     }
 }
