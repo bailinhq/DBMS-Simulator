@@ -3,9 +3,7 @@ package Statistics;
 public class SimulationStatistics {
 
     private int discardedNumberOfQuerys;
-
     private int numberOfQuerys;
-
     private double timeLifeOfQuery;
 
     private ModuleStatistics clientModuleStatistics;
@@ -14,9 +12,14 @@ public class SimulationStatistics {
     private ModuleStatistics transactionalStorageModuleStatistics;
     private ModuleStatistics executorModuleStatistics;
 
-    public int getDiscardedNumberOfQuerys() {
 
-        return 1;
+
+    public int getDiscardedNumberOfQueries() {
+        return discardedNumberOfQuerys;
+    }
+
+    public void increaseDiscardedNumberOfQueries(){
+        ++discardedNumberOfQuerys;
     }
 
     public double getTimeLifeOfQuery() {
