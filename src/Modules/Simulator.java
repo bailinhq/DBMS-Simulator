@@ -51,11 +51,36 @@ public class Simulator {
 //        return event;
 //    }
 
+
+    public RandomValueGenerator getValueGenerator() {
+        return valueGenerator;
+    }
+
+    public ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
+        return clientCommunicationsManagerModule;
+    }
+
+    public ProcessManagerModule getProcessManagerModule() {
+        return processManagerModule;
+    }
+
+    public QueryProcessorModule getQueryProcessorModule() {
+        return queryProcessorModule;
+    }
+
+    public TransactionalStorageModule getTransactionalStorageModule() {
+        return transactionalStorageModule;
+    }
+
     private void simulate(){
         
     }
 
     public void setParameters(){
 
+    }
+
+    public void addEvent(Event event){
+        queue.offer(event);
     }
 }
