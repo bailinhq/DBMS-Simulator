@@ -2,10 +2,49 @@ package Modules;
 
 public class Event implements Comparable<Event> {
     private Query query;
-    private int type;
-    private CurrentState state;
-    public Event(Query aQuery, int aType, CurrentState aState){
-        state = aState;
+    private EventType eventType;
+    private Module currentModule;
+    private double timeClock;
+
+    public Query getQuery() {
+        return query;
+    }
+
+    public void setQuery(Query query) {
+        this.query = query;
+    }
+
+    public EventType getEventType() {
+        return eventType;
+    }
+
+    public void setEventType(EventType eventType) {
+        this.eventType = eventType;
+    }
+
+    public Module getCurrentModule() {
+        return currentModule;
+    }
+
+    public void setCurrentModule(Module currentModule) {
+        this.currentModule = currentModule;
+    }
+
+    public double getTimeClock() {
+        return timeClock;
+    }
+
+    public void setTimeClock(double timeClock) {
+        this.timeClock = timeClock;
+    }
+
+    public Event(Query aQuery, double time, EventType aEventType, Module theCurrentModule){
+        query = aQuery;
+        eventType = aEventType;
+        timeClock = time;
+        currentModule = theCurrentModule;
+
+
     }
 
 
