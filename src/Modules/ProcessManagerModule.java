@@ -10,11 +10,18 @@ public class ProcessManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-
+        if(this.busyServers<numberServers){
+            event.setEventType(EventType.DEPARTURE);
+        }else
+        {
+            //se rechazan
+        }
     }
 
     @Override
     public void processDeparture(Event event) {
-
+        event.setCurrentModule(simulator.getProcessManagerModule());
+        event.setEventType(EventType.ARRIVAL);
+        this.simulator.addEvent(event);
     }
 }

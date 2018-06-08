@@ -11,11 +11,18 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        int x = 0;
+        if(this.busyServers<numberServers){
+            event.setEventType(EventType.DEPARTURE);
+        }else
+        {
+            //se rechazan
+        }
     }
 
     @Override
     public void processDeparture(Event event) {
-        int x = 0;
+        event.setCurrentModule(simulator.getProcessManagerModule());
+        event.setEventType(EventType.ARRIVAL);
+        this.simulator.addEvent(event);
     }
 }

@@ -7,11 +7,11 @@ import java.util.PriorityQueue;
 public abstract class Module {
     Simulator simulator;
 
-    private PriorityQueue<Event> globalQueue;
-    private int queueLength;
-    private int numberServers;
-    private int busyServers;
-    private PriorityQueue<Event> queue;
+    public PriorityQueue<Event> globalQueue;
+    public int queueLength;
+    public int numberServers;
+    public int busyServers;
+    public PriorityQueue<Event> queue;
 
 
     private ModuleStatistics statisticsOfModule;
