@@ -4,17 +4,17 @@ import java.util.PriorityQueue;
 
 public class TransactionalStorageModule extends Module {
 
-    public TransactionalStorageModule(PriorityQueue<Event> global){
-        super(global);
+    TransactionalStorageModule(Simulator simulator) {
+        super(simulator);
     }
 
     @Override
-    public void processInput() {
-        super.processInput();
+    public void processArrival(Event event) {
+
     }
 
     @Override
-    public void processOutput() {
-        super.processOutput();
+    public void processDeparture(Event event) {
+
     }
 }

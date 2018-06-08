@@ -3,17 +3,18 @@ package Modules;
 import java.util.PriorityQueue;
 
 public class QueryProcessorModule extends Module {
-    public QueryProcessorModule(PriorityQueue<Event> global){
-        super(global);
+
+    QueryProcessorModule(Simulator simulator) {
+        super(simulator);
     }
 
     @Override
-    public void processInput() {
-        super.processInput();
+    public void processArrival(Event event) {
+
     }
 
     @Override
-    public void processOutput() {
-        super.processOutput();
+    public void processDeparture(Event event) {
+
     }
 }

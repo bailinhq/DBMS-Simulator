@@ -4,17 +4,18 @@ import java.util.PriorityQueue;
 
 public class ExecutorModule extends Module {
 
-    public ExecutorModule(PriorityQueue<Event> global){
-        super(global);
+
+    ExecutorModule(Simulator simulator) {
+        super(simulator);
     }
 
     @Override
-    public void processInput() {
-        super.processInput();
+    public void processArrival(Event event) {
+
     }
 
     @Override
-    public void processOutput() {
-        super.processOutput();
+    public void processDeparture(Event event) {
+
     }
 }
