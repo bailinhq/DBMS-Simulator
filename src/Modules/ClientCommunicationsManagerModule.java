@@ -4,17 +4,18 @@ import java.util.PriorityQueue;
 
 public class ClientCommunicationsManagerModule extends Module {
 
-    public ClientCommunicationsManagerModule(PriorityQueue<Event> global){
-        super(global);
+
+    ClientCommunicationsManagerModule(Simulator simulator) {
+        super(simulator);
     }
 
     @Override
-    public void processInput() {
-        super.processInput();
+    public void processArrival(Event event) {
+        int x = 0;
     }
 
     @Override
-    public void processOutput() {
-        super.processOutput();
+    public void processDeparture(Event event) {
+        int x = 0;
     }
 }
