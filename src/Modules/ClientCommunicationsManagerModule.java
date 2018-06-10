@@ -5,24 +5,26 @@ import java.util.PriorityQueue;
 public class ClientCommunicationsManagerModule extends Module {
 
 
-    ClientCommunicationsManagerModule(Simulator simulator) {
-        super(simulator);
+    ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
+        super(simulator, randSimulator);
+        this.numberServers = numConnections;
     }
+
 
     @Override
     public void processArrival(Event event) {
         if(this.busyServers<numberServers){
-            event.setEventType(EventType.DEPARTURE);
+            event.setCurrentModule(simulator.getProcessManagerModule());
+            event.setEventType(EventType.ARRIVAL);
+            this.simulator.addEvent(event);
         }else
         {
-            //se rechazan
+            this.simulator.increaseRejectQueries();
         }
     }
 
     @Override
     public void processDeparture(Event event) {
-        event.setCurrentModule(simulator.getProcessManagerModule());
-        event.setEventType(EventType.ARRIVAL);
-        this.simulator.addEvent(event);
+
     }
 }

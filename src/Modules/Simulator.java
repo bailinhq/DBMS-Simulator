@@ -1,6 +1,7 @@
 package Modules;
 
 import Modules.*;
+import Statistics.SimulationStatistics;
 
 import java.util.PriorityQueue;
 import java.util.Random;
@@ -17,13 +18,17 @@ public class Simulator {
     private double maxSimulationTime;
     private int maxConcurrentConnections;
     private double timeout;
+    private double clockTime;
     private int p;
+
+    private SimulationStatistics simulationStatistics;
 
     private Random randomGenerator;
 
     public Simulator(){
         randomGenerator = new Random(0);
         valueGenerator = new RandomValueGenerator();
+        simulationStatistics = new SimulationStatistics();
     }
 
     public void run(){
@@ -82,5 +87,13 @@ public class Simulator {
 
     public void addEvent(Event event){
         queue.offer(event);
+    }
+
+    public  void increaseRejectQueries(){
+        this.simulationStatistics.increaseDiscardedNumberOfQueries();
+    }
+
+    public double getClockTime() {
+        return clockTime;
     }
 }

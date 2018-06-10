@@ -4,23 +4,28 @@ import java.util.PriorityQueue;
 
 public class ProcessManagerModule extends Module {
 
-    ProcessManagerModule(Simulator simulator) {
-        super(simulator);
+    ProcessManagerModule(Simulator simulator, RandomValueGenerator randSimulator) {
+        super(simulator, randSimulator);
+        this.numberServers = 1;
     }
 
     @Override
     public void processArrival(Event event) {
-        if(this.busyServers<numberServers){
+        if(busyServers>0){
+            queue.offer(event);
+        }else{
+            ++busyServers;
+            event.setTimeClock(simulator.getClockTime()+this.randomValueGenerator.generateNormalDistributionValue(1,0.01));
+            //Output is generated
             event.setEventType(EventType.DEPARTURE);
-        }else
-        {
-            //se rechazan
+            this.simulator.addEvent(event);
         }
     }
 
     @Override
     public void processDeparture(Event event) {
-        event.setCurrentModule(simulator.getProcessManagerModule());
+        //Exit to the next event
+        event.setCurrentModule(simulator.getQueryProcessorModule());
         event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
     }

@@ -1,23 +1,27 @@
 package Modules;
 
 import Statistics.ModuleStatistics;
+import com.google.common.collect.RangeMap;
 
 import java.util.PriorityQueue;
 
 public abstract class Module {
     Simulator simulator;
 
-    public PriorityQueue<Event> globalQueue;
     public int queueLength;
     public int numberServers;
     public int busyServers;
     public PriorityQueue<Event> queue;
+    public RandomValueGenerator randomValueGenerator;
 
 
     private ModuleStatistics statisticsOfModule;
 
-    Module(Simulator simulator) {
+    Module(Simulator simulator, RandomValueGenerator randSimulator) {
         this.simulator = simulator;
+        this.randomValueGenerator = randSimulator;
+        this.busyServers = 0;
+        this.queueLength = 0;
     }
 
     public abstract void processArrival(Event event);
