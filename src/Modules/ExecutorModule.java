@@ -5,8 +5,9 @@ import java.util.PriorityQueue;
 public class ExecutorModule extends Module {
 
 
-    ExecutorModule(Simulator simulator) {
-        super(simulator);
+    ExecutorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
+        super(simulator, randSimulator);
+        this.numberServers = numProcesses;
     }
 
     @Override

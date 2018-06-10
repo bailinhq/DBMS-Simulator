@@ -1,7 +1,6 @@
 package Modules;
 
 import Statistics.ModuleStatistics;
-import com.google.common.collect.RangeMap;
 
 import java.util.PriorityQueue;
 
