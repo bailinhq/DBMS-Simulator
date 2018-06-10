@@ -36,10 +36,10 @@ public class Simulator {
     public void setUp(Object parameters[]){
         randomGenerator = new Random(0);
         valueGenerator = new RandomValueGenerator();
-        clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this);
-        processManagerModule = new ProcessManagerModule(this);
-        queryProcessorModule = new QueryProcessorModule(this);
-        transactionalStorageModule = new TransactionalStorageModule(this);
+        clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this, valueGenerator, 0);
+        processManagerModule = new ProcessManagerModule(this, valueGenerator);
+        queryProcessorModule = new QueryProcessorModule(this, valueGenerator , 0);
+        transactionalStorageModule = new TransactionalStorageModule(this, valueGenerator, 0);
         queue = new PriorityQueue<>();
         this.setParameters(parameters);
     }
