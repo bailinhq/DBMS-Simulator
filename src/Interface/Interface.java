@@ -1,10 +1,17 @@
 package Interface;
 import Controller.Application;
 import Modules.*;
-public class Interface {
-    private Application application;
-    public Interface(Application anApplication){
+import javafx.stage.Stage;
+
+public class Interface extends javafx.application.Application {
+    private Controller.Application application;
+    public Interface(Controller.Application anApplication){
         application = anApplication;
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+
     }
 
     public void showMenu(){
