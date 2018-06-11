@@ -15,6 +15,7 @@ public class ClientCommunicationsManagerModule extends Module {
     public void processArrival(Event event) {
         if(this.busyServers < numberServers){
             ++busyServers;
+            processClient(event);
         }else
         {
             this.simulator.increaseRejectQueries();

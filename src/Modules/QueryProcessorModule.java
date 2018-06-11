@@ -24,7 +24,7 @@ public class QueryProcessorModule extends Module {
     public void processDeparture(Event event) {
         //Exit to the next event
         --busyServers;
-        if(queue.size()>0){
+        if(queue.size() > 0){
             Event temporal = queue.poll();
             processClient(temporal);
         }

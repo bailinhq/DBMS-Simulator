@@ -39,11 +39,14 @@ public class Query {
         switch (type){
             //Read Only
             case SELECT:
+                timeOptimization = 0.1;
             case JOIN:
                 timeOptimization = 0.1;
                 break;
+
              // No read only
             case UPDATE:
+                timeOptimization = 0.25;
             case DDL:
                 timeOptimization = 0.25;
                 break;
