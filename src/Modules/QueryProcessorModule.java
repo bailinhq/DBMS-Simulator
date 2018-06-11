@@ -9,30 +9,33 @@ public class QueryProcessorModule extends Module {
         this.numberServers = numProcesses;
     }
 
+
+    //TODO ver la posibilidad de tener este metodo en la clase padre
     @Override
     public void processArrival(Event event) {
-        if(busyServers>0){
-            queue.offer(event);
+        if(busyServers < numberServers){
+            processClient(event);
         }else{
-            ++busyServers;
-            event.setTimeClock(simulator.getClockTime()+getProcessTimeQuery(event));
-
-            //Output is generated
-            event.setEventType(EventType.DEPARTURE);
-            this.simulator.addEvent(event);
+            queue.offer(event);
         }
     }
 
     @Override
     public void processDeparture(Event event) {
         //Exit to the next event
+        --busyServers;
+        if(queue.size()>0){
+            Event temporal = queue.poll();
+            processClient(temporal);
+        }
         event.setCurrentModule(simulator.getTransactionalStorageModule());
         event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
 
     }
 
-    private double getProcessTimeQuery(Event event){
+    @Override
+    public double getServiceTime(Event event) {
         double processingTime = 0.0;
         //lexical validation
         processingTime += 0.1;
@@ -51,7 +54,14 @@ public class QueryProcessorModule extends Module {
         processingTime += event.getQuery().getTimeOptimization();
 
         return  processingTime;
+    }
 
-
+    @Override
+    public void processClient(Event event) {
+        ++busyServers;
+        event.setTimeClock(event.getTimeClock()+getServiceTime(event));
+        //Output is generated
+        event.setEventType(EventType.DEPARTURE);
+        this.simulator.addEvent(event);
     }
 }

@@ -57,4 +57,9 @@ public class Query {
     public int getNumberOfBlocks() {
         return numberOfBlocks;
     }
+
+    public QueryType getType() {
+        return type;
+    }
+
 }

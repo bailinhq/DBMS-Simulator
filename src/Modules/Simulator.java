@@ -12,6 +12,7 @@ public class Simulator {
     private ProcessManagerModule processManagerModule;
     private QueryProcessorModule queryProcessorModule;
     private TransactionalStorageModule transactionalStorageModule;
+    private ExecutorModule executorModule;
     private PriorityQueue<Event> queue;
 
     private int numberOfSimulations;
@@ -34,12 +35,15 @@ public class Simulator {
     }
 
     public void setUp(Object parameters[]){
+        //TODO cambiar los valores que reciben los modulos
         randomGenerator = new Random(0);
         valueGenerator = new RandomValueGenerator();
         clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this, valueGenerator, 0);
         processManagerModule = new ProcessManagerModule(this, valueGenerator);
         queryProcessorModule = new QueryProcessorModule(this, valueGenerator , 0);
         transactionalStorageModule = new TransactionalStorageModule(this, valueGenerator, 0);
+        executorModule = new ExecutorModule(this, valueGenerator, 0);
+
         queue = new PriorityQueue<>();
         this.setParameters(parameters);
     }
@@ -63,9 +67,9 @@ public class Simulator {
         return query;
     }
 
-    private Event generateEvent(){
+    public void generateNewEvent(){
         Query query = generateQuery();
-        return new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule);
+        queue.offer(new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule));
     }
 
     private void simulate(){
@@ -107,6 +111,9 @@ public class Simulator {
         return transactionalStorageModule;
     }
 
+    public ExecutorModule getExecutorModule() {
+        return executorModule;
+    }
 
     public void setParameters(){
 
@@ -120,4 +127,5 @@ public class Simulator {
     public double getClockTime() {
         return clockTime;
     }
+
 }

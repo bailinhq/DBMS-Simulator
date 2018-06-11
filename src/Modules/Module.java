@@ -25,6 +25,8 @@ public abstract class Module {
 
     public abstract void processArrival(Event event);
     public abstract void processDeparture(Event event);
+    public abstract double getServiceTime(Event event);
+    public abstract  void processClient(Event event);
 
     public void processEvent(Event event){
         switch (event.getEventType()){

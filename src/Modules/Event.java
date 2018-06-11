@@ -51,4 +51,6 @@ public class Event implements Comparable<Event> {
     public void setTimeClock(double timeClock) {
         this.timeClock = timeClock;
     }
+
+
 }
