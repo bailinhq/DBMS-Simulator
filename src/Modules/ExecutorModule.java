@@ -28,7 +28,8 @@ public class ExecutorModule extends Module {
             processClient(event);
         }
         //Exit to the next event
-        event.setCurrentModule(simulator.getTransactionalStorageModule());
+        //event.setCurrentModule(simulator.getTransactionalStorageModule());
+        event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
 
@@ -53,7 +54,8 @@ public class ExecutorModule extends Module {
         ++busyServers;
         event.setTimeClock(event.getTimeClock()+getServiceTime(event));
         //Output is generated
-        event.setCurrentModule(this.simulator.getExecutorModule());
+        //event.setCurrentModule(this.simulator.getExecutorModule());
+        event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
     }
 }

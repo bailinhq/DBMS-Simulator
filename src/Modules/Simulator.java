@@ -75,9 +75,9 @@ public class Simulator {
     public  void increaseRejectQueries(){
         this.simulationStatistics.increaseDiscardedNumberOfQueries();
     }
-    
+
     private void simulate(){
-        //asdwadaw
+
     }
 
     public void setParameters(Object parameters[]){

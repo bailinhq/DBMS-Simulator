@@ -13,7 +13,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        if(this.busyServers<numberServers){
+        if(this.busyServers < numberServers){
             ++busyServers;
         }else
         {

@@ -31,7 +31,6 @@ public class QueryProcessorModule extends Module {
         event.setCurrentModule(simulator.getTransactionalStorageModule());
         event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
-
     }
 
     @Override

@@ -30,9 +30,9 @@ public class TransactionalStorageModule extends Module {
             processingDDL = false;
         //transmission time R = numbers of blocks
         event.setTimeClock(event.getTimeClock()+event.getQuery().getNumberOfBlocks());
-
-        event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
-        event.setEventType(EventType.DEPARTURE);
+        //event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
+        event.setCurrentModule(simulator.getExecutorModule());
+        event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
 
     }
@@ -81,7 +81,8 @@ public class TransactionalStorageModule extends Module {
 
         }
         //Output is generated
-        event.setCurrentModule(this.simulator.getExecutorModule());
+        event.setEventType(EventType.DEPARTURE);
+        //event.setCurrentModule(this.simulator.getExecutorModule());
         this.simulator.addEvent(event);
     }
 }
