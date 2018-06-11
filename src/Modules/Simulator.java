@@ -72,6 +72,10 @@ public class Simulator {
         queue.offer(new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule));
     }
 
+    public  void increaseRejectQueries(){
+        this.simulationStatistics.increaseDiscardedNumberOfQueries();
+    }
+    
     private void simulate(){
         //asdwadaw
     }
@@ -113,15 +117,6 @@ public class Simulator {
 
     public ExecutorModule getExecutorModule() {
         return executorModule;
-    }
-
-    public void setParameters(){
-
-    }
-
-
-    public  void increaseRejectQueries(){
-        this.simulationStatistics.increaseDiscardedNumberOfQueries();
     }
 
     public double getClockTime() {
