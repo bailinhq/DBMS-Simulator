@@ -1,5 +1,4 @@
 package Modules;
-
 import java.util.PriorityQueue;
 
 public class TransactionalStorageModule extends Module {
@@ -58,7 +57,7 @@ public class TransactionalStorageModule extends Module {
     public void processClient(Event event) {
         switch (event.getQuery().getType()){
             case DDL:
-                if(busyServers >0){
+                if(busyServers > 0){
                     queue.offer(event);
                 }else{
                     ++busyServers;

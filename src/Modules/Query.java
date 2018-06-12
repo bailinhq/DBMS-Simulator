@@ -40,6 +40,7 @@ public class Query {
             //Read Only
             case SELECT:
                 timeOptimization = 0.1;
+                break;
             case JOIN:
                 timeOptimization = 0.1;
                 break;
@@ -47,6 +48,7 @@ public class Query {
              // No read only
             case UPDATE:
                 timeOptimization = 0.25;
+                break;
             case DDL:
                 timeOptimization = 0.25;
                 break;
