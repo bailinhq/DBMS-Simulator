@@ -27,38 +27,39 @@ public class TransactionalStorageModule extends Module {
         --busyServers;
         if(event.getQuery().getType() == QueryType.DDL)
             processingDDL = false;
-        //transmission time R = numbers of blocks
-        event.setTimeClock(event.getTimeClock()+event.getQuery().getNumberOfBlocks());
+        if(queue.size()>0){
+            Event temporal =  queue.poll();
+            this.processClient(temporal);
+        }
         //event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
         event.setCurrentModule(simulator.getExecutorModule());
         event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
 
+
+
     }
 
     @Override
     public double getServiceTime(Event event) {
+        //coordination time
         double timeTemp = busyServers*0.3;
-        switch (event.getQuery().getType())
-        {
-            case JOIN:
-            case SELECT:
-            case UPDATE:
-                timeTemp += event.getQuery().getNumberOfBlocks()*(0.1/10);
-                break;
-            case DDL:
-                timeTemp = 0.3;
-                break;
-        }
+
+        //time to load the blocks
+        timeTemp += event.getQuery().getNumberOfBlocks()*(0.1/10);
+
         return timeTemp;
     }
 
     @Override
     public void processClient(Event event) {
+        boolean processedEvent  = false;
+
         switch (event.getQuery().getType()){
             case DDL:
                 if(busyServers > 0){
                     queue.offer(event);
+                    processedEvent = true;
                 }else{
                     ++busyServers;
                     processingDDL = true;
@@ -74,14 +75,17 @@ public class TransactionalStorageModule extends Module {
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
                     queue.offer(event);
+                    processedEvent = true;
                 }
 
                 break;
 
         }
         //Output is generated
-        event.setEventType(EventType.DEPARTURE);
-        //event.setCurrentModule(this.simulator.getExecutorModule());
-        this.simulator.addEvent(event);
+        if(!processedEvent) {
+            event.setEventType(EventType.DEPARTURE);
+            //event.setCurrentModule(this.simulator.getExecutorModule());
+            this.simulator.addEvent(event);
+        }
     }
 }

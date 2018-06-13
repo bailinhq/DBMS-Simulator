@@ -4,7 +4,7 @@ import java.util.PriorityQueue;
 
 public class ClientCommunicationsManagerModule extends Module {
 
-
+    //Receive k connections
     ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
         super(simulator, randSimulator);
         this.numberServers = numConnections;
@@ -18,7 +18,7 @@ public class ClientCommunicationsManagerModule extends Module {
             processClient(event);
         }else
         {
-            this.simulator.increaseRejectQueries();
+            //this.simulator.increaseRejectQueries();
         }
         //A new arrival is generated
         this.simulator.generateNewEvent();

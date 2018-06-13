@@ -4,6 +4,7 @@ import java.util.PriorityQueue;
 
 public class QueryProcessorModule extends Module {
 
+    //Capacity for n processes
     QueryProcessorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;

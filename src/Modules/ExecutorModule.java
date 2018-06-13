@@ -25,7 +25,7 @@ public class ExecutorModule extends Module {
         if(queue.size()>0)
         {
             Event temporal = queue.poll();
-            processClient(event);
+            processClient(temporal);
         }
         //Exit to the next event
         //event.setCurrentModule(simulator.getTransactionalStorageModule());
@@ -38,14 +38,23 @@ public class ExecutorModule extends Module {
     @Override
     public double getServiceTime(Event event) {
         double numBlocks = event.getQuery().getNumberOfBlocks();
-        double timeTemp = numBlocks * numBlocks;
+
+        //B^2 milliseconds = (B^2)/1000 seconds
+        double timeTemp = (numBlocks * numBlocks)/1000.0;
+
         switch (event.getQuery().getType()){
             case DDL:
+                //Update database schema 1/2 second
                 timeTemp += 0.5;
                 break;
             case UPDATE:
+                //Update database schema 1 second
                 timeTemp += 1.0;
+                break;
         }
+        //transmission time R = numbers of blocks
+        timeTemp += event.getQuery().getNumberOfBlocks();
+
         return timeTemp;
     }
 
