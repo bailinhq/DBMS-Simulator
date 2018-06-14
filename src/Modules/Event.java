@@ -16,11 +16,37 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event o) {
-        return -1;
+        if(o.getCurrentModule().getCurrentModuleType() != 4) {
+            return compareEvents(o);
+        }else{
+            if(this.getEventType() == o.getEventType()){
+                return compareEvents(o);
+            }else if(this.getQuery().getPriority() < o.getQuery().getPriority()){
+                return -1;
+            }else{
+                return 1;
+            }
+        }
     }
 
+    //compare events by time and type
+    public int compareEvents(Event o){
+        if (this.getTimeClock() < o.getTimeClock()) {
+            return -1;
+        } else if (this.getTimeClock() > o.getTimeClock()) {
+            return 1;
+        } else {
+            if (this.getTimeClock() == o.getTimeClock()) {
+                return 0;
+            } else if (this.getEventType() == EventType.DEPARTURE) {
+                return -1;
+            } else {
+                return 1;
+            }
+        }
+    }
 
-    public Query getQuery() {
+    public Query getQuery() {//    top priority
         return query;
     }
 

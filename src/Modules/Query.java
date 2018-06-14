@@ -55,15 +55,35 @@ public class Query {
         }
     }
 
-    public double getTimeOptimization() {
+
+    int getPriority(){
+        //top priority 1
+        int priority = 0;
+        switch (this.type){
+            case DDL:
+                priority = 1;
+                break;
+            case UPDATE:
+                priority = 2;
+                break;
+            case JOIN:
+                priority = 3;
+                break;
+            case SELECT:
+                priority = 4;
+        }
+        return priority;
+    }
+
+    double getTimeOptimization() {
         return timeOptimization;
     }
 
-    public int getNumberOfBlocks() {
+    int getNumberOfBlocks() {
         return numberOfBlocks;
     }
 
-    public QueryType getType() {
+    QueryType getType() {
         return type;
     }
 

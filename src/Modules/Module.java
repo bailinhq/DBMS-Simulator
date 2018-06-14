@@ -6,6 +6,8 @@ import java.util.PriorityQueue;
 
 public abstract class Module {
     Simulator simulator;
+    //TODO definir si mejor hacer un enum o tener un entero para comparar más facil
+    public int currentModule;
 
     public int queueLength;
     public int numberServers;
@@ -28,6 +30,7 @@ public abstract class Module {
     public abstract double getServiceTime(Event event);
     public abstract  void processClient(Event event);
 
+
     public void processEvent(Event event){
         switch (event.getEventType()){
             case ARRIVAL: processArrival(event);
@@ -40,5 +43,7 @@ public abstract class Module {
         }
     }
 
-
+    public int getCurrentModuleType() {
+        return currentModule;
+    }
 }
