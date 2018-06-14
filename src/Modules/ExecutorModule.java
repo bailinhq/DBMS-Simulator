@@ -12,6 +12,7 @@ public class ExecutorModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        System.out.println("Llega cliente al modulo 5");
         if(busyServers < numberServers){
             processClient(event);
         }else{

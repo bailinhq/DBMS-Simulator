@@ -13,6 +13,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        System.out.println("Llega cliente al modulo 1");
         if(this.busyServers < numberServers){
             ++busyServers;
             processClient(event);
@@ -21,12 +22,13 @@ public class ClientCommunicationsManagerModule extends Module {
             //this.simulator.increaseRejectQueries();
         }
         //A new arrival is generated
-        this.simulator.generateNewEvent();
+        //this.simulator.generateNewEvent();
     }
 
     @Override
     public void processDeparture(Event event) {
         --busyServers;
+        this.simulator.generateNewEvent();
     }
 
     @Override

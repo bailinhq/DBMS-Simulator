@@ -1,6 +1,5 @@
 package Modules;
 
-import Modules.*;
 import Statistics.SimulationStatistics;
 
 import java.util.PriorityQueue;
@@ -27,9 +26,20 @@ public class Simulator {
     private int p;
 
     private SimulationStatistics simulationStatistics;
-
     private Random randomGenerator;
 
+    public Simulator(){
+        this.valueGenerator = new RandomValueGenerator();
+
+        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,5);
+        this.processManagerModule = new ProcessManagerModule(this,valueGenerator);
+        this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,2);
+        this.executorModule = new ExecutorModule(this,valueGenerator,3);
+        this.simulationStatistics = new SimulationStatistics();
+        this.queue = new PriorityQueue<>();
+        this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,3);
+        this.timeout = 100;
+    }
     public Simulator(Object parameters[]){
         this.setUp(parameters);
     }
@@ -48,11 +58,36 @@ public class Simulator {
         this.setParameters(parameters);
     }
 
-    public void run(){
-
+    public void generateNewEvent(){
+        System.out.println("Se crea un nuevo evento en el tiempo"+this.clockTime);
+        Query query = generateQuery();
+        queue.offer(new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule));
     }
 
+    public void run(){
+        int numberSimulation = 0;
+        while(numberSimulation < this.numberOfSimulations) {
+            simulate();
+            ++numberSimulation;
+        }
+    }
+
+    private void simulate(){
+        generateNewEvent();
+        while (this.clockTime <= this.maxSimulationTime){
+            Event event = queue.poll();
+            if(event!=null){
+                this.clockTime += event.getTimeClock();
+                event.getCurrentModule().processEvent(event);
+            }else{
+                clockTime = maxSimulationTime+1;
+            }
+        }
+    }
+
+
     private Query generateQuery(){
+        randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
         if (random <= 0.30){
@@ -67,20 +102,10 @@ public class Simulator {
         return query;
     }
 
-    public void generateNewEvent(){
-        Query query = generateQuery();
-        queue.offer(new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule));
-    }
 
-    public  void increaseRejectQueries(){
-        this.simulationStatistics.increaseDiscardedNumberOfQueries();
-    }
 
-    private void simulate(){
 
-    }
-
-    public void setParameters(Object parameters[]){
+    private void setParameters(Object parameters[]){
         numberOfSimulations = (Integer) parameters[0];
         maxSimulationTime = (Double) parameters[1];
         delay = (Boolean) parameters[2];
@@ -91,31 +116,32 @@ public class Simulator {
         timeout = (Double) parameters[7];
     }
 
-    public void addEvent(Event event){
-        queue.offer(event);
+    void addEvent(Event event){
+        if (!isTimeOut(event))
+            queue.offer(event);
     }
 
-    public RandomValueGenerator getValueGenerator() {
+    private RandomValueGenerator getValueGenerator() {
         return valueGenerator;
     }
 
-    public ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
+    ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
         return clientCommunicationsManagerModule;
     }
 
-    public ProcessManagerModule getProcessManagerModule() {
+    ProcessManagerModule getProcessManagerModule() {
         return processManagerModule;
     }
 
-    public QueryProcessorModule getQueryProcessorModule() {
+    QueryProcessorModule getQueryProcessorModule() {
         return queryProcessorModule;
     }
 
-    public TransactionalStorageModule getTransactionalStorageModule() {
+    TransactionalStorageModule getTransactionalStorageModule() {
         return transactionalStorageModule;
     }
 
-    public ExecutorModule getExecutorModule() {
+    ExecutorModule getExecutorModule() {
         return executorModule;
     }
 
@@ -123,4 +149,23 @@ public class Simulator {
         return clockTime;
     }
 
+    public  void increaseRejectQueries(){
+        this.simulationStatistics.increaseDiscardedNumberOfQueries();
+    }
+
+    public boolean isTimeOut(Event event){
+        if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void setNumberOfSimulations(int numberOfSimulations) {
+        this.numberOfSimulations = numberOfSimulations;
+    }
+
+    public void setMaxSimulationTime(double maxSimulationTime) {
+        this.maxSimulationTime = maxSimulationTime;
+    }
 }

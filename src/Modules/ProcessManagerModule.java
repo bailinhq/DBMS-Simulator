@@ -11,6 +11,7 @@ public class ProcessManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        System.out.println("Llega cliente al modulo 2");
         if(busyServers < numberServers){
             processClient(event);
         }else{
@@ -39,7 +40,9 @@ public class ProcessManagerModule extends Module {
     @Override
     public void processClient(Event event) {
         ++busyServers;
+
         event.setTimeClock(event.getTimeClock()+getServiceTime(event));
+        System.out.println("\n\n\n\n"+event.getTimeClock()+"\n\n\n\n");
         //Output is generated
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);

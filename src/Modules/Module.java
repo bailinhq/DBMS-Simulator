@@ -23,6 +23,7 @@ public abstract class Module {
         this.randomValueGenerator = randSimulator;
         this.busyServers = 0;
         this.queueLength = 0;
+        this.queue = new PriorityQueue<>();
     }
 
     public abstract void processArrival(Event event);

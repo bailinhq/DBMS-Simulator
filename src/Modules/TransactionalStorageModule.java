@@ -14,6 +14,7 @@ public class TransactionalStorageModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        System.out.println("Llega cliente al modulo 4");
         if(busyServers < numberServers){
             processClient(event);
         }else{

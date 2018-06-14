@@ -1,5 +1,7 @@
 package Modules;
 
+import Statistics.QueryStatistics;
+
 public class Query {
     // Uniform distribution range for select type queries
     private static final int a = 1;
@@ -9,6 +11,7 @@ public class Query {
     private double timeOptimization;
     private QueryType type;
     private int numberOfBlocks;
+    private QueryStatistics queryStatistics;
 
 
 
@@ -16,6 +19,7 @@ public class Query {
         type = queryType;
         setNumbersOfBlocks();
         setTimeOptimization();
+        queryStatistics = new QueryStatistics();
     }
 
     private void setNumbersOfBlocks(){
@@ -87,4 +91,7 @@ public class Query {
         return type;
     }
 
+    public QueryStatistics getQueryStatistics() {
+        return queryStatistics;
+    }
 }

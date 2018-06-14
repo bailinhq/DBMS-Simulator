@@ -14,6 +14,7 @@ public class QueryProcessorModule extends Module {
     //TODO ver la posibilidad de tener este metodo en la clase padre
     @Override
     public void processArrival(Event event) {
+        System.out.println("Llega cliente al modulo 3");
         if(busyServers < numberServers){
             processClient(event);
         }else{
