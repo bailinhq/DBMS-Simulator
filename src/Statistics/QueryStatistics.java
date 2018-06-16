@@ -5,10 +5,10 @@ public class QueryStatistics {
     private double departureTime;
     private double timeOfQuery;
 
-    public QueryStatistics(){
-        arrivalTime = 0;
-        departureTime = 0;
-        timeOfQuery = 0;
+    public QueryStatistics( double arrivalTime ){
+        this.arrivalTime = arrivalTime;
+        this.departureTime = 0;
+        this.timeOfQuery = 0;
     }
 
     public double getTimeInSystem(){
