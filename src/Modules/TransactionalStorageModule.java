@@ -14,7 +14,7 @@ public class TransactionalStorageModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 4 -> "+event.getTimeClock());
+        //System.out.println("Llega cliente al modulo 4 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
@@ -76,7 +76,7 @@ public class TransactionalStorageModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
+        //System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
         //Exit to the next event
         --busyServers;
 

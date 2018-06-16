@@ -11,7 +11,7 @@ public class ProcessManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 2 -> "+event.getTimeClock());
+        //System.out.println("Llega cliente al modulo 2 -> "+event.getTimeClock());
         if(this.busyServers < this.numberServers){
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
@@ -36,7 +36,7 @@ public class ProcessManagerModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        System.out.println("Sale cliente al modulo 2 -> "+event.getTimeClock()+"\n\n");
+        //System.out.println("Sale cliente al modulo 2 -> "+event.getTimeClock()+"\n\n");
         --busyServers;
 
         //Exit to the next event

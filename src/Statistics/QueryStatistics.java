@@ -5,8 +5,8 @@ public class QueryStatistics {
     private double departureTime;
     private double timeOfQuery;
 
-    public QueryStatistics(double time){
-        arrivalTime = time;
+    public QueryStatistics(){
+        arrivalTime = 0;
         departureTime = 0;
         timeOfQuery = 0;
     }

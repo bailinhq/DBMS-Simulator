@@ -14,7 +14,7 @@ public class QueryProcessorModule extends Module {
     //TODO ver la posibilidad de tener este metodo en la clase padre
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 3 -> "+event.getTimeClock());
+        //System.out.println("Llega cliente al modulo 3 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
@@ -59,7 +59,7 @@ public class QueryProcessorModule extends Module {
     //TODO definir si seguimos el algoritmo de clase o se deja este.
     @Override
     public void processDeparture(Event event) {
-        System.out.println("Sale cliente al modulo 3 -> "+event.getTimeClock()+"\n\n");
+        //System.out.println("Sale cliente al modulo 3 -> "+event.getTimeClock()+"\n\n");
         //Exit to the next event
         --busyServers;
 

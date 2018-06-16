@@ -13,6 +13,7 @@ public class Simulator {
     private TransactionalStorageModule transactionalStorageModule;
     private ExecutorModule executorModule;
     private PriorityQueue<Event> queue;
+    public int numClientes;
 
     private int numberOfSimulations;
     private double maxSimulationTime;
@@ -169,6 +170,7 @@ public class Simulator {
 
     private void simulate(){
         generateNewEvent();
+        numClientes = 0;
         while (this.clockTime <= this.maxSimulationTime){
             Event event = queue.poll();
             if(event!=null){
@@ -178,5 +180,6 @@ public class Simulator {
                 clockTime = maxSimulationTime+1;
             }
         }
+        System.out.println("Clientes atendiddos " + numClientes);
     }
 }

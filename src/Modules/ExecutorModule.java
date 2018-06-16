@@ -12,7 +12,7 @@ public class ExecutorModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 5 -> "+event.getTimeClock());
+        //System.out.println("Llega cliente al modulo 5 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
         }else{
@@ -51,8 +51,6 @@ public class ExecutorModule extends Module {
             case JOIN:
                 break;
         }
-        //transmission time R = numbers of blocks
-        timeTemp += event.getQuery().getNumberOfBlocks();
 
         return timeTemp;
     }
@@ -60,13 +58,13 @@ public class ExecutorModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
+        //System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
         --busyServers;
 
         //Exit to the next event
         //event.setCurrentModule(simulator.getTransactionalStorageModule());
         event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
-        event.setEventType(EventType.DEPARTURE);
+        event.setEventType(EventType.RETURN);
         this.simulator.addEvent(event);
 
         if(queue.size()>0)
@@ -74,8 +72,6 @@ public class ExecutorModule extends Module {
             Event temporal = queue.poll();
             processClient(temporal);
         }
-
-
     }
 
 
