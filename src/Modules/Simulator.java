@@ -40,7 +40,7 @@ public class Simulator {
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>();
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout = 10;
+        this.timeout =3;
         this.firstEvent = true;
     }
 

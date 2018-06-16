@@ -9,14 +9,13 @@ public abstract class Module {
     //TODO definir si mejor hacer un enum o tener un entero para comparar más facil
     protected int currentModule;
 
-    protected int queueLength;
+    protected long queueLength;
     protected int numberServers;
     protected int busyServers;
+
     protected PriorityQueue<Event> queue;
     protected RandomValueGenerator randomValueGenerator;
-
-
-    private ModuleStatistics statisticsOfModule;
+    protected ModuleStatistics statisticsOfModule;
 
     Module(Simulator simulator, RandomValueGenerator randSimulator) {
         this.simulator = simulator;
@@ -24,6 +23,7 @@ public abstract class Module {
         this.busyServers = 0;
         this.queueLength = 0;
         this.queue = new PriorityQueue<>();
+        this.statisticsOfModule = new ModuleStatistics();
     }
 
     protected abstract void processArrival(Event event);

@@ -96,4 +96,8 @@ public class ModuleStatistics {
         ++this.queueSize;
     }
 
+    public void updateTotalQueueSize( double sizeQueue){ this.totalQueueSize+= sizeQueue;}
+
+    public int getTotalQueries(){ return this.numberOfDDL+this.numberOfSELECT+this.numberOfJOIN+this.numberOfUPDATE; }
+
 }

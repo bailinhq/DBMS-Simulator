@@ -60,7 +60,6 @@ public class ClientCommunicationsManagerModule extends Module {
 
         ++this.simulator.numClientes;
         --busyServers;
-        this.simulator.generateNewEvent();
     }
 
     @Override
