@@ -2,11 +2,13 @@ package Statistics;
 
 public class QueryStatistics {
     private double arrivalTime;
+    private double arrivalTimeModule;
     private double departureTime;
     private double timeOfQuery;
 
     public QueryStatistics(){
         this.arrivalTime = 0;
+        this.arrivalTimeModule = 0;
         this.departureTime = 0;
         this.timeOfQuery = 0;
     }
@@ -39,5 +41,11 @@ public class QueryStatistics {
         this.timeOfQuery = timeOfQuery;
     }
 
+    public double getArrivalTimeModule() {
+        return arrivalTimeModule;
+    }
 
+    public void setArrivalTimeModule(double arrivalTimeModule) {
+        this.arrivalTimeModule = arrivalTimeModule;
+    }
 }

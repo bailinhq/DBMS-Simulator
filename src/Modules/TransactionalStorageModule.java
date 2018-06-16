@@ -14,6 +14,10 @@ public class TransactionalStorageModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        //Statistics
+        event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
+
         //System.out.println("Llega cliente al modulo 4 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
@@ -103,6 +107,11 @@ public class TransactionalStorageModule extends Module {
                 noTimeOut = true;
             }
         }
+
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
+        this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
+        this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
     }
 
 

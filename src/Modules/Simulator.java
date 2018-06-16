@@ -40,7 +40,7 @@ public class Simulator {
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>();
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout =3;
+        this.timeout =10;
         this.firstEvent = true;
     }
 
@@ -148,6 +148,22 @@ public class Simulator {
             }
         }
         System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
+        System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getTotalQueries());
+        System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageSizeQueue());
+
+        System.out.println("\n\nEl total de consultas atendidas en Modulo Procesos fue "+ this.processManagerModule.statisticsOfModule.getTotalQueries());
+        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.processManagerModule.statisticsOfModule.getAverageSizeQueue());
+
+        System.out.println("\n\nEl total de consultas atendidas en Modulo Consultas fue "+ this.queryProcessorModule.statisticsOfModule.getTotalQueries());
+        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.queryProcessorModule.statisticsOfModule.getAverageSizeQueue());
+
+        System.out.println("\n\nEl total de consultas atendidas en Modulo Transacciones fue "+ this.transactionalStorageModule.statisticsOfModule.getTotalQueries());
+        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.transactionalStorageModule.statisticsOfModule.getAverageSizeQueue());
+
+        System.out.println("\n\nEl total de consultas atendidas en Modulo Exe fue "+ this.executorModule.statisticsOfModule.getTotalQueries());
+        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.executorModule.statisticsOfModule.getAverageSizeQueue());
+
+        System.out.println("FIN");
     }
 
 

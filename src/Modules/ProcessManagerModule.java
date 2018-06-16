@@ -12,6 +12,11 @@ public class ProcessManagerModule extends Module {
     @Override
     public void processArrival(Event event) {
         //System.out.println("Llega cliente al modulo 2 -> "+event.getTimeClock());
+
+        //Statistics
+        event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
+
         if(this.busyServers < this.numberServers){
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
@@ -57,6 +62,11 @@ public class ProcessManagerModule extends Module {
                 noTimeOut = true;
             }
         }
+
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
+        this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
+        this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
 
     }
 
