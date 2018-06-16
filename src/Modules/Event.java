@@ -13,23 +13,23 @@ public class Event implements Comparable<Event> {
         this.timeClock = timeClock;
         this.currentModule = currentModule;
 
-        //Statistics
-        query.getQueryStatistics().setArrivalTime(timeClock);
     }
 
     @Override
     public int compareTo(Event o) {
-        if(o.getCurrentModule().getCurrentModuleType() != 4) {
+        //If the current module is different from the transaction module
+        return compareEvents(o);
+        /*if(o.getCurrentModule().getCurrentModuleType() != 4) {
             return compareEvents(o);
         }else{
-            if(this.getEventType() == o.getEventType()){
+            if(this.getQuery().getPriority() == o.getQuery().getPriority()){
                 return compareEvents(o);
             }else if(this.getQuery().getPriority() < o.getQuery().getPriority()){
                 return -1;
             }else{
                 return 1;
             }
-        }
+        }*/
     }
 
     //compare events by time and type
@@ -39,9 +39,7 @@ public class Event implements Comparable<Event> {
         } else if (this.getTimeClock() > o.getTimeClock()) {
             return 1;
         } else {
-            if (this.getTimeClock() == o.getTimeClock()) {
-                return 0;
-            } else if (this.getEventType() == EventType.DEPARTURE) {
+            if (this.getEventType() == EventType.DEPARTURE) {
                 return -1;
             } else {
                 return 1;
