@@ -17,8 +17,7 @@ public class RandomValueGenerator {
     }
 
     public double generateExponentialDistributionValue(double lambda){
-
-        return -(1/lambda)*Math.log10(Math.random());
+        return -(1/lambda)*Math.log(Math.random());
     }
 
     public int generateUniformDistributionValue(int a, int b){

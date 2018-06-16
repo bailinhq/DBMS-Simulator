@@ -13,22 +13,24 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 1");
+        System.out.println("Llega cliente al modulo 1 -> "+event.getTimeClock());
         if(this.busyServers < numberServers){
-            ++busyServers;
             processClient(event);
+            //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else
         {
-            //this.simulator.increaseRejectQueries();
+            this.simulator.increaseRejectQueries();
         }
         //A new arrival is generated
-        //this.simulator.generateNewEvent();
+        this.simulator.generateNewEvent();
     }
 
     @Override
-    public void processDeparture(Event event) {
-        --busyServers;
-        this.simulator.generateNewEvent();
+    public void processClient(Event event) {
+        ++busyServers;
+        event.setCurrentModule(simulator.getProcessManagerModule());
+        event.setEventType(EventType.ARRIVAL);
+        this.simulator.addEvent(event);
     }
 
     @Override
@@ -36,10 +38,14 @@ public class ClientCommunicationsManagerModule extends Module {
         return 0.0;
     }
 
+
+
     @Override
-    public void processClient(Event event) {
-        event.setCurrentModule(simulator.getProcessManagerModule());
-        event.setEventType(EventType.ARRIVAL);
-        this.simulator.addEvent(event);
+    public void processDeparture(Event event) {
+        System.out.println("\n\nCliente atendido"+ event.getTimeClock()+"\n");
+        --busyServers;
+        this.simulator.generateNewEvent();
     }
+
+
 }

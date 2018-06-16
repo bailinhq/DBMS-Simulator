@@ -7,13 +7,13 @@ import java.util.PriorityQueue;
 public abstract class Module {
     Simulator simulator;
     //TODO definir si mejor hacer un enum o tener un entero para comparar más facil
-    public int currentModule;
+    protected int currentModule;
 
-    public int queueLength;
-    public int numberServers;
-    public int busyServers;
-    public PriorityQueue<Event> queue;
-    public RandomValueGenerator randomValueGenerator;
+    protected int queueLength;
+    protected int numberServers;
+    protected int busyServers;
+    protected PriorityQueue<Event> queue;
+    protected RandomValueGenerator randomValueGenerator;
 
 
     private ModuleStatistics statisticsOfModule;
@@ -26,10 +26,10 @@ public abstract class Module {
         this.queue = new PriorityQueue<>();
     }
 
-    public abstract void processArrival(Event event);
-    public abstract void processDeparture(Event event);
-    public abstract double getServiceTime(Event event);
-    public abstract  void processClient(Event event);
+    protected abstract void processArrival(Event event);
+    protected abstract void processDeparture(Event event);
+    protected abstract double getServiceTime(Event event);
+    protected abstract  void processClient(Event event);
 
 
     public void processEvent(Event event){

@@ -11,24 +11,21 @@ public class ProcessManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        System.out.println("Llega cliente al modulo 2");
-        if(busyServers < numberServers){
+        System.out.println("Llega cliente al modulo 2 -> "+event.getTimeClock());
+        if(this.busyServers < this.numberServers){
             processClient(event);
+            //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else{
             queue.offer(event);
         }
     }
 
     @Override
-    public void processDeparture(Event event) {
-        --busyServers;
-        if(queue.size()>0){
-            Event temporal = queue.poll();
-            processClient(temporal);
-        }
-        //Exit to the next event
-        event.setCurrentModule(simulator.getQueryProcessorModule());
-        event.setEventType(EventType.ARRIVAL);
+    public void processClient(Event event) {
+        ++busyServers;
+        event.setTimeClock(event.getTimeClock()+getServiceTime(event));
+        //Output is generated
+        event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
     }
 
@@ -38,13 +35,23 @@ public class ProcessManagerModule extends Module {
     }
 
     @Override
-    public void processClient(Event event) {
-        ++busyServers;
+    public void processDeparture(Event event) {
+        System.out.println("Sale cliente al modulo 2 -> "+event.getTimeClock()+"\n\n");
+        --busyServers;
 
-        event.setTimeClock(event.getTimeClock()+getServiceTime(event));
-        System.out.println("\n\n\n\n"+event.getTimeClock()+"\n\n\n\n");
-        //Output is generated
-        event.setEventType(EventType.DEPARTURE);
+        //Exit to the next event
+        event.setCurrentModule(simulator.getQueryProcessorModule());
+        event.setEventType(EventType.ARRIVAL);
         this.simulator.addEvent(event);
+
+        if(queue.size()>0){
+            Event temporal = queue.poll();
+            processClient(temporal);
+        }
+
     }
+
+
+
+
 }

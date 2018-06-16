@@ -23,7 +23,7 @@ public class Simulator {
     private int maxQueriesInExecutor;
     private double timeout;
     private double clockTime;
-    private int p;
+    private boolean firstEvent;
 
     private SimulationStatistics simulationStatistics;
     private Random randomGenerator;
@@ -31,14 +31,15 @@ public class Simulator {
     public Simulator(){
         this.valueGenerator = new RandomValueGenerator();
 
-        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,5);
+        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,10);
         this.processManagerModule = new ProcessManagerModule(this,valueGenerator);
-        this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,2);
-        this.executorModule = new ExecutorModule(this,valueGenerator,3);
+        this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,5);
+        this.executorModule = new ExecutorModule(this,valueGenerator,5);
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>();
-        this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,3);
+        this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
         this.timeout = 100;
+        this.firstEvent = true;
     }
     public Simulator(Object parameters[]){
         this.setUp(parameters);
@@ -59,31 +60,20 @@ public class Simulator {
     }
 
     public void generateNewEvent(){
-        System.out.println("Se crea un nuevo evento en el tiempo"+this.clockTime);
         Query query = generateQuery();
-        queue.offer(new Event(query, clockTime, EventType.ARRIVAL, clientCommunicationsManagerModule));
+
+
+        double timeTemp = 0;
+        if(!firstEvent){
+            //30 connections per minute -> 1/lambda = 30 connections/min -> 1/lambda = 0.5connections/sec -> lambda = 2
+            timeTemp = valueGenerator.generateExponentialDistributionValue(2);
+        }else {
+            firstEvent = false;
+        }
+
+        queue.offer(new Event(query, clockTime+timeTemp, EventType.ARRIVAL, clientCommunicationsManagerModule));
     }
 
-    public void run(){
-        int numberSimulation = 0;
-        while(numberSimulation < this.numberOfSimulations) {
-            simulate();
-            ++numberSimulation;
-        }
-    }
-
-    private void simulate(){
-        generateNewEvent();
-        while (this.clockTime <= this.maxSimulationTime){
-            Event event = queue.poll();
-            if(event!=null){
-                this.clockTime += event.getTimeClock();
-                event.getCurrentModule().processEvent(event);
-            }else{
-                clockTime = maxSimulationTime+1;
-            }
-        }
-    }
 
 
     private Query generateQuery(){
@@ -167,5 +157,26 @@ public class Simulator {
 
     public void setMaxSimulationTime(double maxSimulationTime) {
         this.maxSimulationTime = maxSimulationTime;
+    }
+
+    public void run(){
+        int numberSimulation = 0;
+        while(numberSimulation < this.numberOfSimulations) {
+            simulate();
+            ++numberSimulation;
+        }
+    }
+
+    private void simulate(){
+        generateNewEvent();
+        while (this.clockTime <= this.maxSimulationTime){
+            Event event = queue.poll();
+            if(event!=null){
+                this.clockTime = event.getTimeClock();
+                event.getCurrentModule().processEvent(event);
+            }else{
+                clockTime = maxSimulationTime+1;
+            }
+        }
     }
 }
