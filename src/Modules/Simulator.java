@@ -14,6 +14,7 @@ public class Simulator {
     private ExecutorModule executorModule;
     private PriorityQueue<Event> queue;
     public int numClientes;
+    public int llegan;
 
     private int numberOfSimulations;
     private double maxSimulationTime;
@@ -39,9 +40,10 @@ public class Simulator {
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>();
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout = 100;
+        this.timeout = 10;
         this.firstEvent = true;
     }
+
     public Simulator(Object parameters[]){
         this.setUp(parameters);
     }
@@ -67,7 +69,8 @@ public class Simulator {
         double timeTemp = 0;
         if(!firstEvent){
             //30 connections per minute -> 1/lambda = 30 connections/min -> 1/lambda = 0.5connections/sec -> lambda = 2
-            timeTemp = valueGenerator.generateExponentialDistributionValue(2);
+            timeTemp = valueGenerator.generateExponentialDistributionValue(0.5 );
+
         }else {
             firstEvent = false;
         }
@@ -108,9 +111,47 @@ public class Simulator {
     }
 
     void addEvent(Event event){
-        if (!isTimeOut(event))
-            queue.offer(event);
+        queue.offer(event);
     }
+
+
+
+    public boolean isTimeOut(Event event){
+        if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
+            System.out.println("\033[31mHay timeout"+event.getQuery().getQueryStatistics().getTimeInSystem());
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public void run(){
+        int numberSimulation = 0;
+        while(numberSimulation < this.numberOfSimulations) {
+            simulate();
+            ++numberSimulation;
+        }
+    }
+
+    private void simulate(){
+        generateNewEvent();
+        numClientes = 0;
+        llegan = 0;
+        while (this.clockTime <= this.maxSimulationTime){
+            Event event = queue.poll();
+            if(event!=null){
+                this.clockTime = event.getTimeClock();
+                event.getCurrentModule().processEvent(event);
+            }else{
+                clockTime = maxSimulationTime+1;
+            }
+        }
+        System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
+    }
+
+
+
 
     private RandomValueGenerator getValueGenerator() {
         return valueGenerator;
@@ -144,42 +185,11 @@ public class Simulator {
         this.simulationStatistics.increaseDiscardedNumberOfQueries();
     }
 
-    public boolean isTimeOut(Event event){
-        if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
     public void setNumberOfSimulations(int numberOfSimulations) {
         this.numberOfSimulations = numberOfSimulations;
     }
 
     public void setMaxSimulationTime(double maxSimulationTime) {
         this.maxSimulationTime = maxSimulationTime;
-    }
-
-    public void run(){
-        int numberSimulation = 0;
-        while(numberSimulation < this.numberOfSimulations) {
-            simulate();
-            ++numberSimulation;
-        }
-    }
-
-    private void simulate(){
-        generateNewEvent();
-        numClientes = 0;
-        while (this.clockTime <= this.maxSimulationTime){
-            Event event = queue.poll();
-            if(event!=null){
-                this.clockTime = event.getTimeClock();
-                event.getCurrentModule().processEvent(event);
-            }else{
-                clockTime = maxSimulationTime+1;
-            }
-        }
-        System.out.println("Clientes atendiddos " + numClientes);
     }
 }

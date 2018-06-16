@@ -39,14 +39,23 @@ public class ProcessManagerModule extends Module {
         //System.out.println("Sale cliente al modulo 2 -> "+event.getTimeClock()+"\n\n");
         --busyServers;
 
-        //Exit to the next event
-        event.setCurrentModule(simulator.getQueryProcessorModule());
-        event.setEventType(EventType.ARRIVAL);
-        this.simulator.addEvent(event);
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
-        if(queue.size()>0){
-            Event temporal = queue.poll();
-            processClient(temporal);
+        if (!this.simulator.isTimeOut(event)) {
+            //Exit to the next event
+            event.setCurrentModule(simulator.getQueryProcessorModule());
+            event.setEventType(EventType.ARRIVAL);
+            this.simulator.addEvent(event);
+        }
+
+        boolean noTimeOut = false;
+        while (this.queue.size()>0 && !noTimeOut){
+            Event temporal = this.queue.poll();
+            if(!this.simulator.isTimeOut(event)){
+                processClient(temporal);
+                noTimeOut = true;
+            }
         }
 
     }

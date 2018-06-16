@@ -63,14 +63,26 @@ public class QueryProcessorModule extends Module {
         //Exit to the next event
         --busyServers;
 
-        event.setCurrentModule(simulator.getTransactionalStorageModule());
-        event.setEventType(EventType.ARRIVAL);
-        this.simulator.addEvent(event);
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
-        if(queue.size() > 0){
-            Event temporal = queue.poll();
-            processClient(temporal);
+
+        if (!this.simulator.isTimeOut(event)) {
+            //Exit to the next event
+            event.setCurrentModule(simulator.getTransactionalStorageModule());
+            event.setEventType(EventType.ARRIVAL);
+            this.simulator.addEvent(event);
         }
+
+        boolean noTimeOut = false;
+        while (this.queue.size()>0 && !noTimeOut){
+            Event temporal = this.queue.poll();
+            if(!this.simulator.isTimeOut(event)){
+                processClient(temporal);
+                noTimeOut = true;
+            }
+        }
+
 
     }
 

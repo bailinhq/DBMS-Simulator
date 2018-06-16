@@ -63,14 +63,22 @@ public class ExecutorModule extends Module {
 
         //Exit to the next event
         //event.setCurrentModule(simulator.getTransactionalStorageModule());
-        event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
-        event.setEventType(EventType.RETURN);
-        this.simulator.addEvent(event);
 
-        if(queue.size()>0)
-        {
-            Event temporal = queue.poll();
-            processClient(temporal);
+
+        if (!this.simulator.isTimeOut(event)) {
+            //Exit to the next event
+            event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
+            event.setEventType(EventType.RETURN);
+            this.simulator.addEvent(event);
+        }
+
+        boolean noTimeOut = false;
+        while (this.queue.size()>0 && !noTimeOut){
+            Event temporal = this.queue.poll();
+            if(!this.simulator.isTimeOut(event)){
+                processClient(temporal);
+                noTimeOut = true;
+            }
         }
     }
 

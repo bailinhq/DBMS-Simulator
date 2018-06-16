@@ -7,11 +7,14 @@ public class Event implements Comparable<Event> {
     private double timeClock;
 
 
-    public Event(Query aQuery, double time, EventType aEventType, Module theCurrentModule) {
-        query = aQuery;
-        eventType = aEventType;
-        timeClock = time;
-        currentModule = theCurrentModule;
+    public Event(Query query, double timeClock, EventType eventType, Module currentModule) {
+        this.query = query;
+        this.eventType = eventType;
+        this.timeClock = timeClock;
+        this.currentModule = currentModule;
+
+        //Statistics
+        query.getQueryStatistics().setArrivalTime(timeClock);
     }
 
     @Override

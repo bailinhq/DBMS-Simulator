@@ -80,17 +80,28 @@ public class TransactionalStorageModule extends Module {
         //Exit to the next event
         --busyServers;
 
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
+
         if(event.getQuery().getType() == QueryType.DDL)
             processingDDL = false;
 
         //event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
-        event.setCurrentModule(simulator.getExecutorModule());
-        event.setEventType(EventType.ARRIVAL);
-        this.simulator.addEvent(event);
 
-        if(queue.size()>0){
-            Event temporal =  queue.poll();
-            this.processClient(temporal);
+        if (!this.simulator.isTimeOut(event)) {
+            //Exit to the next event
+            event.setCurrentModule(simulator.getExecutorModule());
+            event.setEventType(EventType.ARRIVAL);
+            this.simulator.addEvent(event);
+        }
+
+        boolean noTimeOut = false;
+        while (this.queue.size()>0 && !noTimeOut){
+            Event temporal = this.queue.poll();
+            if(!this.simulator.isTimeOut(event)){
+                processClient(temporal);
+                noTimeOut = true;
+            }
         }
     }
 

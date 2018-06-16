@@ -13,6 +13,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processArrival(Event event) {
+        ++this.simulator.llegan;
         //System.out.println("Llega cliente al modulo 1 -> "+event.getTimeClock());
         if(this.busyServers < numberServers){
             processClient(event);
@@ -52,7 +53,11 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        //System.out.println("\n####################\nCliente atendido"+ event.getTimeClock()+"\n####################");
+        System.out.println("\033[36m\n####################\nCliente atendido"+ event.getTimeClock()+"\n####################");
+
+        //Statistics
+        event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
+
         ++this.simulator.numClientes;
         --busyServers;
         this.simulator.generateNewEvent();

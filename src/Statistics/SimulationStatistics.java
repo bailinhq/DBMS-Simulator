@@ -13,6 +13,9 @@ public class SimulationStatistics {
     private ModuleStatistics executorModuleStatistics;
 
 
+    public SimulationStatistics(){
+        this.discardedNumberOfQuerys = 0;
+    }
 
     public int getDiscardedNumberOfQueries() {
         return discardedNumberOfQuerys;
