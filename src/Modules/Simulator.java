@@ -38,7 +38,7 @@ public class Simulator {
         this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,5);
         this.executorModule = new ExecutorModule(this,valueGenerator,5);
         this.simulationStatistics = new SimulationStatistics();
-        this.queue = new PriorityQueue<>();
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
         this.timeout =10;
         this.firstEvent = true;
@@ -58,7 +58,7 @@ public class Simulator {
         transactionalStorageModule = new TransactionalStorageModule(this, valueGenerator, 0);
         executorModule = new ExecutorModule(this, valueGenerator, 0);
 
-        queue = new PriorityQueue<>();
+        queue = new PriorityQueue<>(new ComparatorNormalEvent());
         this.setParameters(parameters);
     }
 
@@ -76,6 +76,8 @@ public class Simulator {
         }
 
         queue.offer(new Event(query, clockTime+timeTemp, EventType.ARRIVAL, clientCommunicationsManagerModule));
+
+        //System.out.println("Tipo->" + query.getType()+"\n\n");
     }
 
 
@@ -84,7 +86,8 @@ public class Simulator {
         randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
-        if (random <= 0.30){
+        query = new Query(QueryType.DDL);
+        /*if (random <= 0.30){
             query = new Query(QueryType.SELECT);
         } else if (random <= 0.55){
             query = new Query(QueryType.UPDATE);
@@ -92,7 +95,7 @@ public class Simulator {
             query = new Query(QueryType.JOIN);
         } else {
             query = new Query(QueryType.DDL);
-        }
+        }*/
         return query;
     }
 

@@ -8,6 +8,7 @@ public class ExecutorModule extends Module {
     ExecutorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
     }
 
     @Override

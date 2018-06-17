@@ -22,7 +22,7 @@ public abstract class Module {
         this.randomValueGenerator = randSimulator;
         this.busyServers = 0;
         this.queueLength = 0;
-        this.queue = new PriorityQueue<>();
+        //this.queue = new PriorityQueue<>();
         this.statisticsOfModule = new ModuleStatistics();
     }
 

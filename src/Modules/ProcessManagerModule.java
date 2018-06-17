@@ -7,6 +7,7 @@ public class ProcessManagerModule extends Module {
     ProcessManagerModule(Simulator simulator, RandomValueGenerator randSimulator) {
         super(simulator, randSimulator);
         this.numberServers = 1;
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
     }
 
     @Override
@@ -21,6 +22,7 @@ public class ProcessManagerModule extends Module {
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else{
+           // System.out.println("Entra a cola "+simulator.getClockTime()+"\n");
             queue.offer(event);
         }
     }
@@ -57,6 +59,7 @@ public class ProcessManagerModule extends Module {
         boolean noTimeOut = false;
         while (this.queue.size()>0 && !noTimeOut){
             Event temporal = this.queue.poll();
+            //System.out.println("Sale de la cola "+simulator.getClockTime()+"\n");
             if(!this.simulator.isTimeOut(event)){
                 processClient(temporal);
                 noTimeOut = true;

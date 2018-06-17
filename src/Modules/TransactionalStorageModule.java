@@ -9,6 +9,7 @@ public class TransactionalStorageModule extends Module {
         super(simulator, randSimulator);
         this.numberServers = numConcurrentProcesses;
         this.processingDDL = false;
+        this.queue = new PriorityQueue<>(new ComparatorPriorityEvent());
     }
 
 
@@ -37,6 +38,7 @@ public class TransactionalStorageModule extends Module {
                 if(busyServers > 0){
                     queue.offer(event);
                     processedEvent = false;
+
                 }else{
                     ++busyServers;
                     processingDDL = true;

@@ -8,6 +8,7 @@ public class QueryProcessorModule extends Module {
     QueryProcessorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
     }
 
 

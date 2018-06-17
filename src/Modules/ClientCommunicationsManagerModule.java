@@ -8,6 +8,7 @@ public class ClientCommunicationsManagerModule extends Module {
     ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
         super(simulator, randSimulator);
         this.numberServers = numConnections;
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
     }
 
 
@@ -57,7 +58,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        System.out.println("\033[36m\n####################\nCliente atendido"+ event.getTimeClock()+"\n####################");
+       // System.out.println("\033[36m\n####################\nCliente atendido"+ event.getTimeClock()+"\n####################");
 
         ++this.simulator.numClientes;
         --busyServers;
