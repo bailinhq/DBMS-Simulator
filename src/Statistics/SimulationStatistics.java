@@ -3,8 +3,8 @@ package Statistics;
 public class SimulationStatistics {
 
     private int discardedNumberOfQuerys;
-    private int numberOfQuerys;
-    private double timeLifeOfQuery;
+    private int numberOfQueries;
+    private double timeLifeQueries;
 
     private ModuleStatistics clientModuleStatistics;
     private ModuleStatistics processModuleStatistics;
@@ -26,8 +26,12 @@ public class SimulationStatistics {
     }
 
     public double getTimeLifeOfQuery() {
+        return timeLifeQueries/numberOfQueries;
+    }
 
-        return 1.0;
+    public void increaseTimeLife( double inputTime, double outputTime){
+        timeLifeQueries += outputTime-inputTime;
+        ++numberOfQueries;
     }
 
 }

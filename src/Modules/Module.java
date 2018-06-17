@@ -32,7 +32,7 @@ public abstract class Module {
     protected abstract  void processClient(Event event);
 
 
-    public void processEvent(Event event){
+    protected void processEvent(Event event){
         switch (event.getEventType()){
             case ARRIVAL: processArrival(event);
             break;
@@ -42,6 +42,10 @@ public abstract class Module {
                 System.out.println("Error, processEvent");
                 break;
         }
+    }
+
+    protected void checkTimeOutQueue(){
+
     }
 
     public int getCurrentModuleType() {

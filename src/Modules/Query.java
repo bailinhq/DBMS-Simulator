@@ -87,7 +87,7 @@ public class Query {
         return numberOfBlocks;
     }
 
-    QueryType getType() {
+    public QueryType getType() {
         return type;
     }
 

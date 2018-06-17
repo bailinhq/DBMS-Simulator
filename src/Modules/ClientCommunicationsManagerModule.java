@@ -69,6 +69,8 @@ public class ClientCommunicationsManagerModule extends Module {
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
+
+        this.simulator.getSimulationStatistics().increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
     }
 
     @Override

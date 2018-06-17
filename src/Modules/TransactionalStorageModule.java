@@ -8,7 +8,7 @@ public class TransactionalStorageModule extends Module {
     Comparator<Event> compareAux;
     //private List<Event> queueTransactional;
 
-    TransactionalStorageModule(Simulator simulator, RandomValueGenerator randSimulator, int numConcurrentProcesses) {
+    public  TransactionalStorageModule(Simulator simulator, RandomValueGenerator randSimulator, int numConcurrentProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numConcurrentProcesses;
         this.processingDDL = false;
@@ -17,6 +17,7 @@ public class TransactionalStorageModule extends Module {
         this.queue = new PriorityQueue<>(compareAux);
         //queueTransactional = new LinkedList<>();
     }
+
 
 
     @Override
@@ -34,7 +35,7 @@ public class TransactionalStorageModule extends Module {
         }
 
         //Statistics
-        if(queue.size()>1)
+        if(queue.size()>4)
                System.out.println("HI");
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
@@ -48,8 +49,9 @@ public class TransactionalStorageModule extends Module {
             case DDL:
                 ++queryDDL;
                 if(busyServers > 0){
-                    if(queue.size()>3)
+                    if(queue.size()>5)
                         System.out.println("HI");
+
                     queue.add(event);
                     //queueTransactional.add(event);
                     //Collections.sort(queueTransactional,compareAux);
@@ -68,8 +70,9 @@ public class TransactionalStorageModule extends Module {
                     ++busyServers;
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
-                    if(queue.size()>3)
+                    if(queue.size()>5) {
                         System.out.println("HI");
+                    }
                     queue.add(event);
                     //queueTransactional.add(event);
                    // Collections.sort(queueTransactional,compareAux);

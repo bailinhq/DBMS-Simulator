@@ -1,7 +1,9 @@
 package Modules;
 
+import Controller.Application;
 import Statistics.SimulationStatistics;
 
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Random;
 
@@ -28,6 +30,7 @@ public class Simulator {
     private boolean firstEvent;
 
     private SimulationStatistics simulationStatistics;
+    private Application application;
     private Random randomGenerator;
 
     public Simulator(){
@@ -40,8 +43,9 @@ public class Simulator {
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout =60;
+        this.timeout =5;
         this.firstEvent = true;
+        this.clockTime = 5;
     }
 
     public Simulator(Object parameters[]){
@@ -113,14 +117,38 @@ public class Simulator {
     }
 
     void addEvent(Event event){
-        queue.offer(event);
+        if(isTimeOut(event))
+        {
+            this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
+        }else {
+            queue.offer(event);
+        }
     }
 
+    public void checkTimeOutSystemQueues(){
+        checkTimeOutQueue(this.queryProcessorModule.queue);
+        checkTimeOutQueue(this.queryProcessorModule.queue);
+        checkTimeOutQueue(this.transactionalStorageModule.queue);
+        checkTimeOutQueue(this.executorModule.queue);
+    }
+
+    public void checkTimeOutQueue(PriorityQueue<Event> queue){
+        Iterator<Event> iterator = queue.iterator();
+        while (iterator.hasNext())
+        {
+            Event event = iterator.next();
+            if(isTimeOut(event)){
+                this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
+                iterator.remove();
+                System.out.println("Se elimina");
+            }
+        }
+    }
 
 
     public boolean isTimeOut(Event event){
         if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
-            System.out.println("\033[31mHay timeout"+event.getQuery().getQueryStatistics().getTimeInSystem());
+            System.out.println("\033[31mHay timeout");
             return true;
         }else{
             return false;
@@ -142,6 +170,7 @@ public class Simulator {
         llegan = 0;
         while (this.clockTime <= this.maxSimulationTime){
             Event event = queue.poll();
+            checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
                 event.getCurrentModule().processEvent(event);
@@ -191,13 +220,14 @@ public class Simulator {
         System.out.println("El tiempo de JOIN en Exe es "+ this.executorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
         executorModule.statisticsOfModule.printData();
 
+        System.out.println("\nEl tiempo de vida promedio de una consulta es "+ this.simulationStatistics.getTimeLifeOfQuery());
         System.out.println("FIN");
     }
 
 
 
 
-    private RandomValueGenerator getValueGenerator() {
+    public RandomValueGenerator getValueGenerator() {
         return valueGenerator;
     }
 
@@ -235,5 +265,9 @@ public class Simulator {
 
     public void setMaxSimulationTime(double maxSimulationTime) {
         this.maxSimulationTime = maxSimulationTime;
+    }
+
+    public SimulationStatistics getSimulationStatistics() {
+        return simulationStatistics;
     }
 }

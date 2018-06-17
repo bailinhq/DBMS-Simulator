@@ -87,6 +87,8 @@ public class ModuleStatistics {
 
     //TODO No entiendo como hacerlo aun
     public double getAverageSizeQueue() {
+        if(queueSize ==0)
+            return 0;
         return (double)totalQueueSize/queueSize;
     }
 
