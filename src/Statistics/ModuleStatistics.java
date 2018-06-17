@@ -100,4 +100,11 @@ public class ModuleStatistics {
 
     public int getTotalQueries(){ return this.numberOfDDL+this.numberOfSELECT+this.numberOfJOIN+this.numberOfUPDATE; }
 
+    public void printData() {
+        System.out.println("DDL " + numberOfDDL);
+        System.out.println("SEL " + numberOfSELECT);
+        System.out.println("UPD " + numberOfUPDATE);
+        System.out.println("JOIN " + numberOfJOIN);
+    }
+
 }

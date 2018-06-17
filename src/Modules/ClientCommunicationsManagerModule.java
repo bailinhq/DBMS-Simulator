@@ -19,7 +19,6 @@ public class ClientCommunicationsManagerModule extends Module {
 
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTime(this.simulator.getClockTime());
-        event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
 
         if(this.busyServers < numberServers){
@@ -46,6 +45,9 @@ public class ClientCommunicationsManagerModule extends Module {
 
     public void processReturn(Event event){
         //System.out.println("Regresa cliente"+ event.getTimeClock());
+
+        //Statistics
+        event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
 
         //transmission time R = numbers of blocks
         double timeTemp = event.getQuery().getNumberOfBlocks();

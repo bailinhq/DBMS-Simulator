@@ -1,15 +1,21 @@
 package Modules;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class TransactionalStorageModule extends Module {
 
     private boolean processingDDL;
+    private int queryDDL;
+    Comparator<Event> compareAux;
+    //private List<Event> queueTransactional;
 
     TransactionalStorageModule(Simulator simulator, RandomValueGenerator randSimulator, int numConcurrentProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numConcurrentProcesses;
         this.processingDDL = false;
-        this.queue = new PriorityQueue<>(new ComparatorPriorityEvent());
+        this.queryDDL = 0;
+        compareAux = new ComparatorPriorityEvent();
+        this.queue = new PriorityQueue<>(compareAux);
+        //queueTransactional = new LinkedList<>();
     }
 
 
@@ -17,15 +23,20 @@ public class TransactionalStorageModule extends Module {
     public void processArrival(Event event) {
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
-        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
 
-        //System.out.println("Llega cliente al modulo 4 -> "+event.getTimeClock());
+        System.out.println("Llega cliente al modulo 4 -> "+event.getTimeClock() + "    " + event.getQuery().getType());
         if(busyServers < numberServers){
             processClient(event);
             //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else{
-            queue.offer(event);
+            queue.add(event);
+            //queueTransactional.add(event);
         }
+
+        //Statistics
+        if(queue.size()>1)
+               System.out.println("HI");
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
 
@@ -35,10 +46,14 @@ public class TransactionalStorageModule extends Module {
 
         switch (event.getQuery().getType()){
             case DDL:
+                ++queryDDL;
                 if(busyServers > 0){
-                    queue.offer(event);
+                    if(queue.size()>3)
+                        System.out.println("HI");
+                    queue.add(event);
+                    //queueTransactional.add(event);
+                    //Collections.sort(queueTransactional,compareAux);
                     processedEvent = false;
-
                 }else{
                     ++busyServers;
                     processingDDL = true;
@@ -49,11 +64,15 @@ public class TransactionalStorageModule extends Module {
             case UPDATE:
             case SELECT:
             case JOIN:
-                if(busyServers<numberServers && !processingDDL){
+                if(busyServers<numberServers && !processingDDL && queryDDL == 0){
                     ++busyServers;
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
-                    queue.offer(event);
+                    if(queue.size()>3)
+                        System.out.println("HI");
+                    queue.add(event);
+                    //queueTransactional.add(event);
+                   // Collections.sort(queueTransactional,compareAux);
                     processedEvent = false;
                 }
 
@@ -72,7 +91,7 @@ public class TransactionalStorageModule extends Module {
     @Override
     public double getServiceTime(Event event) {
         //coordination time
-        double timeTemp = busyServers*0.3;
+        double timeTemp = numberServers*0.3;
 
         //time to load the blocks
         timeTemp += event.getQuery().getNumberOfBlocks()*(0.1/10);
@@ -82,15 +101,17 @@ public class TransactionalStorageModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        //System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
+        System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"  " +event.getQuery().getType());
         //Exit to the next event
         --busyServers;
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
-        if(event.getQuery().getType() == QueryType.DDL)
+        if(event.getQuery().getType() == QueryType.DDL) {
+            --queryDDL;
             processingDDL = false;
+        }
 
         //event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
 
@@ -102,13 +123,13 @@ public class TransactionalStorageModule extends Module {
         }
 
         boolean noTimeOut = false;
-        while (this.queue.size()>0 && !noTimeOut){
+        /*while (this.queue.size()>0 && !noTimeOut){
             Event temporal = this.queue.poll();
             if(!this.simulator.isTimeOut(event)){
                 processClient(temporal);
                 noTimeOut = true;
             }
-        }
+        }*/
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());

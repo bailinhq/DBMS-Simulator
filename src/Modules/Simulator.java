@@ -33,14 +33,14 @@ public class Simulator {
     public Simulator(){
         this.valueGenerator = new RandomValueGenerator();
 
-        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,10);
+        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,15);
         this.processManagerModule = new ProcessManagerModule(this,valueGenerator);
         this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,5);
         this.executorModule = new ExecutorModule(this,valueGenerator,5);
         this.simulationStatistics = new SimulationStatistics();
         this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
         this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout =10;
+        this.timeout =60;
         this.firstEvent = true;
     }
 
@@ -86,8 +86,7 @@ public class Simulator {
         randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
-        query = new Query(QueryType.DDL);
-        /*if (random <= 0.30){
+        if (random <= 0.30){
             query = new Query(QueryType.SELECT);
         } else if (random <= 0.55){
             query = new Query(QueryType.UPDATE);
@@ -95,7 +94,7 @@ public class Simulator {
             query = new Query(QueryType.JOIN);
         } else {
             query = new Query(QueryType.DDL);
-        }*/
+        }
         return query;
     }
 
@@ -153,18 +152,44 @@ public class Simulator {
         System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
         System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getTotalQueries());
         System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tiempo de DDL en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
+        System.out.println("El tiempo de SE en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.SELECT));
+        System.out.println("El tiempo de UP en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.UPDATE));
+        System.out.println("El tiempo de JOIN en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
+        clientCommunicationsManagerModule.statisticsOfModule.printData();
 
         System.out.println("\n\nEl total de consultas atendidas en Modulo Procesos fue "+ this.processManagerModule.statisticsOfModule.getTotalQueries());
         System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.processManagerModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tiempo de DDL en Procesos es "+ this.processManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
+        System.out.println("El tiempo de SE en Procesos es "+ this.processManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.SELECT));
+        System.out.println("El tiempo de UP en Procesos es "+ this.processManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.UPDATE));
+        System.out.println("El tiempo de JOIN en Procesos es "+ this.processManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
+        processManagerModule.statisticsOfModule.printData();
 
         System.out.println("\n\nEl total de consultas atendidas en Modulo Consultas fue "+ this.queryProcessorModule.statisticsOfModule.getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.queryProcessorModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tamanio de cola promedio  en Modulo Consultas fue "+ this.queryProcessorModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tiempo de DDL en Consultas es "+ this.queryProcessorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
+        System.out.println("El tiempo de SE en Consultas es "+ this.queryProcessorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.SELECT));
+        System.out.println("El tiempo de UP en Consultas es "+ this.queryProcessorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.UPDATE));
+        System.out.println("El tiempo de JOIN en Consultas es "+ this.queryProcessorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
+        queryProcessorModule.statisticsOfModule.printData();
+
 
         System.out.println("\n\nEl total de consultas atendidas en Modulo Transacciones fue "+ this.transactionalStorageModule.statisticsOfModule.getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.transactionalStorageModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tamanio de cola promedio  en Modulo Transacciones fue "+ this.transactionalStorageModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tiempo de DDL en Transacciones es "+ this.transactionalStorageModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
+        System.out.println("El tiempo de SE en Transacciones es "+ this.transactionalStorageModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.SELECT));
+        System.out.println("El tiempo de UP en Transacciones es "+ this.transactionalStorageModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.UPDATE));
+        System.out.println("El tiempo de JOIN en Transacciones es "+ this.transactionalStorageModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
+        transactionalStorageModule.statisticsOfModule.printData();
 
         System.out.println("\n\nEl total de consultas atendidas en Modulo Exe fue "+ this.executorModule.statisticsOfModule.getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.executorModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tamanio de cola promedio  en Modulo Exe fue "+ this.executorModule.statisticsOfModule.getAverageSizeQueue());
+        System.out.println("El tiempo de DDL en Exe es "+ this.executorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
+        System.out.println("El tiempo de SE en Exe es "+ this.executorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.SELECT));
+        System.out.println("El tiempo de UP en Exe es "+ this.executorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.UPDATE));
+        System.out.println("El tiempo de JOIN en Exe es "+ this.executorModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.JOIN));
+        executorModule.statisticsOfModule.printData();
 
         System.out.println("FIN");
     }
