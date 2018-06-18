@@ -1,4 +1,4 @@
-/*package Interface;
+package Interface;
 import Controller.Application;
 import Modules.*;
 import javafx.stage.Stage;
@@ -25,8 +25,10 @@ public class Interface extends javafx.application.Application {
 
     }
 
-    public double[] askParameters(){
-        double[] parameters = new double[5];
+    public Object[] askParameters(){
+        Object[] parameters = new Object[8];
         return parameters;
     }
-}*/
+
+
+}

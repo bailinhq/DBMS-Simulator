@@ -63,7 +63,23 @@ public class Simulator {
         executorModule = new ExecutorModule(this, valueGenerator, 0);
 
         queue = new PriorityQueue<>(new ComparatorNormalEvent());
+        simulationStatistics = new SimulationStatistics(clientCommunicationsManagerModule.getStatisticsOfModule(),
+                                                        processManagerModule.getStatisticsOfModule(),
+                                                        queryProcessorModule.getStatisticsOfModule(),
+                                                        transactionalStorageModule.getStatisticsOfModule(),
+                                                        executorModule.getStatisticsOfModule());
         this.setParameters(parameters);
+    }
+
+    private void setParameters(Object parameters[]){
+        numberOfSimulations = (Integer) parameters[0];
+        maxSimulationTime = (Double) parameters[1];
+        delay = (Boolean) parameters[2];
+        maxConcurrentConnectionsSystem = (Integer) parameters[3];
+        maxConcurrentConnectionsQueries = (Integer) parameters[4];
+        maxQueriesInTransactions = (Integer) parameters[5];
+        maxQueriesInExecutor = (Integer) parameters[6];
+        timeout = (Double) parameters[7];
     }
 
     public void generateNewEvent(){
@@ -102,20 +118,6 @@ public class Simulator {
         return query;
     }
 
-
-
-
-    private void setParameters(Object parameters[]){
-        numberOfSimulations = (Integer) parameters[0];
-        maxSimulationTime = (Double) parameters[1];
-        delay = (Boolean) parameters[2];
-        maxConcurrentConnectionsSystem = (Integer) parameters[3];
-        maxConcurrentConnectionsQueries = (Integer) parameters[4];
-        maxQueriesInTransactions = (Integer) parameters[5];
-        maxQueriesInExecutor = (Integer) parameters[6];
-        timeout = (Double) parameters[7];
-    }
-
     void addEvent(Event event){
         if(isTimeOut(event))
         {
@@ -145,7 +147,6 @@ public class Simulator {
         }
     }
 
-
     public boolean isTimeOut(Event event){
         if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
             System.out.println("\033[31mHay timeout");
@@ -164,7 +165,7 @@ public class Simulator {
         }
     }
 
-    private void simulate(){
+    public void simulate(){
         generateNewEvent();
         numClientes = 0;
         llegan = 0;

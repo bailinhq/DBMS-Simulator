@@ -52,5 +52,7 @@ public abstract class Module {
         return currentModule;
     }
 
-
+    public ModuleStatistics getStatisticsOfModule(){
+        return statisticsOfModule;
+    }
 }

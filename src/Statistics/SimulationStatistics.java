@@ -16,6 +16,19 @@ public class SimulationStatistics {
     public SimulationStatistics(){
         this.discardedNumberOfQuerys = 0;
     }
+    public SimulationStatistics(ModuleStatistics aclientModuleStatistics,
+                                ModuleStatistics aprocessModuleStatistics,
+                                ModuleStatistics aqueryProcessorModuleStatistics,
+                                ModuleStatistics atransactionalStorageModuleStatistics,
+                                ModuleStatistics aexecutorModuleStatistics){
+
+        clientModuleStatistics = aclientModuleStatistics;
+        processModuleStatistics = aprocessModuleStatistics;
+        queryProcessorModuleStatistics = aqueryProcessorModuleStatistics;
+        transactionalStorageModuleStatistics = atransactionalStorageModuleStatistics;
+        executorModuleStatistics = aexecutorModuleStatistics;
+        this.discardedNumberOfQuerys = 0;
+    }
 
     public int getDiscardedNumberOfQueries() {
         return discardedNumberOfQuerys;
@@ -28,6 +41,8 @@ public class SimulationStatistics {
     public double getTimeLifeOfQuery() {
         return timeLifeQueries/numberOfQueries;
     }
+
+
 
     public void increaseTimeLife( double inputTime, double outputTime){
         timeLifeQueries += outputTime-inputTime;
