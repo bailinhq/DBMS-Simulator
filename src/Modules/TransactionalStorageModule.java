@@ -35,8 +35,6 @@ public class TransactionalStorageModule extends Module {
         }
 
         //Statistics
-        if(queue.size()>4)
-               System.out.println("HI");
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
@@ -49,8 +47,6 @@ public class TransactionalStorageModule extends Module {
             case DDL:
                 ++queryDDL;
                 if(busyServers > 0){
-                    if(queue.size()>5)
-                        System.out.println("HI");
 
                     queue.add(event);
                     //queueTransactional.add(event);

@@ -1,4 +1,5 @@
 import Controller.Application;
+import Interface.Interface;
 import Modules.*;
 import Statistics.SimulationStatistics;
 import javafx.scene.layout.Priority;
@@ -64,10 +65,13 @@ public class Main {
             Event temporal = priorityQueue.poll();
             System.out.println(temporal.getQuery().getType());
         }
-        */
+
         Simulator simulator = new Simulator();
         simulator.setMaxSimulationTime(60);
         simulator.setNumberOfSimulations(1);
-        simulator.run();
+        simulator.run();*/
+        Interface interfaceSimulator = new Interface();
+        interfaceSimulator.run(args);
+
     }
 }

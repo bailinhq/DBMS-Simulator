@@ -1,34 +1,59 @@
 package Interface;
-import Controller.Application;
-import Modules.*;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class Interface extends javafx.application.Application {
-    private Controller.Application application;
-    public Interface(Controller.Application anApplication){
-        application = anApplication;
-    }
+
+public class Interface extends Application {
+
+    private double xOffset;
+    private double yOffset;
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("SimulatorInterface.fxml"));
 
+        /*Method to move application*/
+        root.setOnMousePressed(new EventHandler<MouseEvent>(){
+            @Override
+            public void handle(MouseEvent event){
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setX(event.getScreenX()-xOffset);
+                primaryStage.setY(event.getScreenY()-yOffset);
+            }
+        });
+
+
+        //Transparent window frame
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle("Simulator");
+
+        //Transparent background
+        Scene scene = new Scene(root);
+        scene.setFill(Color.TRANSPARENT);
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    public void showMenu(){
-
-    }
-    public void showStatistics(){
-
+    public void run(String[] args) {
+        launch(args);
     }
 
-    public void showRealTime(Event event){
-
-    }
-
-    public Object[] askParameters(){
-        Object[] parameters = new Object[8];
-        return parameters;
-    }
-
-
+    /*public static void main(String[] args) {
+        launch(args);
+    }*/
 }
