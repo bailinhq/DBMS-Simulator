@@ -1,5 +1,6 @@
 package Interface;
 
+import Controller.Application;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.DoubleValidator;
 import javafx.application.Platform;
@@ -19,10 +20,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class InterfaceController implements Initializable {
+    Application application;
+
     //Graphic interface elements
     //arrows
-    @FXML
-    private ImageView welcomeArrow;
+    @FXML private ImageView welcomeArrow;
     @FXML private ImageView simulatorArrow;
     @FXML private ImageView systemArrow;
     @FXML private ImageView runArrow;
@@ -47,6 +49,10 @@ public class InterfaceController implements Initializable {
     @FXML private JFXTextField mText;
     @FXML private JFXTextField tText;
 
+
+    public InterfaceController(Application application){
+        this.application = application;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

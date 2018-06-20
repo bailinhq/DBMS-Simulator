@@ -18,7 +18,11 @@ public class Interface extends Application {
 
     private double xOffset;
     private double yOffset;
+    private InterfaceController interfaceController;
 
+    public Interface(Controller.Application application){
+        this.interfaceController = new InterfaceController(application);
+    }
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("SimulatorInterface.fxml"));

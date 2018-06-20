@@ -2,13 +2,16 @@ package Controller;
 
 import Statistics.SystemStatistics;
 import Modules.Simulator;
+import Interface.Interface;
 
 public class Application {
-   // private Interface anInterface;
+    private Interface interfaceSimulator;
     private Simulator simulator;
     private int numberOfSimulations;
     private SystemStatistics systemStatistics;
+
     public Application(){
+
         this.setUp();
         this.showWindow();
     }
