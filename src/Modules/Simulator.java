@@ -48,30 +48,9 @@ public class Simulator {
         this.clockTime = 5;
     }
 
-    public Simulator(Object parameters[]){
-        this.setUp(parameters);
-    }
 
-    public void setUp(Object parameters[]){
-        //TODO cambiar los valores que reciben los modulos
-        randomGenerator = new Random(0);
-        valueGenerator = new RandomValueGenerator();
-        clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this, valueGenerator, 0);
-        processManagerModule = new ProcessManagerModule(this, valueGenerator);
-        queryProcessorModule = new QueryProcessorModule(this, valueGenerator , 0);
-        transactionalStorageModule = new TransactionalStorageModule(this, valueGenerator, 0);
-        executorModule = new ExecutorModule(this, valueGenerator, 0);
 
-        queue = new PriorityQueue<>(new ComparatorNormalEvent());
-        simulationStatistics = new SimulationStatistics(clientCommunicationsManagerModule.getStatisticsOfModule(),
-                                                        processManagerModule.getStatisticsOfModule(),
-                                                        queryProcessorModule.getStatisticsOfModule(),
-                                                        transactionalStorageModule.getStatisticsOfModule(),
-                                                        executorModule.getStatisticsOfModule());
-        this.setParameters(parameters);
-    }
-
-    private void setParameters(Object parameters[]){
+    public void setParameters(Object parameters[]){
         numberOfSimulations = (Integer) parameters[0];
         maxSimulationTime = (Double) parameters[1];
         delay = (Boolean) parameters[2];
@@ -80,7 +59,36 @@ public class Simulator {
         maxQueriesInTransactions = (Integer) parameters[5];
         maxQueriesInExecutor = (Integer) parameters[6];
         timeout = (Double) parameters[7];
+
+        setUp();
     }
+
+    private void setUp(){
+
+        clientCommunicationsManagerModule =
+                new ClientCommunicationsManagerModule(this, valueGenerator, this.maxConcurrentConnectionsSystem);
+
+        processManagerModule =
+                new ProcessManagerModule(this, valueGenerator);
+
+        queryProcessorModule =
+                new QueryProcessorModule(this, valueGenerator , this.maxConcurrentConnectionsQueries);
+
+        transactionalStorageModule =
+                new TransactionalStorageModule(this, valueGenerator, this.maxQueriesInTransactions);
+
+        executorModule =
+                new ExecutorModule(this, valueGenerator, this.maxQueriesInExecutor);
+
+
+        simulationStatistics = new SimulationStatistics(clientCommunicationsManagerModule.getStatisticsOfModule(),
+                                                        processManagerModule.getStatisticsOfModule(),
+                                                        queryProcessorModule.getStatisticsOfModule(),
+                                                        transactionalStorageModule.getStatisticsOfModule(),
+                                                        executorModule.getStatisticsOfModule());
+    }
+
+
 
     public void generateNewEvent(){
         Query query = generateQuery();

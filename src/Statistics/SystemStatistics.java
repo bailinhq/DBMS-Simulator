@@ -3,7 +3,7 @@ package Statistics;
 import java.util.ArrayList;
 
 public class SystemStatistics {
-    private ArrayList<SimulationStatistics> runsResults;
+    /*private ArrayList<SimulationStatistics> runsResults;
     private int discardedNumberOfQuerys;
     private double timeLifeQueries;
     private double clientCommunicationsManagerQueueLength;
@@ -143,5 +143,5 @@ public class SystemStatistics {
 
     public double[] getExecutorQueryTimes() {
         return executorQueryTimes;
-    }
+    }*/
 }

@@ -1,4 +1,5 @@
 
+import Controller.Application;
 import Interface.*;
 import Modules.*;
 
@@ -66,8 +67,8 @@ public class Main {
         simulator.setMaxSimulationTime(60);
         simulator.setNumberOfSimulations(1);
         simulator.run();*/
-        Interface interfaceSimulator = new Interface();
-        interfaceSimulator.run(args);
+
+        Application application = new Application(args);
 
     }
 }

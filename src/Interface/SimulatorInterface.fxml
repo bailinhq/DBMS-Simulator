@@ -108,7 +108,7 @@
                         <Font size="14.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="timeSimulationsText" focusColor="#05bfb9" layoutX="287.0" layoutY="247.0" prefHeight="30.0" prefWidth="133.0" promptText="Time in seconds" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                <JFXTextField fx:id="simulationTimeText" focusColor="#05bfb9" layoutX="287.0" layoutY="247.0" prefHeight="30.0" prefWidth="133.0" promptText="Time in seconds" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -125,7 +125,7 @@
                 </Label>
                 <Separator layoutX="31.0" layoutY="517.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
                 <Separator layoutX="31.0" layoutY="39.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
-                <JFXToggleButton layoutX="369.0" layoutY="364.0" prefHeight="62.0" prefWidth="142.0" text="Delay" textFill="#a8edeb">
+                <JFXToggleButton fx:id="delayToggle" layoutX="369.0" layoutY="364.0" prefHeight="62.0" prefWidth="142.0" text="Delay" textFill="#a8edeb">
                     <font>
                         <Font size="18.0" />
                     </font>

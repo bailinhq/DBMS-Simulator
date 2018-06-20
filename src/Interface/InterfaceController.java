@@ -2,6 +2,7 @@ package Interface;
 
 import Controller.Application;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.validation.DoubleValidator;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -22,6 +23,16 @@ import java.util.ResourceBundle;
 public class InterfaceController implements Initializable {
     Application application;
 
+    //constant values
+    static final int NUMBER_SIMULATION = 0;
+    static final int MAX_SIMULATION_TIME = 1;
+    static final int DELAY = 2;
+    static final int K = 3;
+    static final int N = 4;
+    static final int P = 5;
+    static final int M = 6;
+    static final int T = 7;
+
     //Graphic interface elements
     //arrows
     @FXML private ImageView welcomeArrow;
@@ -41,7 +52,7 @@ public class InterfaceController implements Initializable {
 
     //Text Field
     @FXML private JFXTextField numberSimulationsText;
-    @FXML private JFXTextField timeSimulationsText;
+    @FXML private JFXTextField simulationTimeText;
 
     @FXML private JFXTextField kText;
     @FXML private JFXTextField nText;
@@ -49,9 +60,10 @@ public class InterfaceController implements Initializable {
     @FXML private JFXTextField mText;
     @FXML private JFXTextField tText;
 
+    @FXML private JFXToggleButton delayToggle;
 
-    public InterfaceController(Application application){
-        this.application = application;
+
+    public InterfaceController(){
     }
 
     @Override
@@ -67,11 +79,11 @@ public class InterfaceController implements Initializable {
         mText.addEventFilter(KeyEvent.ANY, handlerWholeNumbers);
         tText.addEventFilter(KeyEvent.ANY, handlerDecimalNumbers);
 
-        timeSimulationsText.textProperty().addListener(new ChangeListener<String>() {
+        simulationTimeText.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.matches("\\d*([\\.]\\d*)?")) {
-                    timeSimulationsText.setText(oldValue);
+                    simulationTimeText.setText(oldValue);
                 }
             }
         });
@@ -114,11 +126,11 @@ public class InterfaceController implements Initializable {
     public void onSettingSystemRunButtonClicked(MouseEvent mouseEvent){
         if(validateFields()) {
             hideAll();
-
             setDisabledSideButtons(true);
-
             runArrow.setVisible(true);
             runPanel.setVisible(true);
+
+            application.setUp(parametersToArray());
         }else{
             System.out.print("Faltan cosas");
         }
@@ -179,7 +191,7 @@ public class InterfaceController implements Initializable {
     }
 
     private boolean validateFields(){
-        if(!numberSimulationsText.getText().isEmpty() && !timeSimulationsText.getText().isEmpty()
+        if(!numberSimulationsText.getText().isEmpty() && !simulationTimeText.getText().isEmpty()
                 && !kText.getText().isEmpty() && !nText.getText().isEmpty() && !pText.getText().isEmpty()
                 && !tText.getText().isEmpty() && !mText.getText().isEmpty()){
             return true;
@@ -187,5 +199,16 @@ public class InterfaceController implements Initializable {
         return false;
     }
 
-
+    private Object[] parametersToArray(){
+        Object parameters[] = new Object[8];
+        parameters[NUMBER_SIMULATION] = Integer.parseInt(this.numberSimulationsText.getText());
+        parameters[MAX_SIMULATION_TIME] = Double.parseDouble(this.simulationTimeText.getText());
+        parameters[DELAY] = this.delayToggle.isSelected();
+        parameters[K] = Integer.parseInt(this.kText.getText());
+        parameters[N] = Integer.parseInt(this.nText.getText());
+        parameters[P] = Integer.parseInt(this.pText.getText());
+        parameters[M] = Integer.parseInt(this.mText.getText());
+        parameters[T] = Double.parseDouble(this.kText.getText());
+        return parameters;
+    }
 }
