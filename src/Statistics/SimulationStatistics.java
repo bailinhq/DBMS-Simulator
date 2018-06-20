@@ -49,4 +49,23 @@ public class SimulationStatistics {
         ++numberOfQueries;
     }
 
+    public ModuleStatistics getClientModuleStatistics() {
+        return clientModuleStatistics;
+    }
+
+    public ModuleStatistics getProcessModuleStatistics() {
+        return processModuleStatistics;
+    }
+
+    public ModuleStatistics getQueryProcessorModuleStatistics() {
+        return queryProcessorModuleStatistics;
+    }
+
+    public ModuleStatistics getTransactionalStorageModuleStatistics() {
+        return transactionalStorageModuleStatistics;
+    }
+
+    public ModuleStatistics getExecutorModuleStatistics() {
+        return executorModuleStatistics;
+    }
 }
