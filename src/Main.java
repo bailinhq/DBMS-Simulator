@@ -1,13 +1,9 @@
-import Controller.Application;
-import Interface.Interface;
-import Modules.*;
-import Statistics.SimulationStatistics;
-import javafx.scene.layout.Priority;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-import java.util.Random;
+import Interface.*;
+import Modules.*;
+
+import Interface.Interface;
+
 
 public class Main {
     public static void main(String[] args){

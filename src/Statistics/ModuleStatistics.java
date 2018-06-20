@@ -1,5 +1,8 @@
 package Statistics;
+
+import Modules.QueryType;
 import Modules.*;
+
 public class ModuleStatistics {
 
     private int queueSize;

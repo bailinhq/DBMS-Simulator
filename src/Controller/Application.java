@@ -1,8 +1,7 @@
 package Controller;
 
-import Interface.Interface;
-import Modules.Simulator;
 import Statistics.SystemStatistics;
+import Modules.Simulator;
 
 public class Application {
    // private Interface anInterface;
