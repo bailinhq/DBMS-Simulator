@@ -6,7 +6,7 @@ import Interface.InterfaceController;
 
 
 
-public class Application extends {
+public class Application {
     private InterfaceController interfaceController;
     private Simulator simulator;
     private int numberOfSimulations;
