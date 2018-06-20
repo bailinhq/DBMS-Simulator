@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class SystemStatistics {
     private ArrayList<SimulationStatistics> runsResults;
-    private int discardedNumberOfQuerys;
+    private double discardedNumberOfQueries;
     private double timeLifeQueries;
     private double clientCommunicationsManagerQueueLength;
     private double processManagerQueueLength;
@@ -29,13 +29,13 @@ public class SystemStatistics {
 
     public SystemStatistics(){
         this.runsResults = new ArrayList<>();
-        discardedNumberOfQuerys = 0;
-        timeLifeQueries = 0;
-        clientCommunicationsManagerQueueLength = 0;
-        processManagerQueueLength = 0;
-        queryProcessorQueueLength = 0;
-        transactionalStorageQueueLength = 0;
-        executorQueueLength = 0;
+        discardedNumberOfQueries = 0.0;
+        timeLifeQueries = 0.0;
+        clientCommunicationsManagerQueueLength = 0.0;
+        processManagerQueueLength = 0.0;
+        queryProcessorQueueLength = 0.0;
+        transactionalStorageQueueLength = 0.0;
+        executorQueueLength = 0.0;
 
         clientCommunicationsManagerQueryTimes = new double[4];
         processManagerQueryTimes = new double[4];
@@ -44,8 +44,8 @@ public class SystemStatistics {
         executorQueryTimes = new double[4];
 
         timeLifeQueriesConfidenceInterval = new ArrayList<>();
-        lowerConfidence = 0;
-        higherConfidence = 0;
+        lowerConfidence = 0.0;
+        higherConfidence = 0.0;
     }
 
     public void addToList(SimulationStatistics simulationStatistics){
@@ -53,9 +53,9 @@ public class SystemStatistics {
     }
 
     public void generateSystemStatistics(){
-        int simulationSize = runsResults.size();
+        double simulationSize = (double) runsResults.size();
         for (SimulationStatistics runsResult : runsResults) {
-            discardedNumberOfQuerys += runsResult.getDiscardedNumberOfQueries();
+            discardedNumberOfQueries += runsResult.getDiscardedNumberOfQueries();
             timeLifeQueries += runsResult.getTimeLifeOfQuery();
             timeLifeQueriesConfidenceInterval.add(runsResult.getTimeLifeOfQuery());
 
@@ -93,28 +93,27 @@ public class SystemStatistics {
             executorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
         }
 
-        discardedNumberOfQuerys = discardedNumberOfQuerys/simulationSize;
-        timeLifeQueries = timeLifeQueries/(double) simulationSize;
-        clientCommunicationsManagerQueueLength = clientCommunicationsManagerQueueLength/(double) simulationSize;
-        processManagerQueueLength = processManagerQueueLength /(double) simulationSize;
-        queryProcessorQueueLength = queryProcessorQueueLength/(double) simulationSize;
-        transactionalStorageQueueLength = transactionalStorageQueueLength/(double) simulationSize;
-        executorQueueLength = executorQueueLength/(double) simulationSize;
+        discardedNumberOfQueries = discardedNumberOfQueries /simulationSize;
+        timeLifeQueries = timeLifeQueries/simulationSize;
+        clientCommunicationsManagerQueueLength = clientCommunicationsManagerQueueLength/simulationSize;
+        processManagerQueueLength = processManagerQueueLength /simulationSize;
+        queryProcessorQueueLength = queryProcessorQueueLength/simulationSize;
+        transactionalStorageQueueLength = transactionalStorageQueueLength/simulationSize;
+        executorQueueLength = executorQueueLength/simulationSize;
 
         for (int i = 0; i < 4; i++){
-            clientCommunicationsManagerQueryTimes[i] = clientCommunicationsManagerQueryTimes[i]/(double) simulationSize;
-            processManagerQueryTimes[i] = processManagerQueryTimes[i]/(double) simulationSize;
-            queryProcessorQueryTimes[i] = queryProcessorQueryTimes[i]/(double) simulationSize;
-            transactionalStorageQueryTimes[i] = transactionalStorageQueryTimes[i]/(double) simulationSize;
-            executorQueryTimes[i] = executorQueryTimes[i]/ (double) simulationSize;
+            clientCommunicationsManagerQueryTimes[i] = clientCommunicationsManagerQueryTimes[i]/simulationSize;
+            processManagerQueryTimes[i] = processManagerQueryTimes[i]/simulationSize;
+            queryProcessorQueryTimes[i] = queryProcessorQueryTimes[i]/simulationSize;
+            transactionalStorageQueryTimes[i] = transactionalStorageQueryTimes[i]/simulationSize;
+            executorQueryTimes[i] = executorQueryTimes[i]/simulationSize;
         }
-
         this.calculateConfidenceInterval();
     }
 
     private void calculateConfidenceInterval(){
         SummaryStatistics summaryStatistics = new SummaryStatistics();
-        double criticalValue = 0;
+        double criticalValue = 0.0;
         for (double value : timeLifeQueriesConfidenceInterval){
             summaryStatistics.addValue(value);
         }
@@ -130,8 +129,8 @@ public class SystemStatistics {
         higherConfidence = summaryStatistics.getMean() + criticalValue;
     }
 
-    public int getDiscardedNumberOfQuerys() {
-        return discardedNumberOfQuerys;
+    public double getDiscardedNumberOfQueries() {
+        return discardedNumberOfQueries;
     }
 
     public double getTimeLifeQueries() {
