@@ -18,9 +18,14 @@ public class Interface extends Application {
 
     private double xOffset;
     private double yOffset;
+    InterfaceController interfaceController;
 
     public Interface(){
-        
+         this.interfaceController = new InterfaceController();
+    }
+
+    public void setApplication(Controller.Application application){
+        this.interfaceController.setApplication(application);
     }
 
     @Override
@@ -57,11 +62,8 @@ public class Interface extends Application {
         primaryStage.show();
     }
 
-    public void run(String[] args) {
+
+    public static void main(String[] args){
         launch(args);
     }
-
-    /*public static void main(String[] args) {
-        launch(args);
-    }*/
 }

@@ -20,7 +20,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class InterfaceController implements Initializable {
+public class InterfaceController implements Initializable{
     Application application;
 
     //constant values
@@ -63,7 +63,13 @@ public class InterfaceController implements Initializable {
     @FXML private JFXToggleButton delayToggle;
 
 
-    public InterfaceController(){
+    public  InterfaceController(){}
+    public InterfaceController(Application application){
+        //this.application = application;
+    }
+
+    public void setApplication( Application application){
+        this.application = application;
     }
 
     @Override
@@ -129,8 +135,12 @@ public class InterfaceController implements Initializable {
             setDisabledSideButtons(true);
             runArrow.setVisible(true);
             runPanel.setVisible(true);
-
+            if ( application == null  )
+            {
+                application = new Application(this);
+            }
             application.setUp(parametersToArray());
+            application.run2();
         }else{
             System.out.print("Faltan cosas");
         }
@@ -197,6 +207,10 @@ public class InterfaceController implements Initializable {
             return true;
         }
         return false;
+    }
+
+    public void prueba(){
+        hideAll();
     }
 
     private Object[] parametersToArray(){

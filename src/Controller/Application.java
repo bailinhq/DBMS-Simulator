@@ -2,23 +2,26 @@ package Controller;
 
 import Statistics.SystemStatistics;
 import Modules.Simulator;
-import Interface.Interface;
+import Interface.InterfaceController;
 
 
 
-public class Application {
-    private Interface interfaceSimulator;
+public class Application extends {
+    private InterfaceController interfaceController;
     private Simulator simulator;
     private int numberOfSimulations;
     private SystemStatistics systemStatistics;
 
 
-    public Application(String args[]){
+    public Application(InterfaceController interfaceController){
+        this.interfaceController = interfaceController;
         simulator = new Simulator();
-        interfaceSimulator = new Interface();
         systemStatistics = new SystemStatistics();
-        interfaceSimulator.run(args);
+
+        System.out.println("Sigo en la aplicacion");
     }
+
+
 
     public void setUp(Object parameters[]){
         //TODO hay que cambiar askParameters to getParameters cuando termines interfaz
@@ -26,7 +29,7 @@ public class Application {
         simulator.setParameters(parameters);
     }
 
-    public void run(){
+    public void run2(){
         int numberSimulation = 0;
         while(numberSimulation < this.numberOfSimulations) {
             simulator.simulate();
