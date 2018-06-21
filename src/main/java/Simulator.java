@@ -212,7 +212,7 @@ public class Simulator {
             checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
-                this.updateData();
+                //this.updateData();
                 delay();
                 event.getCurrentModule().processEvent(event);
             }else{
@@ -348,6 +348,8 @@ public class Simulator {
         this.interfaceController.showUpdateNumber(this.getUpdateNumber());
         this.interfaceController.showQueueLength(this.getModulesQueueLength());
         this.interfaceController.updateTimeoutNumber(timeoutNumber);
+
+
     }
 
     /**

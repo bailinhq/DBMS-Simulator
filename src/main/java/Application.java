@@ -4,7 +4,7 @@ import main.java.Statistics.SystemStatistics;
 import main.java.Interface.InterfaceController;
 
 
-public class Application {
+public class Application extends Thread{
     private InterfaceController interfaceController;
     private Simulator simulator;
     private int numberOfSimulations;
@@ -38,6 +38,7 @@ public class Application {
      * Also stores the statistics at the end of each simulation.
      * Once the simulation cycle is finished, it generates a general statistics.
      */
+    @Override
     public void run(){
         while(numberOfSimulationsActual < this.numberOfSimulations) {
             this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
@@ -47,6 +48,10 @@ public class Application {
             ++numberOfSimulationsActual;
         }
         systemStatistics.generateSystemStatistics();
+        System.out.println("Voy a esperar");
+        System.out.println("Voy a morir");
+
     }
+
 
 }

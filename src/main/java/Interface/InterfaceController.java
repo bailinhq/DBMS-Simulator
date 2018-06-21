@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Semaphore;
 
 import static main.java.Simulator.*;
 
@@ -153,8 +154,6 @@ public class InterfaceController implements Initializable{
             }
         });
 
-
-
     }
 
     /**
@@ -218,7 +217,7 @@ public class InterfaceController implements Initializable{
             //The simulation is configured.
             application.setUp(parameters);
             //The simulation starts running
-            application.run();
+            application.start();
         }else{
             System.out.print("Faltan cosas");
         }
@@ -397,7 +396,7 @@ public class InterfaceController implements Initializable{
      * Update the number of simulations executed.
      * @param simulationNumber number of simulations
      */
-    public void updateSimulationNumber(int simulationNumber){
+    public synchronized void updateSimulationNumber(int simulationNumber){
         this.simulationNumberTxt.setText(String.valueOf(simulationNumber));
     }
 
