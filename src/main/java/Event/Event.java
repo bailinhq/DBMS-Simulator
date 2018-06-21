@@ -32,14 +32,6 @@ public class Event {
     }
 
     /**
-     * Sets the query of the event.
-     * @param query
-     */
-    public void setQuery(Query query) {
-        this.query = query;
-    }
-
-    /**
      * Returns the type of event.
      * @return event type.
      */
@@ -49,7 +41,7 @@ public class Event {
 
     /**
      * Sets the event type.
-     * @param eventType
+     * @param eventType Event to set the event type.
      */
     public void setEventType(EventType eventType) {
         this.eventType = eventType;
