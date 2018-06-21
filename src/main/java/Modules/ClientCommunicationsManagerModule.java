@@ -10,8 +10,16 @@ import java.util.PriorityQueue;
 
 public class ClientCommunicationsManagerModule extends Module {
 
-    //Receive k connections
+
+
+    /**
+     * Constructor
+     * @param simulator Pointer to the simulator
+     * @param randSimulator Pointer of a random value generator.
+     * @param numConnections Number of connections of the module.
+     */
     public ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
+        //Receive k connections
         super(simulator, randSimulator);
         this.numberServers = numConnections;
         this.queue = new PriorityQueue<>(new ComparatorFIFO());
