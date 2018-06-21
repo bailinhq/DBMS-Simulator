@@ -1,4 +1,4 @@
-package main.java.Controller;
+package main.java;
 
 import main.java.Statistics.SystemStatistics;
 import main.java.Modules.Simulator;

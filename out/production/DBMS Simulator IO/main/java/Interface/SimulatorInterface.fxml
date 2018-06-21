@@ -598,7 +598,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="356.0" layoutY="564.0" onMouseClicked="#onSettingSystemRunButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statictics" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="356.0" layoutY="564.0" onMouseClicked="#onSettingSystemRunButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

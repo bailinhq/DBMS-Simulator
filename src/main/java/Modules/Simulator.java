@@ -1,6 +1,5 @@
 package main.java.Modules;
 
-import main.java.Controller.Application;
 import main.java.Interface.InterfaceController;
 import main.java.Statistics.SimulationStatistics;
 

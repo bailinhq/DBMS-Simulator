@@ -21,7 +21,7 @@ public class Interface extends Application {
          this.interfaceController = new InterfaceController();
     }
 
-    public void setApplication(main.java.Controller.Application application){
+    public void setApplication(main.java.Application application){
         this.interfaceController.setApplication(application);
     }
 

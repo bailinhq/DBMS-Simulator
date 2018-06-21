@@ -1,6 +1,6 @@
 package main.java.Interface;
 
-import main.java.Controller.Application;
+import main.java.Application;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.application.Platform;
