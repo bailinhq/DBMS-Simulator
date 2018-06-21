@@ -1,14 +1,20 @@
 package main.java.Modules;
 
+import main.java.Comparators.ComparatorFIFO;
+import main.java.Event.Event;
+import main.java.Event.EventType;
+import main.java.RandomValueGenerator;
+import main.java.Simulator;
+
 import java.util.PriorityQueue;
 
 public class ClientCommunicationsManagerModule extends Module {
 
     //Receive k connections
-    ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
+    public ClientCommunicationsManagerModule(Simulator simulator, RandomValueGenerator randSimulator, int numConnections) {
         super(simulator, randSimulator);
         this.numberServers = numConnections;
-        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
+        this.queue = new PriorityQueue<>(new ComparatorFIFO());
     }
 
     @Override

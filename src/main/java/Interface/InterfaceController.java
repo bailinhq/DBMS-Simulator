@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static main.java.Modules.Simulator.*;
+import static main.java.Simulator.*;
 
 public class InterfaceController implements Initializable{
     Application application;
@@ -92,21 +92,21 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField tDDL;
     @FXML private JFXTextField eDDL;
 
-    //DDL
+    //Update
     @FXML private JFXTextField cUpdate;
     @FXML private JFXTextField pUpdate;
     @FXML private JFXTextField qUpdate;
     @FXML private JFXTextField tUpdate;
     @FXML private JFXTextField eUpdate;
 
-    //DDL
+    //Join
     @FXML private JFXTextField cJoin;
     @FXML private JFXTextField pJoin;
     @FXML private JFXTextField qJoin;
     @FXML private JFXTextField tJoin;
     @FXML private JFXTextField eJoin;
 
-    //DDL
+    //Select
     @FXML private JFXTextField cSelect;
     @FXML private JFXTextField pSelect;
     @FXML private JFXTextField qSelect;

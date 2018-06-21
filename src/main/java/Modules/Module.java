@@ -1,5 +1,8 @@
 package main.java.Modules;
 
+import main.java.Event.Event;
+import main.java.RandomValueGenerator;
+import main.java.Simulator;
 import main.java.Statistics.ModuleStatistics;
 
 import java.util.PriorityQueue;
@@ -22,7 +25,6 @@ public abstract class Module {
         this.randomValueGenerator = randSimulator;
         this.busyServers = 0;
         this.queueLength = 0;
-        //this.queue = new PriorityQueue<>();
         this.statisticsOfModule = new ModuleStatistics();
     }
 
@@ -32,7 +34,7 @@ public abstract class Module {
     protected abstract  void processClient(Event event);
 
 
-    protected void processEvent(Event event){
+    public void processEvent(Event event){
         switch (event.getEventType()){
             case ARRIVAL: processArrival(event);
             break;
@@ -54,5 +56,13 @@ public abstract class Module {
 
     public ModuleStatistics getStatisticsOfModule(){
         return statisticsOfModule;
+    }
+
+    public PriorityQueue<Event> getQueue() {
+        return queue;
+    }
+
+    public RandomValueGenerator getRandomValueGenerator() {
+        return randomValueGenerator;
     }
 }

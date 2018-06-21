@@ -1,6 +1,6 @@
 package main.java.Statistics;
 
-import main.java.Modules.QueryType;
+import main.java.Event.QueryType;
 
 public class ModuleStatistics {
 
@@ -17,8 +17,9 @@ public class ModuleStatistics {
     private double timeOfJOIN;
     private double timeOfDDL;
 
-    private QueryType type;
-
+    /**
+     * class constructor.
+     */
     public ModuleStatistics() {
         this.queueSize = 0;
         this.totalQueueSize = 0;
@@ -32,7 +33,12 @@ public class ModuleStatistics {
         this.timeOfDDL = 0.0;
     }
 
-    //TODO tengo dudas con este metodo con los parametros que recibe, creo que solo deberia ser el tipo
+    /**
+     * Methodo to increase the life time of the query, to later calculate the average life.
+     * @param query Query type.
+     * @param inputTime  Time the query entered to the module.
+     * @param outputTime Time the query came out to the module.
+     */
     public void increaseTimeOfQuery(QueryType query, double inputTime, double outputTime) {
         double timeTemp = outputTime - inputTime;
         switch (query){
@@ -51,6 +57,10 @@ public class ModuleStatistics {
         }
     }
 
+    /**
+     * Method to increase the number of queries processed in the module, they are increased by type to facilitate the calculation of averages.
+     * @param query Query processed type.
+     */
     public void increaseNumberOfQuery(QueryType query) {
         switch (query){
             case UPDATE:
@@ -68,6 +78,11 @@ public class ModuleStatistics {
         }
     }
 
+    /**
+     * Method that calculates the average life of the type of query indicated.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
     public double getAverageTimeInModuleOfQuery(QueryType query) {
         double timeTemp = 0.0;
         switch (query){
@@ -87,42 +102,59 @@ public class ModuleStatistics {
         return timeTemp;
     }
 
-    //TODO No entiendo como hacerlo aun
+    /**
+     * Method that calculates the average of queue length into the module.
+     * @return Average of queue length into the module.
+     */
     public double getAverageSizeQueue() {
         if(queueSize ==0)
             return 0;
         return (double)totalQueueSize/queueSize;
     }
 
-
+    /**
+     * Method to update the queue length into the module.
+     * @param queueSize Queue length into the module.
+     */
     public void increaseTotalQueueSize(int queueSize) {
         this.totalQueueSize += queueSize;
         ++this.queueSize;
     }
 
-    public void updateTotalQueueSize( double sizeQueue){ this.totalQueueSize+= sizeQueue;}
-
+    /**
+     * Method to calculates the number of queries processed in the module.
+     * @return Number of queries processed in the module.
+     */
     public int getTotalQueries(){ return this.numberOfDDL+this.numberOfSELECT+this.numberOfJOIN+this.numberOfUPDATE; }
 
-    public void printData() {
-        System.out.println("DDL " + numberOfDDL);
-        System.out.println("SEL " + numberOfSELECT);
-        System.out.println("UPD " + numberOfUPDATE);
-        System.out.println("JOIN " + numberOfJOIN);
-    }
-
+    /**
+     * Method to calculates the number of queries Select type processed in the module.
+     * @return Number of queries Select type processed in the module.
+     */
     public int getNumberOfSELECT() {
         return numberOfSELECT;
     }
 
+    /**
+     * Method to calculates the number of queries Update type processed in the module.
+     * @return Number of queries Update type processed in the module.
+     */
     public int getNumberOfUPDATE() {
         return numberOfUPDATE;
     }
 
+    /**
+     * Method to calculates the number of queries Join type processed in the module.
+     * @return Number of queries Join type processed in the module.
+     */
     public int getNumberOfJOIN() {
         return numberOfJOIN;
     }
 
+    /**
+     * Method to calculates the number of queries DDL type processed in the module.
+     * @return Number of queries DDL type processed in the module.
+     */
     public int getNumberOfDDL() {
         return numberOfDDL;
     }

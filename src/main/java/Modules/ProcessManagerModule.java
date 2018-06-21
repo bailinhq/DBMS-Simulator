@@ -1,13 +1,19 @@
 package main.java.Modules;
 
+import main.java.Comparators.ComparatorFIFO;
+import main.java.Event.Event;
+import main.java.Event.EventType;
+import main.java.RandomValueGenerator;
+import main.java.Simulator;
+
 import java.util.PriorityQueue;
 
 public class ProcessManagerModule extends Module {
 
-    ProcessManagerModule(Simulator simulator, RandomValueGenerator randSimulator) {
+    public ProcessManagerModule(Simulator simulator, RandomValueGenerator randSimulator) {
         super(simulator, randSimulator);
         this.numberServers = 1;
-        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
+        this.queue = new PriorityQueue<>(new ComparatorFIFO());
     }
 
     @Override

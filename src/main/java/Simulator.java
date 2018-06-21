@@ -1,6 +1,12 @@
-package main.java.Modules;
+package main.java;
 
+import main.java.Comparators.ComparatorNormalEvent;
+import main.java.Event.Event;
+import main.java.Event.EventType;
+import main.java.Event.Query;
+import main.java.Event.QueryType;
 import main.java.Interface.InterfaceController;
+import main.java.Modules.*;
 import main.java.Statistics.SimulationStatistics;
 
 import java.util.Iterator;
@@ -39,10 +45,18 @@ public class Simulator {
 
     private int timeoutNumber;
 
+    /**
+     * class constructor
+     * @param interfaceController Interface where the real-time simulation data and statistics are displayed.
+     */
     public Simulator(InterfaceController interfaceController){
         this.interfaceController = interfaceController;
     }
 
+    /**
+     * Method that initializes the simulation variables according to the parameters.
+     * @param parameters Simulation parameters indicated by the user.
+     */
     public void setParameters(Object parameters[]){
         maxSimulationTime = (Double) parameters[1];
         delay = (Boolean) parameters[2];
@@ -51,12 +65,12 @@ public class Simulator {
         maxQueriesInTransactions = (Integer) parameters[5];
         maxQueriesInExecutor = (Integer) parameters[6];
         timeout = (Double) parameters[7];
-
-        initialize();
     }
 
+    /**
+     * Method that initializes the rest of the variables (modules, statistics and others), based on the user parameters.
+     */
     public void initialize(){
-
         this.valueGenerator = new RandomValueGenerator();
         this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
         this.timeout =0;
@@ -88,23 +102,32 @@ public class Simulator {
     }
 
 
-
+    /**
+     * Method that creates a new event (arrival to the connections module), assigns it an arrival time with exponential distribution
+     * (first arrival is always time 0) and then inserts it into the list of events of the simulation.
+     */
     public void generateNewEvent(){
+
+        //Create query for the event
         Query query = generateQuery();
 
         double timeTemp = 0;
         if(!firstEvent){
             //30 connections per minute -> 1/lambda = 30 connections/min -> 1/lambda = 0.5connections/sec -> lambda = 2
             timeTemp = valueGenerator.generateExponentialDistributionValue(0.5 );
-
         }else {
             firstEvent = false;
         }
 
+        //Add into the list of events
         queue.offer(new Event(query, clockTime+timeTemp, EventType.ARRIVAL, clientCommunicationsManagerModule));
     }
 
-    private Query generateQuery(){
+    /**
+     * Method that creates, using the Monte Carlo method, the query for the event.
+     * @return Query created.
+     */
+    public Query generateQuery(){
         Random randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
@@ -120,7 +143,12 @@ public class Simulator {
         return query;
     }
 
-    void addEvent(Event event){
+    /**
+     * Method that the modules use to insert events in the list of events of the simulation.
+     * Verify if the event to be inserted is timeout (not inserted and and updates statistics) or not (if it is inserted).
+     * @param event Event to be inserted into the list.
+     */
+    public void addEvent(Event event){
         if(isTimeOut(event)){
             this.timeoutNumber++;
             this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
@@ -129,29 +157,40 @@ public class Simulator {
         }
     }
 
+    /**
+     * Method that sends the queue of each module to be reviewed, to eliminate the timeout events that may be waiting.
+     */
     public void checkTimeOutSystemQueues(){
-        checkTimeOutQueue(this.queryProcessorModule.queue);
-        checkTimeOutQueue(this.queryProcessorModule.queue);
-        checkTimeOutQueue(this.transactionalStorageModule.queue);
-        checkTimeOutQueue(this.executorModule.queue);
+        checkTimeOutQueue(this.queryProcessorModule.getQueue());
+        checkTimeOutQueue(this.queryProcessorModule.getQueue());
+        checkTimeOutQueue(this.transactionalStorageModule.getQueue());
+        checkTimeOutQueue(this.executorModule.getQueue());
     }
 
+    /**
+     * Method that runs through the module's queue (indicated in parameter) and eliminates events that have timeout, also updates statistics data.     *
+     * @param queue Queue of the module to review.
+     */
     public void checkTimeOutQueue(PriorityQueue<Event> queue){
         Iterator<Event> iterator = queue.iterator();
         while (iterator.hasNext())
         {
             Event event = iterator.next();
             if(isTimeOut(event)){
+                this.timeoutNumber++;
                 this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
                 iterator.remove();
-                //System.out.println("Se elimina");
             }
         }
     }
 
+    /**
+     * Method that checks if the event is timeout (takes a long time in the system).
+     * @param event Event to review.
+     * @return Boolean indicating whether it is timeout or not.
+     */
     public boolean isTimeOut(Event event){
         if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
-            //System.out.println("\033[31mHay timeout");
             return true;
         }else{
             return false;
@@ -159,6 +198,12 @@ public class Simulator {
     }
 
 
+    /**
+     * Method that controls a simulation.
+     * It is responsible for creating the initial event and entering a simulation cycle until the time indicated by the user ends.
+     * The events are removed and processed from the list and for each event the modified data is shown in the interface (in real time).
+     * It also modifies the time of the simulation clock and places a delay in the interface if the user requested it.
+     */
     public void simulate(){
         generateNewEvent();
         while (this.clockTime <= this.maxSimulationTime){
@@ -220,18 +265,25 @@ public class Simulator {
     }
 
 
-
-    private int[] getModulesQueueLength(){
+    /**
+     * Method that updates the sizes of the queues in each module.
+     * @return Array with the tail sizes in the modules.
+     */
+    public int[] getModulesQueueLength(){
         int queueLength[] = new int[5];
-        queueLength[M_CLIENTS] = this.clientCommunicationsManagerModule.queue.size();
-        queueLength[M_PROCESSES] = this.processManagerModule.queue.size();
-        queueLength[M_QUERIES] = this.queryProcessorModule.queue.size();
-        queueLength[M_TRANSACTIONS] = this.transactionalStorageModule.queue.size();
-        queueLength[M_EXECUTIONS] = this.executorModule.queue.size();
+        queueLength[M_CLIENTS] = this.clientCommunicationsManagerModule.getQueue().size();
+        queueLength[M_PROCESSES] = this.processManagerModule.getQueue().size();
+        queueLength[M_QUERIES] = this.queryProcessorModule.getQueue().size();
+        queueLength[M_TRANSACTIONS] = this.transactionalStorageModule.getQueue().size();
+        queueLength[M_EXECUTIONS] = this.executorModule.getQueue().size();
         return queueLength;
     }
 
-    private int[] getDDLNumber(){
+    /**
+     * Method that updates the number of DDL queries processed by the modules.
+     * @return Array with the amount of DDL processed in each module.
+     */
+    public int[] getDDLNumber(){
         int DDLNumber[] = new int[5];
         DDLNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfDDL();
         DDLNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfDDL();
@@ -241,7 +293,11 @@ public class Simulator {
         return DDLNumber;
     }
 
-    private int[] getUpdateNumber(){
+    /**
+     * Method that updates the number of Update queries processed by the modules.
+     * @return Array with the amount of Update processed in each module.
+     */
+    public int[] getUpdateNumber(){
         int updateNumber[] = new int[5];
         updateNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfUPDATE();
         updateNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfUPDATE();
@@ -251,7 +307,11 @@ public class Simulator {
         return updateNumber;
     }
 
-    private int[] getJoinNumber(){
+    /**
+     * Method that updates the number of Join queries processed by the modules.
+     * @return Array with the amount of Join processed in each module.
+     */
+    public int[] getJoinNumber(){
         int joinNumber[] = new int[5];
         joinNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfJOIN();
         joinNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfJOIN();
@@ -261,7 +321,11 @@ public class Simulator {
         return joinNumber;
     }
 
-    private int[] getSelectNumber(){
+    /**
+     * Method that updates the number of Select queries processed by the modules.
+     * @return Array with the amount of Select processed in each module.
+     */
+    public int[] getSelectNumber(){
         int selectNumber[] = new int[5];
         selectNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfSELECT();
         selectNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfSELECT();
@@ -271,7 +335,10 @@ public class Simulator {
         return selectNumber;
     }
 
-    private void updateData(){
+    /**
+     * Method that updates the data in the interface in real time, requests the updated data of each module and is sent to the interface to be displayed.
+     */
+    public void updateData(){
         this.interfaceController.updateClock(this.clockTime);
         this.interfaceController.updateDiscarded(this.simulationStatistics.getDiscardedNumberOfQueries());
         this.interfaceController.showDDLNumber(this.getDDLNumber());
@@ -279,11 +346,13 @@ public class Simulator {
         this.interfaceController.showSelectNumber(this.getSelectNumber());
         this.interfaceController.showUpdateNumber(this.getUpdateNumber());
         this.interfaceController.showQueueLength(this.getModulesQueueLength());
-       // this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual);\
         this.interfaceController.updateTimeoutNumber(timeoutNumber);
     }
 
-    private void delay(){
+    /**
+     * Method that makes a delay (if requested), so that the user can observe the change of the data throughout the simulation.
+     */
+    public void delay(){
         /*if(delay){
             try {
                 Thread.sleep(1000);
@@ -293,42 +362,80 @@ public class Simulator {
         }*/
     }
 
-    ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
+    /**
+     * Method to access the simulation variable clientCommunicationsManagerModule.
+     * @return Module of simulation clientCommunicationsManagerModule
+     */
+    public ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
         return clientCommunicationsManagerModule;
     }
 
-    ProcessManagerModule getProcessManagerModule() {
+    /**
+     * Method to access the simulation variable processManagerModule.
+     * @return Module of simulation processManagerModule
+     */
+    public ProcessManagerModule getProcessManagerModule() {
         return processManagerModule;
     }
 
-    QueryProcessorModule getQueryProcessorModule() {
+    /**
+     * Method to access the simulation variable queryProcessorModule.
+     * @return Module of simulation queryProcessorModule
+     */
+    public QueryProcessorModule getQueryProcessorModule() {
         return queryProcessorModule;
     }
 
-    TransactionalStorageModule getTransactionalStorageModule() {
+    /**
+     * Method to access the simulation variable transactionalStorageModule.
+     * @return Module of simulation transactionalStorageModule
+     */
+    public TransactionalStorageModule getTransactionalStorageModule() {
         return transactionalStorageModule;
     }
 
-    ExecutorModule getExecutorModule() {
+    /**
+     * Method to access the simulation variable executorModule.
+     * @return Module of simulation executorModule
+     */
+    public ExecutorModule getExecutorModule() {
         return executorModule;
     }
 
+    /**
+     * Method to access the simulation clock.
+     * @return clockTime of simulation.
+     */
     public double getClockTime() {
         return clockTime;
     }
 
+    /**
+     * Method to access the current number of timeout.
+     * @return Numbers of timeout.
+     */
     public int getTimeoutNumber() {
         return timeoutNumber;
     }
 
+    /**
+     * Method to update the number of timeout.
+     */
     public void setTimeoutNumber(int timeoutNumber) {
         this.timeoutNumber = timeoutNumber;
     }
 
+    /**
+     * Method to update the number of reject or discarded queries.
+     */
     public void increaseRejectQueries(){
         this.simulationStatistics.increaseDiscardedNumberOfQueries();
     }
 
+    /**
+     * Method to access the statistics of the current simulation.
+     * @return Simulation Statistics.
+     */
     public SimulationStatistics getSimulationStatistics() {
         return simulationStatistics;
     }

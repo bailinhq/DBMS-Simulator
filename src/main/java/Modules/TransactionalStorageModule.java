@@ -1,4 +1,11 @@
 package main.java.Modules;
+import main.java.Comparators.ComparatorPriorityEvent;
+import main.java.Event.Event;
+import main.java.Event.EventType;
+import main.java.Event.QueryType;
+import main.java.RandomValueGenerator;
+import main.java.Simulator;
+
 import java.util.*;
 
 public class TransactionalStorageModule extends Module {
@@ -6,7 +13,6 @@ public class TransactionalStorageModule extends Module {
     private boolean processingDDL;
     private int queryDDL;
     Comparator<Event> compareAux;
-    //private List<Event> queueTransactional;
 
     public  TransactionalStorageModule(Simulator simulator, RandomValueGenerator randSimulator, int numConcurrentProcesses) {
         super(simulator, randSimulator);
@@ -15,7 +21,6 @@ public class TransactionalStorageModule extends Module {
         this.queryDDL = 0;
         compareAux = new ComparatorPriorityEvent();
         this.queue = new PriorityQueue<>(compareAux);
-        //queueTransactional = new LinkedList<>();
     }
 
 

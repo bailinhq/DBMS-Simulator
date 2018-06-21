@@ -1,14 +1,20 @@
 package main.java.Modules;
 
+import main.java.Comparators.ComparatorFIFO;
+import main.java.Event.Event;
+import main.java.Event.EventType;
+import main.java.RandomValueGenerator;
+import main.java.Simulator;
+
 import java.util.PriorityQueue;
 
 public class ExecutorModule extends Module {
 
 
-    ExecutorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
+    public ExecutorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;
-        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
+        this.queue = new PriorityQueue<>(new ComparatorFIFO());
     }
 
     @Override

@@ -1,7 +1,7 @@
-package main.java.Modules;
+package main.java;
 
 public class RandomValueGenerator {
-    RandomValueGenerator(){
+    public RandomValueGenerator(){
     }
 
     public double generateNormalDistributionValue( double normalMean, double variance ){

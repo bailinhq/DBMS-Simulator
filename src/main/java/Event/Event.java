@@ -1,4 +1,6 @@
-package main.java.Modules;
+package main.java.Event;
+
+import main.java.Modules.Module;
 
 public class Event {
     private Query query;

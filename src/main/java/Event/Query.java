@@ -1,5 +1,6 @@
-package main.java.Modules;
+package main.java.Event;
 
+import main.java.RandomValueGenerator;
 import main.java.Statistics.QueryStatistics;
 
 public class Query {
@@ -60,7 +61,7 @@ public class Query {
     }
 
 
-    int getPriority(){
+    public int getPriority(){
         //top priority 1
         int priority = 0;
         switch (this.type){
@@ -79,11 +80,11 @@ public class Query {
         return priority;
     }
 
-    double getTimeOptimization() {
+    public double getTimeOptimization() {
         return timeOptimization;
     }
 
-    int getNumberOfBlocks() {
+    public int getNumberOfBlocks() {
         return numberOfBlocks;
     }
 

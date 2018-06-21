@@ -1,4 +1,6 @@
-package main.java.Modules;
+package main.java.Comparators;
+
+import main.java.Event.Event;
 
 import java.util.Comparator;
 
