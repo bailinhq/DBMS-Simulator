@@ -66,6 +66,7 @@ public class InterfaceController implements Initializable{
 
     @FXML private JFXTextField clockTxt;
     @FXML private JFXTextField discardedTxt;
+    @FXML private JFXTextField simulationNumberTxt;
     // main.java.Statistics
     //number of servers
     @FXML private JFXTextField cServers;
@@ -329,5 +330,9 @@ public class InterfaceController implements Initializable{
 
     public void updateDiscarded(int discardedConnections){
         this.discardedTxt.setText(String.valueOf(discardedConnections));
+    }
+
+    public void updateSimulationNumber(int simulationNumber){
+        this.simulationNumberTxt.setText(String.valueOf(simulationNumber));
     }
 }

@@ -306,6 +306,7 @@ public class Simulator {
         this.interfaceController.showSelectNumber(this.getSelectNumber());
         this.interfaceController.showUpdateNumber(this.getUpdateNumber());
         this.interfaceController.showQueueLength(this.getModulesQueueLength());
+        this.interfaceController.updateSimulationNumber(this.numberOfSimulations);
     }
 
     private void delay(){
