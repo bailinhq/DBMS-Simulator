@@ -588,7 +588,7 @@
                   <Image url="@../../resources/Images/icons_timeout.png" />
                </image>
             </ImageView>
-            <JFXTextField fx:id="discardedTxt1" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="66.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+            <JFXTextField fx:id="timeoutTxt" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="66.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>

@@ -588,7 +588,7 @@
                   <Image url="@../../resources/Images/icons_timeout.png" />
                </image>
             </ImageView>
-            <JFXTextField fx:id="discardedTxt1" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="66.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+            <JFXTextField fx:id="timeoutTxt" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="66.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -598,7 +598,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="356.0" layoutY="564.0" onMouseClicked="#onSettingSystemRunButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statictics" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="356.0" layoutY="564.0" onMouseClicked="#onSettingSystemRunButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>

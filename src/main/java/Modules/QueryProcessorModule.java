@@ -15,17 +15,17 @@ public class QueryProcessorModule extends Module {
     //TODO ver la posibilidad de tener este metodo en la clase padre
     @Override
     public void processArrival(Event event) {
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
-        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
 
-        //System.out.println("Llega cliente al modulo 3 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
-            //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else{
             queue.offer(event);
         }
+
+        //Statistics
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
     @Override
@@ -79,12 +79,14 @@ public class QueryProcessorModule extends Module {
             this.simulator.addEvent(event);
         }
 
-        boolean noTimeOut = false;
-        while (this.queue.size()>0 && !noTimeOut){
+        boolean isTimeOut = true;
+        while (this.queue.size()>0 && isTimeOut){
             Event temporal = this.queue.poll();
             if(!this.simulator.isTimeOut(event)){
                 processClient(temporal);
-                noTimeOut = true;
+                isTimeOut = false;
+            }else {
+                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
             }
         }
 

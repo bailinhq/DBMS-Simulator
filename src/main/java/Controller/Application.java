@@ -5,11 +5,11 @@ import main.java.Modules.Simulator;
 import main.java.Interface.InterfaceController;
 
 
-
 public class Application {
     private InterfaceController interfaceController;
     private Simulator simulator;
     private int numberOfSimulations;
+    private int numberOfSimulationsActual;
     private SystemStatistics systemStatistics;
 
 
@@ -17,29 +17,25 @@ public class Application {
         this.interfaceController = interfaceController;
         simulator = new Simulator(interfaceController);
         systemStatistics = new SystemStatistics();
-
-        System.out.println("Sigo en la aplicacion");
+        numberOfSimulationsActual = 0;
     }
 
 
 
     public void setUp(Object parameters[]){
-        //TODO hay que cambiar askParameters to getParameters cuando termines interfaz
         numberOfSimulations = (Integer)parameters[0];
         simulator.setParameters(parameters);
     }
 
-    public void run2(){
-        int numberSimulation = 0;
-        while(numberSimulation < this.numberOfSimulations) {
+    public void run(){
+        while(numberOfSimulationsActual < this.numberOfSimulations) {
+            this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
+            simulator.initialize();
             simulator.simulate();
-            //systemStatistics.addToList(simulator.getSimulationStatistics());
-            ++numberSimulation;
+            systemStatistics.addToList(simulator.getSimulationStatistics());
+            ++numberOfSimulationsActual;
         }
-        //systemStatistics.generateSystemStatistics();
+        systemStatistics.generateSystemStatistics();
     }
 
-    public void showWindow(){
-
-    }
 }

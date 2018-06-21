@@ -12,10 +12,6 @@ public class SimulationStatistics {
     private ModuleStatistics transactionalStorageModuleStatistics;
     private ModuleStatistics executorModuleStatistics;
 
-
-    public SimulationStatistics(){
-        this.discardedNumberOfQuerys = 0;
-    }
     public SimulationStatistics(ModuleStatistics aclientModuleStatistics,
                                 ModuleStatistics aprocessModuleStatistics,
                                 ModuleStatistics aqueryProcessorModuleStatistics,

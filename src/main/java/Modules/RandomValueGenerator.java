@@ -2,11 +2,9 @@ package main.java.Modules;
 
 public class RandomValueGenerator {
     RandomValueGenerator(){
-
     }
 
     public double generateNormalDistributionValue( double normalMean, double variance ){
-        //Metodo de convolucion
         double sum = 0;
         for (int i = 0; i < 12; i++) {
             sum += Math.random();

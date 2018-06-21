@@ -24,10 +24,7 @@ public class Simulator {
     private TransactionalStorageModule transactionalStorageModule;
     private ExecutorModule executorModule;
     private PriorityQueue<Event> queue;
-    public int numClientes;
-    public int llegan;
 
-    private int numberOfSimulations;
     private double maxSimulationTime;
     private boolean delay;
     private int maxConcurrentConnectionsSystem;
@@ -40,29 +37,14 @@ public class Simulator {
 
     private SimulationStatistics simulationStatistics;
     private InterfaceController interfaceController;
-    private Application application;
-    private Random randomGenerator;
+
+    private int timeoutNumber;
 
     public Simulator(InterfaceController interfaceController){
-        this.valueGenerator = new RandomValueGenerator();
         this.interfaceController = interfaceController;
-
-        this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,15);
-        this.processManagerModule = new ProcessManagerModule(this,valueGenerator);
-        this.queryProcessorModule = new QueryProcessorModule(this,valueGenerator,5);
-        this.executorModule = new ExecutorModule(this,valueGenerator,5);
-        this.simulationStatistics = new SimulationStatistics();
-        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
-        this.transactionalStorageModule =  new TransactionalStorageModule(this,valueGenerator,5);
-        this.timeout =5;
-        this.firstEvent = true;
-        this.clockTime = 5;
     }
 
-
-
     public void setParameters(Object parameters[]){
-        numberOfSimulations = (Integer) parameters[0];
         maxSimulationTime = (Double) parameters[1];
         delay = (Boolean) parameters[2];
         maxConcurrentConnectionsSystem = (Integer) parameters[3];
@@ -71,10 +53,17 @@ public class Simulator {
         maxQueriesInExecutor = (Integer) parameters[6];
         timeout = (Double) parameters[7];
 
-        setUp();
+        initialize();
     }
 
-    private void setUp(){
+    public void initialize(){
+
+        this.valueGenerator = new RandomValueGenerator();
+        this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
+        this.timeout =0;
+        this.firstEvent = true;
+        this.clockTime = 0;
+        this.timeoutNumber = 0;
 
         clientCommunicationsManagerModule =
                 new ClientCommunicationsManagerModule(this, valueGenerator, this.maxConcurrentConnectionsSystem);
@@ -104,7 +93,6 @@ public class Simulator {
     public void generateNewEvent(){
         Query query = generateQuery();
 
-
         double timeTemp = 0;
         if(!firstEvent){
             //30 connections per minute -> 1/lambda = 30 connections/min -> 1/lambda = 0.5connections/sec -> lambda = 2
@@ -115,14 +103,10 @@ public class Simulator {
         }
 
         queue.offer(new Event(query, clockTime+timeTemp, EventType.ARRIVAL, clientCommunicationsManagerModule));
-
-        //System.out.println("Tipo->" + query.getType()+"\n\n");
     }
 
-
-
     private Query generateQuery(){
-        randomGenerator = new Random();
+        Random randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
         if (random <= 0.30){
@@ -138,8 +122,8 @@ public class Simulator {
     }
 
     void addEvent(Event event){
-        if(isTimeOut(event))
-        {
+        if(isTimeOut(event)){
+            this.timeoutNumber++;
             this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
         }else {
             queue.offer(event);
@@ -161,14 +145,14 @@ public class Simulator {
             if(isTimeOut(event)){
                 this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
                 iterator.remove();
-                System.out.println("Se elimina");
+                //System.out.println("Se elimina");
             }
         }
     }
 
     public boolean isTimeOut(Event event){
         if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
-            System.out.println("\033[31mHay timeout");
+            //System.out.println("\033[31mHay timeout");
             return true;
         }else{
             return false;
@@ -176,18 +160,8 @@ public class Simulator {
     }
 
 
-    public void run(){
-        int numberSimulation = 0;
-        while(numberSimulation < this.numberOfSimulations) {
-            simulate();
-            ++numberSimulation;
-        }
-    }
-
     public void simulate(){
         generateNewEvent();
-        numClientes = 0;
-        llegan = 0;
         while (this.clockTime <= this.maxSimulationTime){
             Event event = queue.poll();
             checkTimeOutSystemQueues();
@@ -200,7 +174,7 @@ public class Simulator {
                 clockTime = maxSimulationTime+1;
             }
         }
-        System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
+        /*System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
         System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getTotalQueries());
         System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageSizeQueue());
         System.out.println("El tiempo de DDL en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
@@ -243,7 +217,7 @@ public class Simulator {
         executorModule.statisticsOfModule.printData();
 
         System.out.println("\nEl tiempo de vida promedio de una consulta es "+ this.simulationStatistics.getTimeLifeOfQuery());
-        System.out.println("FIN");
+        System.out.println("FIN");*/
     }
 
 
@@ -306,7 +280,8 @@ public class Simulator {
         this.interfaceController.showSelectNumber(this.getSelectNumber());
         this.interfaceController.showUpdateNumber(this.getUpdateNumber());
         this.interfaceController.showQueueLength(this.getModulesQueueLength());
-        this.interfaceController.updateSimulationNumber(this.numberOfSimulations);
+       // this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual);\
+        this.interfaceController.updateTimeoutNumber(timeoutNumber);
     }
 
     private void delay(){
@@ -317,10 +292,6 @@ public class Simulator {
                 e.printStackTrace();
             }
         }*/
-    }
-
-    public RandomValueGenerator getValueGenerator() {
-        return valueGenerator;
     }
 
     ClientCommunicationsManagerModule getClientCommunicationsManagerModule() {
@@ -347,16 +318,16 @@ public class Simulator {
         return clockTime;
     }
 
-    public  void increaseRejectQueries(){
+    public int getTimeoutNumber() {
+        return timeoutNumber;
+    }
+
+    public void setTimeoutNumber(int timeoutNumber) {
+        this.timeoutNumber = timeoutNumber;
+    }
+
+    public void increaseRejectQueries(){
         this.simulationStatistics.increaseDiscardedNumberOfQueries();
-    }
-
-    public void setNumberOfSimulations(int numberOfSimulations) {
-        this.numberOfSimulations = numberOfSimulations;
-    }
-
-    public void setMaxSimulationTime(double maxSimulationTime) {
-        this.maxSimulationTime = maxSimulationTime;
     }
 
     public SimulationStatistics getSimulationStatistics() {

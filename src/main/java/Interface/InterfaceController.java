@@ -54,6 +54,7 @@ public class InterfaceController implements Initializable{
     //Text Field
     @FXML private JFXTextField numberSimulationsText;
     @FXML private JFXTextField simulationTimeText;
+    @FXML private JFXTextField timeoutTxt;
 
     @FXML private JFXTextField kText;
     @FXML private JFXTextField nText;
@@ -190,7 +191,7 @@ public class InterfaceController implements Initializable{
             Object parameters[] = parametersToArray();
             showNumberServers(parameters);
             application.setUp(parameters);
-            application.run2();
+            application.run();
         }else{
             System.out.print("Faltan cosas");
         }
@@ -334,5 +335,9 @@ public class InterfaceController implements Initializable{
 
     public void updateSimulationNumber(int simulationNumber){
         this.simulationNumberTxt.setText(String.valueOf(simulationNumber));
+    }
+
+    public void updateTimeoutNumber(int timeoutNumber){
+        this.timeoutTxt.setText(String.valueOf(timeoutNumber));
     }
 }

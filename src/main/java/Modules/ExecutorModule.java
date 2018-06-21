@@ -13,23 +13,23 @@ public class ExecutorModule extends Module {
 
     @Override
     public void processArrival(Event event) {
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
-        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
 
-        //System.out.println("Llega cliente al modulo 5 -> "+event.getTimeClock());
         if(busyServers < numberServers){
             processClient(event);
         }else{
             queue.offer(event);
         }
+
+        //Statistics
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
     @Override
     public void processClient(Event event) {
         ++busyServers;
         event.setTimeClock(event.getTimeClock()+getServiceTime(event));
-        //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         //Output is generated
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
@@ -64,12 +64,11 @@ public class ExecutorModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-        //System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"\n\n");
+
         --busyServers;
 
         //Exit to the next event
         //event.setCurrentModule(simulator.getTransactionalStorageModule());
-
 
         if (!this.simulator.isTimeOut(event)) {
             //Exit to the next event
@@ -78,16 +77,18 @@ public class ExecutorModule extends Module {
             this.simulator.addEvent(event);
         }
 
-        boolean noTimeOut = false;
-        while (this.queue.size()>0 && !noTimeOut){
+        boolean isTimeOut = true;
+        while (this.queue.size()>0 && isTimeOut){
             Event temporal = this.queue.poll();
             if(!this.simulator.isTimeOut(event)){
                 processClient(temporal);
-                noTimeOut = true;
+                isTimeOut = false;
+            }else {
+                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
             }
         }
 
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());

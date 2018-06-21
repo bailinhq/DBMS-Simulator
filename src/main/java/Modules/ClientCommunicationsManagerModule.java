@@ -11,25 +11,22 @@ public class ClientCommunicationsManagerModule extends Module {
         this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
     }
 
-
     @Override
     public void processArrival(Event event) {
-        ++this.simulator.llegan;
-        //System.out.println("Llega cliente al modulo 1 -> "+event.getTimeClock());
-
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setArrivalTime(this.simulator.getClockTime());
-        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
 
         if(this.busyServers < numberServers){
             processClient(event);
-            //System.out.println("Tiempo servicio -> "+event.getTimeClock()+"\n");
         }else
         {
             this.simulator.increaseRejectQueries();
         }
         //A new arrival is generated
         this.simulator.generateNewEvent();
+
+        //Statistics
+        this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
     @Override
@@ -44,9 +41,7 @@ public class ClientCommunicationsManagerModule extends Module {
     public double getServiceTime(Event event) { return 0.0; }
 
     public void processReturn(Event event){
-        //System.out.println("Regresa cliente"+ event.getTimeClock());
-
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
 
         //transmission time R = numbers of blocks
@@ -60,16 +55,12 @@ public class ClientCommunicationsManagerModule extends Module {
 
     @Override
     public void processDeparture(Event event) {
-       // System.out.println("\033[36m\n####################\nCliente atendido"+ event.getTimeClock()+"\n####################");
-
-        ++this.simulator.numClientes;
         --busyServers;
 
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
-
         this.simulator.getSimulationStatistics().increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
     }
 
@@ -83,7 +74,7 @@ public class ClientCommunicationsManagerModule extends Module {
             case RETURN: processReturn(event);
                 break;
                 default:
-                    System.out.println("Error, processEvent");
+                    System.err.println("Error, processEvent");
                     break;
         }
     }
