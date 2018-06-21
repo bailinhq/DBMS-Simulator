@@ -112,4 +112,19 @@ public class ModuleStatistics {
         System.out.println("JOIN " + numberOfJOIN);
     }
 
+    public int getNumberOfSELECT() {
+        return numberOfSELECT;
+    }
+
+    public int getNumberOfUPDATE() {
+        return numberOfUPDATE;
+    }
+
+    public int getNumberOfJOIN() {
+        return numberOfJOIN;
+    }
+
+    public int getNumberOfDDL() {
+        return numberOfDDL;
+    }
 }

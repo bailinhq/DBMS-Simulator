@@ -1,6 +1,7 @@
 package Modules;
 
 import Controller.Application;
+import Interface.InterfaceController;
 import Statistics.SimulationStatistics;
 
 import java.util.Iterator;
@@ -8,6 +9,14 @@ import java.util.PriorityQueue;
 import java.util.Random;
 
 public class Simulator {
+    //Constants
+    public static final int M_CLIENTS = 0; 
+    public static final int M_PROCESSES = 1; 
+    public static final int M_QUERIES = 2; 
+    public static final int M_TRANSACTIONS = 3; 
+    public static final int M_EXECUTIONS = 4;
+
+
     private RandomValueGenerator valueGenerator;
     private ClientCommunicationsManagerModule clientCommunicationsManagerModule;
     private ProcessManagerModule processManagerModule;
@@ -30,11 +39,13 @@ public class Simulator {
     private boolean firstEvent;
 
     private SimulationStatistics simulationStatistics;
+    private InterfaceController interfaceController;
     private Application application;
     private Random randomGenerator;
 
-    public Simulator(){
+    public Simulator(InterfaceController interfaceController){
         this.valueGenerator = new RandomValueGenerator();
+        this.interfaceController = interfaceController;
 
         this.clientCommunicationsManagerModule = new ClientCommunicationsManagerModule(this,valueGenerator,15);
         this.processManagerModule = new ProcessManagerModule(this,valueGenerator);
@@ -182,6 +193,8 @@ public class Simulator {
             checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
+                this.updateData();
+                delay();
                 event.getCurrentModule().processEvent(event);
             }else{
                 clockTime = maxSimulationTime+1;
@@ -235,6 +248,75 @@ public class Simulator {
 
 
 
+    private int[] getModulesQueueLength(){
+        int queueLength[] = new int[5];
+        queueLength[M_CLIENTS] = this.clientCommunicationsManagerModule.queue.size();
+        queueLength[M_PROCESSES] = this.processManagerModule.queue.size();
+        queueLength[M_QUERIES] = this.queryProcessorModule.queue.size();
+        queueLength[M_TRANSACTIONS] = this.transactionalStorageModule.queue.size();
+        queueLength[M_EXECUTIONS] = this.executorModule.queue.size();
+        return queueLength;
+    }
+
+    private int[] getDDLNumber(){
+        int DDLNumber[] = new int[5];
+        DDLNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfDDL();
+        DDLNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfDDL();
+        DDLNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getNumberOfDDL();
+        DDLNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getNumberOfDDL();
+        DDLNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getNumberOfDDL();
+        return DDLNumber;
+    }
+
+    private int[] getUpdateNumber(){
+        int updateNumber[] = new int[5];
+        updateNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfUPDATE();
+        updateNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfUPDATE();
+        updateNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getNumberOfUPDATE();
+        updateNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getNumberOfUPDATE();
+        updateNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getNumberOfUPDATE();
+        return updateNumber;
+    }
+
+    private int[] getJoinNumber(){
+        int joinNumber[] = new int[5];
+        joinNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfJOIN();
+        joinNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfJOIN();
+        joinNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getNumberOfJOIN();
+        joinNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getNumberOfJOIN();
+        joinNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getNumberOfJOIN();
+        return joinNumber;
+    }
+
+    private int[] getSelectNumber(){
+        int selectNumber[] = new int[5];
+        selectNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getNumberOfSELECT();
+        selectNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getNumberOfSELECT();
+        selectNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getNumberOfSELECT();
+        selectNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getNumberOfSELECT();
+        selectNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getNumberOfSELECT();
+        return selectNumber;
+    }
+
+    private void updateData(){
+        this.interfaceController.updateClock(this.clockTime);
+        this.interfaceController.updateDiscarded(this.simulationStatistics.getDiscardedNumberOfQueries());
+        this.interfaceController.showDDLNumber(this.getDDLNumber());
+        this.interfaceController.showJoinNumber(this.getJoinNumber());
+        this.interfaceController.showSelectNumber(this.getSelectNumber());
+        this.interfaceController.showUpdateNumber(this.getUpdateNumber());
+        this.interfaceController.showQueueLength(this.getModulesQueueLength());
+    }
+
+    private void delay(){
+        /*if(delay){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }*/
+    }
 
     public RandomValueGenerator getValueGenerator() {
         return valueGenerator;

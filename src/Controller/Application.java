@@ -15,7 +15,7 @@ public class Application {
 
     public Application(InterfaceController interfaceController){
         this.interfaceController = interfaceController;
-        simulator = new Simulator();
+        simulator = new Simulator(interfaceController);
         systemStatistics = new SystemStatistics();
 
         System.out.println("Sigo en la aplicacion");

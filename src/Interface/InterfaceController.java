@@ -1,6 +1,7 @@
 package Interface;
 
 import Controller.Application;
+import Modules.Simulator;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.validation.DoubleValidator;
@@ -20,18 +21,20 @@ import javafx.scene.layout.AnchorPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static Modules.Simulator.*;
+
 public class InterfaceController implements Initializable{
     Application application;
 
     //constant values
-    static final int NUMBER_SIMULATION = 0;
-    static final int MAX_SIMULATION_TIME = 1;
-    static final int DELAY = 2;
-    static final int K = 3;
-    static final int N = 4;
-    static final int P = 5;
-    static final int M = 6;
-    static final int T = 7;
+    private static final int NUMBER_SIMULATION = 0;
+    private static final int MAX_SIMULATION_TIME = 1;
+    private static final int DELAY = 2;
+    private static final int K = 3;
+    private static final int N = 4;
+    private static final int P = 5;
+    private static final int M = 6;
+    private static final int T = 7;
 
     //Graphic interface elements
     //arrows
@@ -61,6 +64,52 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField tText;
 
     @FXML private JFXToggleButton delayToggle;
+
+
+    @FXML private JFXTextField clockTxt;
+    @FXML private JFXTextField discardedTxt;
+    // Statistics
+    //number of servers
+    @FXML private JFXTextField cServers;
+    @FXML private JFXTextField pServers;
+    @FXML private JFXTextField qServers;
+    @FXML private JFXTextField tServers;
+    @FXML private JFXTextField eServers;
+
+    //queue length
+    @FXML private JFXTextField cQueue;
+    @FXML private JFXTextField pQueue;
+    @FXML private JFXTextField qQueue;
+    @FXML private JFXTextField tQueue;
+    @FXML private JFXTextField eQueue;
+
+    //DDL
+    @FXML private JFXTextField cDDL;
+    @FXML private JFXTextField pDDL;
+    @FXML private JFXTextField qDDL;
+    @FXML private JFXTextField tDDL;
+    @FXML private JFXTextField eDDL;
+
+    //DDL
+    @FXML private JFXTextField cUpdate;
+    @FXML private JFXTextField pUpdate;
+    @FXML private JFXTextField qUpdate;
+    @FXML private JFXTextField tUpdate;
+    @FXML private JFXTextField eUpdate;
+
+    //DDL
+    @FXML private JFXTextField cJoin;
+    @FXML private JFXTextField pJoin;
+    @FXML private JFXTextField qJoin;
+    @FXML private JFXTextField tJoin;
+    @FXML private JFXTextField eJoin;
+
+    //DDL
+    @FXML private JFXTextField cSelect;
+    @FXML private JFXTextField pSelect;
+    @FXML private JFXTextField qSelect;
+    @FXML private JFXTextField tSelect;
+    @FXML private JFXTextField eSelect;
 
 
     public  InterfaceController(){}
@@ -139,7 +188,9 @@ public class InterfaceController implements Initializable{
             {
                 application = new Application(this);
             }
-            application.setUp(parametersToArray());
+            Object parameters[] = parametersToArray();
+            showNumberServers(parameters);
+            application.setUp(parameters);
             application.run2();
         }else{
             System.out.print("Faltan cosas");
@@ -224,5 +275,61 @@ public class InterfaceController implements Initializable{
         parameters[M] = Integer.parseInt(this.mText.getText());
         parameters[T] = Double.parseDouble(this.kText.getText());
         return parameters;
+    }
+
+    private void showNumberServers(Object server[]){
+        this.cServers.setText(server[K].toString());
+        this.pServers.setText("1");
+        this.qServers.setText(server[N].toString());
+        this.tServers.setText(server[P].toString());
+        this.eServers.setText(server[M].toString());
+    }
+
+    public void showQueueLength(int queueLength[]){
+        this.cQueue.setText(String.valueOf(queueLength[M_CLIENTS]));
+        this.pQueue.setText(String.valueOf(queueLength[M_PROCESSES]));
+        this.qQueue.setText(String.valueOf(queueLength[M_QUERIES]));
+        this.tQueue.setText(String.valueOf(queueLength[M_TRANSACTIONS]));
+        this.eQueue.setText(String.valueOf(queueLength[M_EXECUTIONS]));
+    }
+
+    public void showDDLNumber(int DDLQuantity[]){
+        this.cDDL.setText(String.valueOf(DDLQuantity[M_CLIENTS]));
+        this.pDDL.setText(String.valueOf(DDLQuantity[M_PROCESSES]));
+        this.qDDL.setText(String.valueOf(DDLQuantity[M_QUERIES]));
+        this.tDDL.setText(String.valueOf(DDLQuantity[M_TRANSACTIONS]));
+        this.eDDL.setText(String.valueOf(DDLQuantity[M_EXECUTIONS]));
+    }
+
+    public void showUpdateNumber(int UpdateQuantity[]){
+        this.cUpdate.setText(String.valueOf(UpdateQuantity[M_CLIENTS]));
+        this.pUpdate.setText(String.valueOf(UpdateQuantity[M_PROCESSES]));
+        this.qUpdate.setText(String.valueOf(UpdateQuantity[M_QUERIES]));
+        this.tUpdate.setText(String.valueOf(UpdateQuantity[M_TRANSACTIONS]));
+        this.eUpdate.setText(String.valueOf(UpdateQuantity[M_EXECUTIONS]));
+    }
+
+    public void showJoinNumber(int JoinQuantity[]){
+        this.cJoin.setText(String.valueOf(JoinQuantity[M_CLIENTS]));
+        this.pJoin.setText(String.valueOf(JoinQuantity[M_PROCESSES]));
+        this.qJoin.setText(String.valueOf(JoinQuantity[M_QUERIES]));
+        this.tJoin.setText(String.valueOf(JoinQuantity[M_TRANSACTIONS]));
+        this.eJoin.setText(String.valueOf(JoinQuantity[M_EXECUTIONS]));
+    }
+
+    public void showSelectNumber(int SelectQuantity[]){
+        this.cSelect.setText(String.valueOf(SelectQuantity[M_CLIENTS]));
+        this.pSelect.setText(String.valueOf(SelectQuantity[M_PROCESSES]));
+        this.qSelect.setText(String.valueOf(SelectQuantity[M_QUERIES]));
+        this.tSelect.setText(String.valueOf(SelectQuantity[M_TRANSACTIONS]));
+        this.eSelect.setText(String.valueOf(SelectQuantity[M_EXECUTIONS]));
+    }
+
+    public void updateClock(double clock){
+        this.clockTxt.setText(String.valueOf(String.format("%.2f",clock)));
+    }
+
+    public void updateDiscarded(int discardedConnections){
+        this.discardedTxt.setText(String.valueOf(discardedConnections));
     }
 }
