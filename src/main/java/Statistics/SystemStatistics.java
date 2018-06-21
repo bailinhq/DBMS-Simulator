@@ -27,6 +27,9 @@ public class SystemStatistics {
     private double[] transactionalStorageQueryTimes;
     private double[] executorQueryTimes;
 
+    /**
+     * Constructs a SystemStatistics and its fields.
+     */
     public SystemStatistics(){
         this.runsResults = new ArrayList<>();
         discardedNumberOfQueries = 0.0;
@@ -48,10 +51,21 @@ public class SystemStatistics {
         higherConfidence = 0.0;
     }
 
+    /**
+     * Adds a SimulationStatistics to the ArrayList runsResults.
+     * @param simulationStatistics
+     */
     public void addToList(SimulationStatistics simulationStatistics){
         runsResults.add(simulationStatistics);
     }
 
+    /**
+     * Generates the system statistics and updates the field variables.
+     * System statistics are the mean discarded number of total queries, life expectancy of queries, queue length for each
+     * module (ClientCommunicationsManager, ProcessManager, QueryProcessor, TransactionalStorage, and Executor) and
+     * the time of service for each type of query (SELECT, JOIN, UPDATE, DDL) for each module, and a 95% confidence
+     * interval of the mean life expectancy of queries.
+     */
     public void generateSystemStatistics(){
         double simulationSize = (double) runsResults.size();
         for (SimulationStatistics runsResult : runsResults) {
@@ -111,6 +125,10 @@ public class SystemStatistics {
         this.calculateConfidenceInterval();
     }
 
+    /**
+     * Calculates the lower bound and higher bound of a 95% confidence interval from the values of the mean
+     * life expectancy of a query in the system.
+     */
     private void calculateConfidenceInterval(){
         SummaryStatistics summaryStatistics = new SummaryStatistics();
         double criticalValue = 0.0;
@@ -129,58 +147,115 @@ public class SystemStatistics {
         higherConfidence = summaryStatistics.getMean() + criticalValue;
     }
 
+    /**
+     * Returns the mean number of discarded queries of the system statistics.
+     * @return mean the number of discarded queries.
+     */
     public double getDiscardedNumberOfQueries() {
         return discardedNumberOfQueries;
     }
 
+    /**
+     * Returns the mean life expectancy of a query in the system statistics.
+     * @return mean life expectancy of a query.
+     */
     public double getTimeLifeQueries() {
         return timeLifeQueries;
     }
 
+    /**
+     * Returns the mean queue length of the ClientCommunicationsManager module of the system statistics.
+     * @return the mean queue length of the ClientCommunicationsManager module
+     */
     public double getClientCommunicationsManagerQueueLength() {
         return clientCommunicationsManagerQueueLength;
     }
 
+    /**
+     * Returns the mean queue length of the ProcessManager module of the system statistics.
+     * @return the mean queue length of the ProcessManager module
+     */
     public double getProcessManagerQueueLength() {
         return processManagerQueueLength;
     }
 
+    /**
+     * Returns the mean queue length of the QueryProcessor module of the system statistics.
+     * @return the mean queue length of the QueryProcessor module
+     */
     public double getQueryProcessorQueueLength() {
         return queryProcessorQueueLength;
     }
 
+    /**
+     * Returns the mean queue length of the TransactionalStorage module of the system statistics.
+     * @return the mean queue length of the TransactionalStorage module
+     */
     public double getTransactionalStorageQueueLength() {
         return transactionalStorageQueueLength;
     }
 
+    /**
+     * Returns the mean queue length of the Executor module of the system statistics.
+     * @return the mean queue length of the Executor module
+     */
     public double getExecutorQueueLength() {
         return executorQueueLength;
     }
 
+    /**
+     * Returns the mean service time of a query in the ClientCommunicationsManager module of the system statistics.
+     * @return the mean service time of a query in the ClientCommunicationsManager module
+     */
     public double[] getClientCommunicationsManagerQueryTimes() {
         return clientCommunicationsManagerQueryTimes;
     }
 
+    /**
+     * Returns the mean service time of a query in the ProcessManager module of the system statistics.
+     * @return the mean service time of a query in the ProcessManager module
+     */
     public double[] getProcessManagerQueryTimes() {
         return processManagerQueryTimes;
     }
 
+    /**
+     * Returns the mean service time of a query in the QueryProcessor module of the system statistics.
+     * @return the mean service time of a query in the QueryProcessor module
+     */
     public double[] getQueryProcessorQueryTimes() {
         return queryProcessorQueryTimes;
     }
 
+    /**
+     * Returns the mean service time of a query in the TransactionalStorage module of the system statistics.
+     * @return the mean service time of a query in the TransactionalStorage module
+     */
     public double[] getTransactionalStorageQueryTimes() {
         return transactionalStorageQueryTimes;
     }
 
+    /**
+     * Returns the mean service time of a query in the Executor module of the system statistics.
+     * @return the mean service time of a query in the Executor module
+     */
     public double[] getExecutorQueryTimes() {
         return executorQueryTimes;
     }
 
+    /**
+     * Returns the lower bound from the confidence interval from the mean life expectancy of a query in the system.
+     * @return the lower bound of the confidence interval.
+     */
     public double getLowerConfidence() {
         return lowerConfidence;
     }
 
+
+    /**
+     * Returns the higher bound from the confidence interval from the mean life expectancy of a query in the system.
+     * @return the higher bound of the confidence interval.
+     */
     public double getHigherConfidence() {
         return higherConfidence;
     }
