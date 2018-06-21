@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" prefHeight="621.0" prefWidth="957.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.Interface.InterfaceController">
+    <children>
+        <AnchorPane prefHeight="400.0" prefWidth="62.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="400.0" prefWidth="56.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fitHeight="42.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_home.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="7.0" right="4.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fx:id="imgbuttonSimulator" fitHeight="105.0" fitWidth="44.0" onMouseClicked="#onWelcomeContinueButtonClicked" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_setting_simulator.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="7.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fx:id="imgButtonSystem" fitHeight="42.0" fitWidth="41.0" onMouseClicked="#onSettingSimulatorContinueButtonClicked" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_setting_system.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="7.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fitHeight="37.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_run.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="13.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fitHeight="38.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_stats.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="10.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                        <ImageView fitHeight="39.0" fitWidth="42.0" onMouseClicked="#onExitButtonClicked" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@../../resources/Images/icons_exitr.png" />
+                            </image>
+                            <VBox.margin>
+                                <Insets left="12.0" />
+                            </VBox.margin>
+                        </ImageView>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" visible="false" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="welcomePanel" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label layoutX="341.0" layoutY="212.0" text="Welcome!" textFill="#c5e2e0" AnchorPane.leftAnchor="341.0" AnchorPane.topAnchor="212.0">
+                    <font>
+                        <Font size="45.0" />
+                    </font>
+                </Label>
+                <Label layoutX="274.0" layoutY="279.0" text="PintoDB simulator" textFill="#c5e2e0" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="279.0">
+                    <font>
+                        <Font size="43.0" />
+                    </font>
+                </Label>
+                <JFXButton buttonType="RAISED" layoutX="397.0" layoutY="565.0" onMouseClicked="#onWelcomeContinueButtonClicked" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="continue" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="simulatorPanel" layoutY="241.0" prefHeight="621.0" prefWidth="881.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label layoutX="336.0" layoutY="8.0" opacity="0.7" text="Simulator configuration" textFill="#c5e2e0">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <JFXTextField fx:id="numberSimulationsText" focusColor="#05bfb9" layoutX="287.0" layoutY="119.0" prefHeight="30.0" prefWidth="134.0" promptText="Simulations" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="simulationTimeText" focusColor="#05bfb9" layoutX="287.0" layoutY="247.0" prefHeight="30.0" prefWidth="133.0" promptText="Time in seconds" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <Label layoutX="31.0" layoutY="125.0" text="Number of simulations" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="31.0" layoutY="251.0" text="Maximum time per simulation" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="31.0" layoutY="517.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+                <Separator layoutX="31.0" layoutY="39.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+                <JFXToggleButton fx:id="delayToggle" layoutX="369.0" layoutY="364.0" prefHeight="62.0" prefWidth="142.0" text="Delay" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXToggleButton>
+                <JFXButton buttonType="RAISED" layoutX="392.0" layoutY="565.0" onMouseClicked="#onSettingSimulatorContinueButtonClicked" ripplerFill="#50c5bb" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="continue" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+            </children></AnchorPane>
+        <AnchorPane fx:id="systemPanel" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Label layoutX="347.0" layoutY="8.0" opacity="0.7" text="System configuration" textFill="#c5e2e0" AnchorPane.leftAnchor="347.0">
+                    <font>
+                        <Font size="20.0" />
+                    </font>
+                </Label>
+                <JFXButton buttonType="RAISED" layoutX="405.0" layoutY="565.0" onMouseClicked="#onSettingSystemRunButtonClicked" prefHeight="39.0" prefWidth="79.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="run" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </JFXButton>
+                <Separator layoutX="32.0" layoutY="39.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+                <Label layoutX="42.0" layoutY="45.0" opacity="0.5" text="Number of servers per module" textFill="#78918f">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Separator layoutX="36.0" layoutY="351.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+                <JFXTextField fx:id="kText" focusColor="#05bfb9" layoutX="150.0" layoutY="75.0" prefHeight="30.0" prefWidth="134.0" promptText="k" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="nText" focusColor="#05bfb9" layoutX="149.0" layoutY="136.0" prefHeight="30.0" prefWidth="134.0" promptText="n" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="pText" focusColor="#05bfb9" layoutX="148.0" layoutY="203.0" prefHeight="30.0" prefWidth="134.0" promptText="p" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="mText" focusColor="#05bfb9" layoutX="148.0" layoutY="263.0" prefHeight="30.0" prefWidth="134.0" promptText="m" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <JFXTextField fx:id="tText" focusColor="#05bfb9" layoutX="141.0" layoutY="410.0" prefHeight="30.0" prefWidth="134.0" promptText="t" style="-fx-text-fill: #a8edeb;" unFocusColor="#7e8c8b">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </JFXTextField>
+                <Separator layoutX="32.0" layoutY="517.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+                <Label layoutX="36.0" layoutY="359.0" opacity="0.5" text="Maximum time of a query in the system" textFill="#78918f">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="36.0" layoutY="78.0" text="Connections" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="36.0" layoutY="205.0" text="Transactions" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="36.0" layoutY="139.0" text="Queries" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="36.0" layoutY="264.0" text="Executor" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label layoutX="36.0" layoutY="412.0" text="Timeout" textFill="#a8edeb">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <ImageView fx:id="welcomeArrow" fitHeight="150.0" fitWidth="12.0" layoutX="62.0" layoutY="71.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="71.0">
+            <image>
+                <Image url="@../../resources/Images/icons_right.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="simulatorArrow" fitHeight="150.0" fitWidth="12.0" layoutX="62.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="168.0">
+            <image>
+                <Image url="@../../resources/Images/icons_right.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="systemArrow" fitHeight="150.0" fitWidth="12.0" layoutX="62.0" layoutY="264.0" pickOnBounds="true" preserveRatio="true" visible="false" AnchorPane.leftAnchor="62.0" AnchorPane.topAnchor="264.0">
+            <image>
+                <Image url="@../../resources/Images/icons_right.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="runArrow" fitHeight="150.0" fitWidth="12.0" layoutX="62.0" layoutY="355.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <image>
+                <Image url="@../../resources/Images/icons_right.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="statsArrow" fitHeight="150.0" fitWidth="12.0" layoutX="62.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true" visible="false">
+            <image>
+                <Image url="@../../resources/Images/icons_right.png" />
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="runPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="24.0" layoutY="173.0" opacity="0.6" prefHeight="20.0" prefWidth="118.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="58.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="44.0" layoutX="400.0" layoutY="563.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_trashcan.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="86.0" fitWidth="118.0" layoutX="379.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_clock.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="30.0" fitWidth="34.0" layoutX="60.0" layoutY="494.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_server.png" />
+               </image>
+            </ImageView>
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="-62.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="-12.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="36.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-106.0" layoutY="-112.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="82.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-105.0" layoutY="-134.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.199951171875" endY="800.800048828125" layoutX="-117.0" layoutY="-274.0" opacity="0.4" startX="262.199951171875" startY="413.20001220703125" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Label layoutX="73.0" layoutY="412.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="26.0" layoutY="421.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="73.0" layoutY="366.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="26.0" layoutY="374.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="73.0" layoutY="317.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="26.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="73.0" layoutY="267.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="26.0" layoutY="275.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="24.0" layoutY="247.0" opacity="0.6" prefHeight="20.0" prefWidth="79.0" text="Cantidades" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-105.0" layoutY="-187.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-105.0" layoutY="-210.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="106.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Label layoutX="18.0" layoutY="466.0" opacity="0.6" prefHeight="20.0" prefWidth="79.0" text="Servers" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-107.0" layoutY="147.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-104.0" layoutY="-243.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <JFXTextField fx:id="cServers" disable="true" layoutX="147.0" layoutY="491.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pServers" disable="true" layoutX="285.0" layoutY="491.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qServers" disable="true" layoutX="423.0" layoutY="491.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tServers" disable="true" layoutX="560.0" layoutY="491.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eServers" disable="true" layoutX="697.0" layoutY="491.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <Line endX="262.1999816894531" endY="487.7786865234375" layoutX="21.0" layoutY="39.0" opacity="0.4" startX="262.1999816894531" startY="100.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.1999816894531" endY="519.8999633789062" layoutX="158.0" layoutY="8.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.1999816894531" endY="519.8999633789062" layoutX="296.0" layoutY="7.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.1999816894531" endY="519.8999633789062" layoutX="435.0" layoutY="7.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="21.0" layoutX="96.0" layoutY="465.0" stroke="TRANSPARENT" strokeType="INSIDE" width="752.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="20.0" layoutX="130.0" layoutY="173.0" stroke="TRANSPARENT" strokeType="INSIDE" width="730.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="20.0" layoutX="116.0" layoutY="248.0" stroke="TRANSPARENT" strokeType="INSIDE" width="752.0" />
+            <JFXTextField fx:id="cQueue" disable="true" layoutX="147.0" layoutY="211.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pQueue" disable="true" layoutX="285.0" layoutY="211.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qQueue" disable="true" layoutX="423.0" layoutY="211.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tQueue" disable="true" layoutX="560.0" layoutY="211.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eQueue" disable="true" layoutX="700.0" layoutY="211.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cDDL" disable="true" layoutX="146.0" layoutY="283.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pDDL" disable="true" layoutX="284.0" layoutY="283.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qDDL" disable="true" layoutX="422.0" layoutY="283.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tDDL" disable="true" layoutX="559.0" layoutY="283.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eDDL" disable="true" layoutX="699.0" layoutY="283.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cUpdate" disable="true" layoutX="146.0" layoutY="334.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pUpdate" disable="true" layoutX="284.0" layoutY="334.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qUpdate" disable="true" layoutX="422.0" layoutY="334.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tUpdate" disable="true" layoutX="559.0" layoutY="334.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eUpdate" disable="true" layoutX="699.0" layoutY="334.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cJoin" disable="true" layoutX="146.0" layoutY="382.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pJoin" disable="true" layoutX="284.0" layoutY="382.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qJoin" disable="true" layoutX="422.0" layoutY="382.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tJoin" disable="true" layoutX="559.0" layoutY="382.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eJoin" disable="true" layoutX="699.0" layoutY="382.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cSelect" disable="true" layoutX="146.0" layoutY="427.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pSelect" disable="true" layoutX="284.0" layoutY="427.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qSelect" disable="true" layoutX="422.0" layoutY="427.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tSelect" disable="true" layoutX="559.0" layoutY="427.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eSelect" disable="true" layoutX="699.0" layoutY="427.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="clockTxt" disable="true" layoutX="377.0" layoutY="95.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="discardedTxt" disable="true" layoutX="444.0" layoutY="565.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #a8edeb;">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+         </children>
+      </AnchorPane>
+        <AnchorPane fx:id="statsPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+    </children>
+</AnchorPane>
