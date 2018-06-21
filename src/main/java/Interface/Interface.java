@@ -17,16 +17,23 @@ public class Interface extends Application {
     private double yOffset;
     InterfaceController interfaceController;
 
+    /**
+     * class constructor
+     */
     public Interface(){
          this.interfaceController = new InterfaceController();
     }
 
-    public void setApplication(main.java.Application application){
-        this.interfaceController.setApplication(application);
-    }
 
+
+    /**
+     * Method invoked automatically when the application is launched from the main
+     * @param primaryStage Scenario or main container of the graphical interface
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
+        //load the fxml of the graphical interface
         Parent root = FXMLLoader.load(getClass().getResource("SimulatorInterface.fxml"));
 
         /*Method to move application*/
@@ -56,10 +63,14 @@ public class Interface extends Application {
         scene.setFill(Color.TRANSPARENT);
 
         primaryStage.setScene(scene);
+        //show graphical interface
         primaryStage.show();
     }
 
-
+    /**
+     * main method
+     * @param args parameters passed by console
+     */
     public static void main(String[] args){
         launch(args);
     }
