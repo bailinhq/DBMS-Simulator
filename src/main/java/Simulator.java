@@ -103,7 +103,8 @@ public class Simulator {
 
 
     /**
-     * Method that creates a new event (arrival to the connections module), assigns it an arrival time with exponential distribution
+     * Method that creates a new event (arrival to the connections module), assigns it an arrival
+     * time with exponential distribution
      * (first arrival is always time 0) and then inserts it into the list of events of the simulation.
      */
     public void generateNewEvent(){

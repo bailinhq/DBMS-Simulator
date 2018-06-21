@@ -10,7 +10,6 @@
 .settings
 
 # Idea
-.idea
 *.iml
 *.iws
 *.ipr
