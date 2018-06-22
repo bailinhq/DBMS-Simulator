@@ -4,7 +4,7 @@ import main.java.Statistics.SystemStatistics;
 import main.java.Interface.InterfaceController;
 
 
-public class Application extends Thread{
+public class Application extends Thread {
     private InterfaceController interfaceController;
     private Simulator simulator;
     private int numberOfSimulations;

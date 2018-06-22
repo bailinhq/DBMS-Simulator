@@ -215,7 +215,7 @@ public class Simulator {
             checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
-                //this.updateData();
+                this.updateData();
                 delay();
                 event.getCurrentModule().processEvent(event);
             }else{
@@ -352,8 +352,6 @@ public class Simulator {
         this.interfaceController.showUpdateNumber(this.getUpdateNumber());
         this.interfaceController.showQueueLength(this.getModulesQueueLength());
         this.interfaceController.updateTimeoutNumber(timeoutNumber);
-
-
     }
 
     /**
@@ -361,13 +359,13 @@ public class Simulator {
      * simulation.
      */
     public void delay(){
-        /*if(delay){
+        if(delay){
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
 
     /**

@@ -1,5 +1,11 @@
 package main.java.Interface;
 
+import javafx.beans.binding.Binding;
+import javafx.beans.binding.Bindings;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.scene.control.Label;
 import main.java.Application;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
@@ -18,12 +24,13 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.concurrent.Semaphore;
+
 
 import static main.java.Simulator.*;
 
 public class InterfaceController implements Initializable{
     Application application;
+
 
     //constant values
     private static final int NUMBER_SIMULATION = 0;
@@ -308,11 +315,11 @@ public class InterfaceController implements Initializable{
      * @param server Array with the number of servers of each module
      */
     private void showNumberServers(Object server[]){
-        this.cServers.setText(server[K].toString());
-        this.pServers.setText("1");
-        this.qServers.setText(server[N].toString());
-        this.tServers.setText(server[P].toString());
-        this.eServers.setText(server[M].toString());
+        updateUI(this.cServers,server[K].toString());
+        updateUI(this.pServers,"1");
+        updateUI(this.qServers,server[N].toString());
+        updateUI(this.tServers,server[P].toString());
+        updateUI(this.eServers,server[M].toString());
     }
 
     /**
@@ -320,11 +327,11 @@ public class InterfaceController implements Initializable{
      * @param queueLength Array with the size of queue of each module
      */
     public void showQueueLength(int queueLength[]){
-        this.cQueue.setText(String.valueOf(queueLength[M_CLIENTS]));
-        this.pQueue.setText(String.valueOf(queueLength[M_PROCESSES]));
-        this.qQueue.setText(String.valueOf(queueLength[M_QUERIES]));
-        this.tQueue.setText(String.valueOf(queueLength[M_TRANSACTIONS]));
-        this.eQueue.setText(String.valueOf(queueLength[M_EXECUTIONS]));
+        updateUI(this.cQueue,String.valueOf(queueLength[M_CLIENTS]));
+        updateUI(this.pQueue,String.valueOf(queueLength[M_PROCESSES]));
+        updateUI(this.qQueue,String.valueOf(queueLength[M_QUERIES]));
+        updateUI(this.tQueue,String.valueOf(queueLength[M_TRANSACTIONS]));
+        updateUI(this.eQueue,String.valueOf(queueLength[M_EXECUTIONS]));
     }
 
     /**
@@ -332,11 +339,11 @@ public class InterfaceController implements Initializable{
      * @param DDLQuantity Number of DDL queries processed by each module.
      */
     public void showDDLNumber(int DDLQuantity[]){
-        this.cDDL.setText(String.valueOf(DDLQuantity[M_CLIENTS]));
-        this.pDDL.setText(String.valueOf(DDLQuantity[M_PROCESSES]));
-        this.qDDL.setText(String.valueOf(DDLQuantity[M_QUERIES]));
-        this.tDDL.setText(String.valueOf(DDLQuantity[M_TRANSACTIONS]));
-        this.eDDL.setText(String.valueOf(DDLQuantity[M_EXECUTIONS]));
+        updateUI(this.cDDL,String.valueOf(DDLQuantity[M_CLIENTS]));
+        updateUI(this.pDDL,String.valueOf(DDLQuantity[M_PROCESSES]));
+        updateUI(this.qDDL,String.valueOf(DDLQuantity[M_QUERIES]));
+        updateUI(this.tDDL,String.valueOf(DDLQuantity[M_TRANSACTIONS]));
+        updateUI(this.eDDL,String.valueOf(DDLQuantity[M_EXECUTIONS]));
     }
 
     /**
@@ -344,11 +351,11 @@ public class InterfaceController implements Initializable{
      * @param UpdateQuantity Number of UPDATE queries processed by each module.
      */
     public void showUpdateNumber(int UpdateQuantity[]){
-        this.cUpdate.setText(String.valueOf(UpdateQuantity[M_CLIENTS]));
-        this.pUpdate.setText(String.valueOf(UpdateQuantity[M_PROCESSES]));
-        this.qUpdate.setText(String.valueOf(UpdateQuantity[M_QUERIES]));
-        this.tUpdate.setText(String.valueOf(UpdateQuantity[M_TRANSACTIONS]));
-        this.eUpdate.setText(String.valueOf(UpdateQuantity[M_EXECUTIONS]));
+        updateUI(this.cUpdate,String.valueOf(UpdateQuantity[M_CLIENTS]));
+        updateUI(this.pUpdate,String.valueOf(UpdateQuantity[M_PROCESSES]));
+        updateUI(this.qUpdate,String.valueOf(UpdateQuantity[M_QUERIES]));
+        updateUI(this.tUpdate,String.valueOf(UpdateQuantity[M_TRANSACTIONS]));
+        updateUI(this.eUpdate,String.valueOf(UpdateQuantity[M_EXECUTIONS]));
     }
 
     /**
@@ -356,11 +363,11 @@ public class InterfaceController implements Initializable{
      * @param joinQuantity Number of JOIN queries processed by each module.
      */
     public void showJoinNumber(int joinQuantity[]){
-        this.cJoin.setText(String.valueOf(joinQuantity[M_CLIENTS]));
-        this.pJoin.setText(String.valueOf(joinQuantity[M_PROCESSES]));
-        this.qJoin.setText(String.valueOf(joinQuantity[M_QUERIES]));
-        this.tJoin.setText(String.valueOf(joinQuantity[M_TRANSACTIONS]));
-        this.eJoin.setText(String.valueOf(joinQuantity[M_EXECUTIONS]));
+        updateUI(this.cJoin,String.valueOf(joinQuantity[M_CLIENTS]));
+        updateUI(this.pJoin,String.valueOf(joinQuantity[M_PROCESSES]));
+        updateUI(this.qJoin,String.valueOf(joinQuantity[M_QUERIES]));
+        updateUI(this.tJoin,String.valueOf(joinQuantity[M_TRANSACTIONS]));
+        updateUI(this.eJoin,String.valueOf(joinQuantity[M_EXECUTIONS]));
     }
 
     /**
@@ -368,11 +375,11 @@ public class InterfaceController implements Initializable{
      * @param selectQuantity Number of SELECT queries processed by each module.
      */
     public void showSelectNumber(int selectQuantity[]){
-        this.cSelect.setText(String.valueOf(selectQuantity[M_CLIENTS]));
-        this.pSelect.setText(String.valueOf(selectQuantity[M_PROCESSES]));
-        this.qSelect.setText(String.valueOf(selectQuantity[M_QUERIES]));
-        this.tSelect.setText(String.valueOf(selectQuantity[M_TRANSACTIONS]));
-        this.eSelect.setText(String.valueOf(selectQuantity[M_EXECUTIONS]));
+        updateUI(this.cSelect,String.valueOf(selectQuantity[M_CLIENTS]));
+        updateUI(this.pSelect,String.valueOf(selectQuantity[M_PROCESSES]));
+        updateUI(this.qSelect,String.valueOf(selectQuantity[M_QUERIES]));
+        updateUI(this.tSelect,String.valueOf(selectQuantity[M_TRANSACTIONS]));
+        updateUI(this.eSelect,String.valueOf(selectQuantity[M_EXECUTIONS]));
     }
 
     /**
@@ -380,7 +387,7 @@ public class InterfaceController implements Initializable{
      * @param clock Simulator clock time
      */
     public void updateClock(double clock){
-        this.clockTxt.setText(String.valueOf(String.format("%.2f",clock)));
+        updateUI(this.clockTxt,String.valueOf(String.format("%.2f",clock)));
     }
 
     /**
@@ -389,7 +396,23 @@ public class InterfaceController implements Initializable{
      * @param discardedConnections currently discarded connections
      */
     public void updateDiscarded(int discardedConnections){
-        this.discardedTxt.setText(String.valueOf(discardedConnections));
+        updateUI(discardedTxt,String.valueOf(discardedConnections));
+    }
+
+    private void updateUI(JFXTextField jfxTextField, String data){
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() {
+
+                Platform.runLater(() -> jfxTextField.setText(data));
+                return null;
+
+            }
+        };
+
+        Thread th = new Thread(task);
+        th.setDaemon(true);
+        th.start();
     }
 
     /**
@@ -397,7 +420,8 @@ public class InterfaceController implements Initializable{
      * @param simulationNumber number of simulations
      */
     public synchronized void updateSimulationNumber(int simulationNumber){
-        this.simulationNumberTxt.setText(String.valueOf(simulationNumber));
+        updateUI(simulationNumberTxt, String.valueOf(simulationNumber));
+
     }
 
     /**
@@ -405,6 +429,6 @@ public class InterfaceController implements Initializable{
      * @param timeoutNumber  Number of connections that made timeout
      */
     public void updateTimeoutNumber(int timeoutNumber){
-        this.timeoutTxt.setText(String.valueOf(timeoutNumber));
+        updateUI(this.timeoutTxt,String.valueOf(timeoutNumber));
     }
 }
