@@ -10,13 +10,22 @@ import java.util.PriorityQueue;
 
 public class ExecutorModule extends Module {
 
-
+    /**
+     * class constructor
+     * @param simulator Pointer to the simulator
+     * @param randSimulator Pointer of a random value generator.
+     * @param numProcesses Number of process in the module.
+     */
     public ExecutorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;
         this.queue = new PriorityQueue<>(new ComparatorFIFO());
     }
 
+    /**
+     * Processes an arrival type of event in the executor module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processArrival(Event event) {
         //Statistics
@@ -32,6 +41,11 @@ public class ExecutorModule extends Module {
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
+    /**
+     * Method to process an event in the executor module, increase the time to the event (duration) and generate an
+     * departure of that event in the same module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processClient(Event event) {
         ++busyServers;
@@ -42,6 +56,11 @@ public class ExecutorModule extends Module {
 
     }
 
+    /**
+     * Method to obtain the query duration in the module, is based on the number of blocks according to the type of query.
+     * @param event Event processed.
+     * @return Time in the module.
+     */
     @Override
     public double getServiceTime(Event event) {
 
@@ -67,7 +86,12 @@ public class ExecutorModule extends Module {
         return timeTemp;
     }
 
-
+    /**
+     * Method to process the output of an event of the executor module, the number of occupied servers is decreased,
+     * generate a return of that event in the client module and statistics are updated.
+     * Also check if there are events waiting to be processed in the module's local queue
+     * @param event Event to be processed.
+     */
     @Override
     public void processDeparture(Event event) {
 
@@ -83,21 +107,14 @@ public class ExecutorModule extends Module {
             this.simulator.addEvent(event);
         }
 
-        boolean isTimeOut = true;
-        while (this.queue.size()>0 && isTimeOut){
-            Event temporal = this.queue.poll();
-            if(!this.simulator.isTimeOut(event)){
-                processClient(temporal);
-                isTimeOut = false;
-            }else {
-                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
-            }
-        }
-
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
-    }
+
+        //Check the local queue
+        this.processNextLocalQueueEvent();
+
+        }
 
 }

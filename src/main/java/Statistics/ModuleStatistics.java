@@ -58,7 +58,8 @@ public class ModuleStatistics {
     }
 
     /**
-     * Method to increase the number of queries processed in the module, they are increased by type to facilitate the calculation of averages.
+     * Method to increase the number of queries processed in the module, they are increased by type to facilitate the
+     * calculation of averages.
      * @param query Query processed type.
      */
     public void increaseNumberOfQuery(QueryType query) {

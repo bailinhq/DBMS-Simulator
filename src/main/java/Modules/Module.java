@@ -9,8 +9,6 @@ import java.util.PriorityQueue;
 
 public abstract class Module {
     Simulator simulator;
-    //TODO definir si mejor hacer un enum o tener un entero para comparar más facil
-    protected int currentModule;
 
     protected long queueLength;
     protected int numberServers;
@@ -72,6 +70,23 @@ public abstract class Module {
             default:
                 System.out.println("Error, processEvent");
                 break;
+        }
+    }
+
+
+    /**
+     * Method to check the module's queue, so that those events that are on hold can be processed.
+     */
+    public void processNextLocalQueueEvent() {
+        boolean isTimeOut = true;
+        while (this.queue.size() > 0 && isTimeOut) {
+            Event temporal = this.queue.poll();
+            if (!this.simulator.isTimeOut(temporal)) {
+                processClient(temporal);
+                isTimeOut = false;
+            } else {
+                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
+            }
         }
     }
 

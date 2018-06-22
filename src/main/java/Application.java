@@ -24,7 +24,8 @@ public class Application extends Thread{
     }
 
     /**
-     * Method that starts the simulation once the parameters are inserted, also creates the simulation with the indicated parameters.
+     * Method that starts the simulation once the parameters are inserted, also creates the simulation with the
+     * indicated parameters.
      * @param parameters User parameters for the operation of the simulation (number of servers, times, among others).
      */
     public void setUp(Object parameters[]){
@@ -34,7 +35,8 @@ public class Application extends Thread{
     }
 
     /**
-     * Method that controls the amount of simulation (parameter), also initializes data from one simulation to another to have the independence of the information.
+     * Method that controls the amount of simulation (parameter), also initializes data from one simulation to another
+     * to have the independence of the information.
      * Also stores the statistics at the end of each simulation.
      * Once the simulation cycle is finished, it generates a general statistics.
      */

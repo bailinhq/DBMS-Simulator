@@ -11,6 +11,12 @@ import java.util.PriorityQueue;
 public class QueryProcessorModule extends Module {
 
     //Capacity for n processes
+    /**
+     * class constructor
+     * @param simulator Pointer to the simulator
+     * @param randSimulator Pointer of a random value generator.
+     * @param numProcesses Number of queries in the module.
+     */
     public QueryProcessorModule(Simulator simulator, RandomValueGenerator randSimulator, int numProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numProcesses;
@@ -18,7 +24,10 @@ public class QueryProcessorModule extends Module {
     }
 
 
-    //TODO ver la posibilidad de tener este metodo en la clase padre
+    /**
+     * Processes an arrival type of event in the query process module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processArrival(Event event) {
         //Statistics
@@ -34,6 +43,11 @@ public class QueryProcessorModule extends Module {
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
+    /**
+     * Method to process an event in the query process module, increase the time to the event (duration) and generate an
+     * departure of that event in the same module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processClient(Event event) {
         ++busyServers;
@@ -43,7 +57,11 @@ public class QueryProcessorModule extends Module {
         this.simulator.addEvent(event);
     }
 
-
+    /**
+     * Method to obtain the query duration in the module, the distribution to calculate the time is different for each query.
+     * @param event Event processed.
+     * @return Time in the module.
+     */
     @Override
     public double getServiceTime(Event event) {
         double processingTime = 0.0;
@@ -67,10 +85,14 @@ public class QueryProcessorModule extends Module {
     }
 
 
-    //TODO definir si seguimos el algoritmo de clase o se deja este.
+    /**
+     * Method to process the output of an event of the query process module, the number of occupied servers is decreased,
+     * generate an arrival of that event in the transactional module and statistics are updated.
+     * Also check if there are events waiting to be processed in the module's local queue
+     * @param event Event to be processed.
+     */
     @Override
     public void processDeparture(Event event) {
-        //System.out.println("Sale cliente al modulo 3 -> "+event.getTimeClock()+"\n\n");
         //Exit to the next event
         --busyServers;
 
@@ -85,23 +107,13 @@ public class QueryProcessorModule extends Module {
             this.simulator.addEvent(event);
         }
 
-        boolean isTimeOut = true;
-        while (this.queue.size()>0 && isTimeOut){
-            Event temporal = this.queue.poll();
-            if(!this.simulator.isTimeOut(event)){
-                processClient(temporal);
-                isTimeOut = false;
-            }else {
-                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
-            }
-        }
-
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
 
-
+        //Check the local queue
+        this.processNextLocalQueueEvent();
     }
 
 }

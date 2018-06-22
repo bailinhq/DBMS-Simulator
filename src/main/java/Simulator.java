@@ -169,7 +169,8 @@ public class Simulator {
     }
 
     /**
-     * Method that runs through the module's queue (indicated in parameter) and eliminates events that have timeout, also updates statistics data.     *
+     * Method that runs through the module's queue (indicated in parameter) and eliminates events that have timeout,
+     * also updates statistics data.
      * @param queue Queue of the module to review.
      */
     public void checkTimeOutQueue(PriorityQueue<Event> queue){
@@ -201,8 +202,10 @@ public class Simulator {
 
     /**
      * Method that controls a simulation.
-     * It is responsible for creating the initial event and entering a simulation cycle until the time indicated by the user ends.
-     * The events are removed and processed from the list and for each event the modified data is shown in the interface (in real time).
+     * It is responsible for creating the initial event and entering a simulation cycle until the time indicated by
+     * the user ends.
+     * The events are removed and processed from the list and for each event the modified data is shown in the interface
+     * (in real time).
      * It also modifies the time of the simulation clock and places a delay in the interface if the user requested it.
      */
     public void simulate(){
@@ -337,7 +340,8 @@ public class Simulator {
     }
 
     /**
-     * Method that updates the data in the interface in real time, requests the updated data of each module and is sent to the interface to be displayed.
+     * Method that updates the data in the interface in real time, requests the updated data of each module and is sent
+     * to the interface to be displayed.
      */
     public void updateData(){
         this.interfaceController.updateClock(this.clockTime);
@@ -353,7 +357,8 @@ public class Simulator {
     }
 
     /**
-     * Method that makes a delay (if requested), so that the user can observe the change of the data throughout the simulation.
+     * Method that makes a delay (if requested), so that the user can observe the change of the data throughout the
+     * simulation.
      */
     public void delay(){
         /*if(delay){

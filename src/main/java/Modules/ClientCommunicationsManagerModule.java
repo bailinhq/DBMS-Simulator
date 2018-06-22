@@ -10,10 +10,8 @@ import java.util.PriorityQueue;
 
 public class ClientCommunicationsManagerModule extends Module {
 
-
-
     /**
-     * Constructor
+     * class constructor
      * @param simulator Pointer to the simulator
      * @param randSimulator Pointer of a random value generator.
      * @param numConnections Number of connections of the module.
@@ -25,6 +23,10 @@ public class ClientCommunicationsManagerModule extends Module {
         this.queue = new PriorityQueue<>(new ComparatorFIFO());
     }
 
+    /**
+     * Processes an arrival type of event in the client module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processArrival(Event event) {
         //Statistics
@@ -32,8 +34,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
         if(this.busyServers < numberServers){
             processClient(event);
-        }else
-        {
+        }else{
             this.simulator.increaseRejectQueries();
         }
         //A new arrival is generated
@@ -43,6 +44,11 @@ public class ClientCommunicationsManagerModule extends Module {
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
+    /**
+     * Method to process an event in the connections module, increase the time to the event (duration) and generate an
+     * arrival of that event in the process module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processClient(Event event) {
         ++busyServers;
@@ -51,9 +57,19 @@ public class ClientCommunicationsManagerModule extends Module {
         this.simulator.addEvent(event);
     }
 
+    /**
+     * Method to obtain the attention time of a query.
+     * @param event Event processed.
+     * @return Time in the module.
+     */
     @Override
     public double getServiceTime(Event event) { return 0.0; }
 
+    /**
+     * Method that processes the return to the client module, increases the time of data transition depending on the
+     * type of query.
+     * @param event Event processed.
+     */
     public void processReturn(Event event){
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
@@ -67,6 +83,11 @@ public class ClientCommunicationsManagerModule extends Module {
     }
 
 
+    /**
+     * Method to process the output of an event of the client module, the number of occupied servers is decreased
+     * and statistics are updated.
+     * @param event Event to be processed.
+     */
     @Override
     public void processDeparture(Event event) {
         --busyServers;
@@ -78,6 +99,11 @@ public class ClientCommunicationsManagerModule extends Module {
         this.simulator.getSimulationStatistics().increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
     }
 
+    /**
+     * Method that indicates the way to process an event, depending on the type (arrival, departure or return to the
+     * module).
+     * @param event Event to be processed.
+     */
     @Override
     public void processEvent(Event event) {
         switch (event.getEventType()){
@@ -88,7 +114,6 @@ public class ClientCommunicationsManagerModule extends Module {
             case RETURN: processReturn(event);
                 break;
                 default:
-                    System.err.println("Error, processEvent");
                     break;
         }
     }

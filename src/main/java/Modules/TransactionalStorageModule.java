@@ -14,6 +14,12 @@ public class TransactionalStorageModule extends Module {
     private int queryDDL;
     Comparator<Event> compareAux;
 
+    /**
+     * class constructor
+     * @param simulator Pointer to the simulator
+     * @param randSimulator Pointer of a random value generator.
+     * @param numConcurrentProcesses Number of queries in the module.
+     */
     public  TransactionalStorageModule(Simulator simulator, RandomValueGenerator randSimulator, int numConcurrentProcesses) {
         super(simulator, randSimulator);
         this.numberServers = numConcurrentProcesses;
@@ -23,8 +29,10 @@ public class TransactionalStorageModule extends Module {
         this.queue = new PriorityQueue<>(compareAux);
     }
 
-
-
+    /**
+     * Processes an arrival type of event in the transactional module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processArrival(Event event) {
         //Statistics
@@ -33,14 +41,18 @@ public class TransactionalStorageModule extends Module {
         if(busyServers < numberServers){
             processClient(event);
         }else{
-            queue.add(event);
+            queue.offer(event);
         }
 
         //Statistics
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
-
+    /**
+     * Method to process an event in the transactional module, increase the time to the event (duration) and generate an
+     * departure of that event in the same module.
+     * @param event Event to be processed.
+     */
     @Override
     public void processClient(Event event) {
         boolean processedEvent  = true;
@@ -67,7 +79,6 @@ public class TransactionalStorageModule extends Module {
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
                     if(queue.size()>5) {
-                        System.out.println("HI");
                     }
                     queue.add(event);
                     processedEvent = false;
@@ -80,11 +91,15 @@ public class TransactionalStorageModule extends Module {
         //If the event was processed, that is, it was not added to the module's queue.
         if(processedEvent) {
             event.setEventType(EventType.DEPARTURE);
-            //event.setCurrentModule(this.simulator.getExecutorModule());
             this.simulator.addEvent(event);
         }
     }
 
+    /**
+     * Method to obtain the query duration in the module, is based on the number of blocks according to the type of query.
+     * @param event Event processed.
+     * @return Time in the module.
+     */
     @Override
     public double getServiceTime(Event event) {
         //coordination time
@@ -96,21 +111,24 @@ public class TransactionalStorageModule extends Module {
         return timeTemp;
     }
 
+    /**
+     * Method to process the output of an event of the transactional process module, the number of occupied servers is decreased,
+     * generate an arrival of that event in the executor module and statistics are updated.
+     * Also check if there are events waiting to be processed in the module's local queue
+     * @param event Event to be processed.
+     */
     @Override
     public void processDeparture(Event event) {
-        System.out.println("Sale cliente al modulo 4 -> "+event.getTimeClock()+"  " +event.getQuery().getType());
         //Exit to the next event
         --busyServers;
 
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
         if(event.getQuery().getType() == QueryType.DDL) {
             --queryDDL;
             processingDDL = false;
         }
-
-        //event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
 
         if (!this.simulator.isTimeOut(event)) {
             //Exit to the next event
@@ -119,21 +137,13 @@ public class TransactionalStorageModule extends Module {
             this.simulator.addEvent(event);
         }
 
-        boolean isTimeOut = true;
-        while (this.queue.size()>0 && isTimeOut){
-            Event temporal = this.queue.poll();
-            if(!this.simulator.isTimeOut(event)){
-                processClient(temporal);
-                isTimeOut = false;
-            }else {
-                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
-            }
-        }
-
-        //main.java.Statistics
+        //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
+
+        //Check the local queue
+        this.processNextLocalQueueEvent();
     }
 
 }
