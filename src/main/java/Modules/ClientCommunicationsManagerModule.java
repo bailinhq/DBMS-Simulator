@@ -41,6 +41,7 @@ public class ClientCommunicationsManagerModule extends Module {
         this.simulator.generateNewEvent();
 
         //Statistics
+        this.simulator.getSimulationStatistics().increaseNumberOfArrivals();
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
     }
 
@@ -74,12 +75,15 @@ public class ClientCommunicationsManagerModule extends Module {
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
 
-        //transmission time R = numbers of blocks
-        double timeTemp = event.getQuery().getNumberOfBlocks();
+        //transmission time R = numbers of blocks of the result of the sentence.
+        //B/64 blocks is returned to the connection management module.
+        //double timeTemp = event.getQuery().getNumberOfBlocks();  //Interpretation 1
+        double timeTemp = event.getQuery().getNumberOfBlocks()/64; //Interpretation 2
 
         event.setTimeClock(event.getTimeClock()+timeTemp);
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
+        System.out.println(event.getTimeClock()+"Time Return\n");
     }
 
 
@@ -94,6 +98,7 @@ public class ClientCommunicationsManagerModule extends Module {
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
+        System.out.println(event.getQuery().getQueryStatistics().getDepartureTime()+"Time Departure\n");
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
         this.simulator.getSimulationStatistics().increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());

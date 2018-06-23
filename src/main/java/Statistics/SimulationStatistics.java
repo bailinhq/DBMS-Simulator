@@ -3,6 +3,7 @@ package main.java.Statistics;
 public class SimulationStatistics {
 
     private int discardedNumberOfQuerys;
+    private int numberOfArrivals;
     private int numberOfQueries;
     private double timeLifeQueries;
     private int timeoutQueries;
@@ -108,6 +109,21 @@ public class SimulationStatistics {
      */
     public ModuleStatistics getExecutorModuleStatistics() {
         return executorModuleStatistics;
+    }
+
+    /**
+     * Method to access the number of arrival's queries.
+     * @return Number of arrival's queries.
+     */
+    public int getNumberOfArrivals() {
+        return numberOfArrivals;
+    }
+
+    /**
+     * Method to update the number of arrival's queries.
+     */
+    public void increaseNumberOfArrivals() {
+        ++this.numberOfArrivals;
     }
 
     /**
