@@ -52,6 +52,7 @@ public class QueryProcessorModule extends Module {
     public void processClient(Event event) {
         ++busyServers;
         event.setTimeClock(event.getTimeClock()+getServiceTime(event));
+        //System.out.println(event.getTimeClock() - event.getQuery().getQueryStatistics().getArrivalTime()+"Clock Query\n\n");
         //Output is generated
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
