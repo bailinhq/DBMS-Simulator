@@ -147,6 +147,7 @@ public class SystemStatistics {
         for (double value : timeLifeQueriesConfidenceInterval){
             summaryStatistics.addValue(value);
         }
+        
         try{
             TDistribution tDistribution;
             if(summaryStatistics.getN() == 1){
