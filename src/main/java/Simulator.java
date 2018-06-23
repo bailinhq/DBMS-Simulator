@@ -186,7 +186,8 @@ public class Simulator {
      * @return Boolean indicating whether it is timeout or not.
      */
     public boolean isTimeOut(Event event){
-        if(event.getQuery().getQueryStatistics().getTimeInSystem() > this.timeout){
+       // if(event.getQuery().getQueryStatistics().getTimeInSystem() > this.timeout){
+        if((event.getTimeClock() - event.getQuery().getQueryStatistics().getArrivalTime())>this.timeout){
             ++this.timeoutNumber;
             this.clientCommunicationsManagerModule.processTimeoutEvent();
             return true;
