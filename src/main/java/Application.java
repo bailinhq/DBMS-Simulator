@@ -37,14 +37,7 @@ public class Application extends Thread {
         simulator.initialize();
     }
 
-    /**
-     * Updates graphical user interface data.
-     */
-    private void updateGUI(){
-        //update interface
-        this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
-        this.simulator.updateAverageData();
-    }
+    
 
     /**
      * Method that controls the amount of simulation (parameter), also initializes data from one simulation to another
@@ -57,9 +50,12 @@ public class Application extends Thread {
         while(numberOfSimulationsActual < this.numberOfSimulations) {
 
             simulator.initialize();
-            simulator.simulate();
 
-            updateGUI();
+            this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
+            simulator.simulate();
+            this.simulator.updateAverageData();
+
+
 
             systemStatistics.addToList(simulator.getSimulationStatistics());
             ++numberOfSimulationsActual;
