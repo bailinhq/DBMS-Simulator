@@ -117,4 +117,9 @@ public class ClientCommunicationsManagerModule extends Module {
                     break;
         }
     }
+
+    public void processTimeoutEvent(){
+        --this.busyServers;
+    }
+
 }

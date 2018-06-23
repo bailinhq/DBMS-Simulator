@@ -149,11 +149,7 @@ public class Simulator {
      * @param event Event to be inserted into the list.
      */
     public void addEvent(Event event){
-        if(isTimeOut(event)){
-            ++this.timeoutNumber;
-            //this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
-            this.clientCommunicationsManagerModule.processTimeoutEvent();
-        }else {
+        if(!isTimeOut(event)){
             queue.offer(event);
         }
     }
@@ -179,10 +175,7 @@ public class Simulator {
         {
             Event event = iterator.next();
             if(isTimeOut(event)){
-                ++this.timeoutNumber;
-                //this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
                 iterator.remove();
-                this.clientCommunicationsManagerModule.processTimeoutEvent();
             }
         }
     }
@@ -194,6 +187,8 @@ public class Simulator {
      */
     public boolean isTimeOut(Event event){
         if(event.getQuery().getQueryStatistics().getTimeInSystem() > this.timeout){
+            ++this.timeoutNumber;
+            this.clientCommunicationsManagerModule.processTimeoutEvent();
             return true;
         }else{
             return false;
@@ -216,7 +211,8 @@ public class Simulator {
             checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
-                event.getCurrentModule().processEvent(event);
+                if(this.clockTime <= this.maxSimulationTime)
+                    event.getCurrentModule().processEvent(event);
             }else{
                 clockTime = maxSimulationTime+1;
             }

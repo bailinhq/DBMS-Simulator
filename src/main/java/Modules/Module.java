@@ -84,8 +84,6 @@ public abstract class Module {
             if (!this.simulator.isTimeOut(temporal)) {
                 processClient(temporal);
                 isTimeOut = false;
-            } else {
-                simulator.setTimeoutNumber(simulator.getTimeoutNumber() + 1);
             }
         }
     }
@@ -106,7 +104,5 @@ public abstract class Module {
         return queue;
     }
 
-    public void processTimeoutEvent(){
-        --this.busyServers;
-    }
+
 }
