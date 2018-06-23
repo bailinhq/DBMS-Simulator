@@ -7,6 +7,14 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 import java.util.ArrayList;
 
 public class SystemStatistics {
+    
+    private static final int SELECT = 0;
+    private static final int UPDATE = 1;
+    private static final int JOIN   = 2;
+    private static final int DDL    = 3;
+    
+    
+    
     private ArrayList<SimulationStatistics> runsResults;
     private double discardedNumberOfQueries;
     private double timeLifeQueries;
@@ -15,6 +23,7 @@ public class SystemStatistics {
     private double queryProcessorQueueLength;
     private double transactionalStorageQueueLength;
     private double executorQueueLength;
+    private double timeoutGlobal;
 
     private ArrayList<Double> timeLifeQueriesConfidenceInterval;
     private double lowerConfidence;
@@ -39,6 +48,7 @@ public class SystemStatistics {
         queryProcessorQueueLength = 0.0;
         transactionalStorageQueueLength = 0.0;
         executorQueueLength = 0.0;
+        timeoutGlobal = 0.0;
 
         clientCommunicationsManagerQueryTimes = new double[4];
         processManagerQueryTimes = new double[4];
@@ -72,6 +82,7 @@ public class SystemStatistics {
             discardedNumberOfQueries += runsResult.getDiscardedNumberOfQueries();
             timeLifeQueries += runsResult.getTimeLifeOfQuery();
             timeLifeQueriesConfidenceInterval.add(runsResult.getTimeLifeOfQuery());
+            timeoutGlobal += runsResult.getTimeoutQueries()*1.0;
 
             //Promedio de largo de cola por modulo
             clientCommunicationsManagerQueueLength += runsResult.getClientModuleStatistics().getAverageSizeQueue();
@@ -81,34 +92,35 @@ public class SystemStatistics {
             executorQueueLength += runsResult.getExecutorModuleStatistics().getAverageSizeQueue();
 
             //Tiempos por sentencia por modulo
-            clientCommunicationsManagerQueryTimes[0] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
-            clientCommunicationsManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
-            clientCommunicationsManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
-            clientCommunicationsManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
+            clientCommunicationsManagerQueryTimes[SELECT] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+            clientCommunicationsManagerQueryTimes[UPDATE] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+            clientCommunicationsManagerQueryTimes[JOIN  ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+            clientCommunicationsManagerQueryTimes[DDL   ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
 
-            processManagerQueryTimes[0] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
-            processManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
-            processManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
-            processManagerQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
+            processManagerQueryTimes[SELECT] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+            processManagerQueryTimes[UPDATE] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+            processManagerQueryTimes[JOIN  ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+            processManagerQueryTimes[DDL   ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
 
-            queryProcessorQueryTimes[0] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
-            queryProcessorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
-            queryProcessorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
-            queryProcessorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
+            queryProcessorQueryTimes[SELECT] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+            queryProcessorQueryTimes[UPDATE] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+            queryProcessorQueryTimes[JOIN  ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+            queryProcessorQueryTimes[DDL   ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
 
-            transactionalStorageQueryTimes[0] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
-            transactionalStorageQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
-            transactionalStorageQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
-            transactionalStorageQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
+            transactionalStorageQueryTimes[SELECT] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+            transactionalStorageQueryTimes[UPDATE] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+            transactionalStorageQueryTimes[JOIN  ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+            transactionalStorageQueryTimes[DDL   ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
 
-            executorQueryTimes[0] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
-            executorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
-            executorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
-            executorQueryTimes[1] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
+            executorQueryTimes[SELECT] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+            executorQueryTimes[UPDATE] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+            executorQueryTimes[JOIN  ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+            executorQueryTimes[DDL   ] += runsResult.getClientModuleStatistics().getAverageTimeInModuleOfQuery(QueryType.DDL);
         }
 
         discardedNumberOfQueries = discardedNumberOfQueries /simulationSize;
         timeLifeQueries = timeLifeQueries/simulationSize;
+        timeoutGlobal = timeoutGlobal/simulationSize;
         clientCommunicationsManagerQueueLength = clientCommunicationsManagerQueueLength/simulationSize;
         processManagerQueueLength = processManagerQueueLength /simulationSize;
         queryProcessorQueueLength = queryProcessorQueueLength/simulationSize;
@@ -244,6 +256,16 @@ public class SystemStatistics {
     }
 
     /**
+     * Returns the mean timeout
+     * @return the mean service time of a timeout
+     */
+    public double getAverageTimeout() {
+        return timeoutGlobal;
+    }
+
+
+
+    /**
      * Returns the lower bound from the confidence interval from the mean life expectancy of a query in the system.
      * @return the lower bound of the confidence interval.
      */
@@ -258,5 +280,85 @@ public class SystemStatistics {
      */
     public double getHigherConfidence() {
         return higherConfidence;
+    }
+
+    /**
+     * Method that calculates the average life of the type of query indicated in client module.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
+    public double getGlobalAverageTimeInClientModule(QueryType query) {
+        double timeTemp = 0.0;
+        timeTemp = getGlobalAverageTimeModules(query, timeTemp, clientCommunicationsManagerQueryTimes);
+        return timeTemp;
+    }
+
+    /**
+     * Method that calculates the average life of the type of query indicated in client module.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
+    public double getGlobalAverageTimeInExecutorModule(QueryType query) {
+        double timeTemp = 0.0;
+        timeTemp = getGlobalAverageTimeModules(query, timeTemp, executorQueryTimes);
+        return timeTemp;
+    }
+
+    /**
+     * Method that calculates the average life of the type of query indicated in process module.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
+    public double getGlobalAverageTimeInProcessModule(QueryType query) {
+        double timeTemp = 0.0;
+        timeTemp = getGlobalAverageTimeModules(query, timeTemp, processManagerQueryTimes);
+        return timeTemp;
+    }
+
+    /**
+     * Method that returns the average lifetime of a query in a specific module
+     * @param query type of query
+     * @param timeTemp variable to return the average
+     * @param processManagerQueryTimes Array with data of each module
+     * @return global average of time in seconds
+     */
+    private double getGlobalAverageTimeModules(QueryType query, double timeTemp, double[] processManagerQueryTimes) {
+        switch (query){
+            case SELECT:
+                timeTemp = processManagerQueryTimes[SELECT];
+                break;
+            case UPDATE:
+                timeTemp = processManagerQueryTimes[UPDATE];
+                break;
+            case JOIN:
+                timeTemp = processManagerQueryTimes[JOIN];
+                break;
+            case DDL:
+                timeTemp = processManagerQueryTimes[DDL];
+                break;
+        }
+        return timeTemp;
+    }
+
+    /**
+     * Method that calculates the average life of the type of query indicated in transactional module.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
+    public double getGlobalAverageTimeInTransactionalModule(QueryType query) {
+        double timeTemp = 0.0;
+        timeTemp = getGlobalAverageTimeModules(query, timeTemp, transactionalStorageQueryTimes);
+        return timeTemp;
+    }
+
+    /**
+     * Method that calculates the average life of the type of query indicated in transactional module.
+     * @param query Type of query of which the average life is wanted.
+     * @return Average life of the type of query.
+     */
+    public double getGlobalAverageTimeInQueriesModule(QueryType query) {
+        double timeTemp = 0.0;
+        timeTemp = getGlobalAverageTimeModules(query, timeTemp, queryProcessorQueryTimes);
+        return timeTemp;
     }
 }

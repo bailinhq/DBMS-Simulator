@@ -5,6 +5,7 @@ public class SimulationStatistics {
     private int discardedNumberOfQuerys;
     private int numberOfQueries;
     private double timeLifeQueries;
+    private int timeoutQueries;
 
     private ModuleStatistics clientModuleStatistics;
     private ModuleStatistics processModuleStatistics;
@@ -107,5 +108,21 @@ public class SimulationStatistics {
      */
     public ModuleStatistics getExecutorModuleStatistics() {
         return executorModuleStatistics;
+    }
+
+    /**
+     * Method to access the timeout of simulation.
+     * @return Statistics of timeout.
+     */
+    public int getTimeoutQueries() {
+        return timeoutQueries;
+    }
+
+    /**
+     * Set value timeout queries
+     * @param timeoutQueries number of timeout in the simulation
+     */
+    public void setTimeoutQueries(int timeoutQueries) {
+        this.timeoutQueries = timeoutQueries;
     }
 }

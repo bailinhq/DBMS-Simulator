@@ -49,9 +49,9 @@ public class InterfaceController implements Initializable{
 
     //Button
     @FXML private JFXButton btnGlobalStats;
-    @FXML private JFXButton btnNextGlobal;
     @FXML private JFXButton btnShowGlobalStats;
     @FXML private JFXButton btnNextAverageStats;
+    @FXML private JFXButton btnNextAverageRealtime;
 
     //arrows
     @FXML private ImageView welcomeArrow;
@@ -138,7 +138,7 @@ public class InterfaceController implements Initializable{
     //-----------------------------------------------------------//
     //                      Statistics by run
     //----------------------------------------------------------//
-    @FXML private JFXTextField clockTxtAverage;
+    @FXML private JFXTextField timelifeAverage;
     @FXML private JFXTextField discardedTxtAverage;
     @FXML private JFXTextField simulationNumberTxtAverage;
 
@@ -181,7 +181,7 @@ public class InterfaceController implements Initializable{
     //                Global stats            // 
     //----------------------------------------//
 
-    @FXML private JFXTextField clockTxtAverageGlobal;
+    @FXML private JFXTextField timelifeAverageGlobal;
     @FXML private JFXTextField discardedTxtAverageGlobal;
     @FXML private JFXTextField timeoutTxtAverageGlobal;
 
@@ -219,6 +219,8 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField qSelectAverageGlobal;
     @FXML private JFXTextField tSelectAverageGlobal;
     @FXML private JFXTextField eSelectAverageGlobal;
+
+    @FXML private JFXTextField confidenceIntervalTxt;
 
 
     /**
@@ -550,6 +552,15 @@ public class InterfaceController implements Initializable{
         updateUI(discardedTxtAverage,String.valueOf(discardedConnections));
     }
 
+    /**
+     * Update the number of connections discarded by the client module,
+     * in the graphical interface.
+     * @param discardedConnections currently discarded connections
+     */
+    public void updateGlobalDiscarded(double discardedConnections){
+        updateUI(discardedTxtAverageGlobal,String.valueOf(discardedConnections));
+    }
+
     private void updateUI(JFXTextField jfxTextField, String data){
         Task<Void> task = new Task<Void>() {
             @Override
@@ -606,10 +617,10 @@ public class InterfaceController implements Initializable{
      */
     public void showDDLGlobalAverageTime(double DDLAverageTime[]){
         updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_CLIENTS])));
-        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_PROCESSES])));
-        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_QUERIES])));
-        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_TRANSACTIONS])));
-        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_EXECUTIONS])));
+        updateUI(this.pDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_PROCESSES])));
+        updateUI(this.qDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_QUERIES])));
+        updateUI(this.tDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_TRANSACTIONS])));
+        updateUI(this.eDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_EXECUTIONS])));
     }
 
     /**
@@ -641,19 +652,19 @@ public class InterfaceController implements Initializable{
      * @param selectQuantity Number of SELECT queries processed by each module.
      */
     public void showSelectGlobalAverageTime(double selectQuantity[]){
-        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_CLIENTS])));
-        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_PROCESSES])));
-        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_QUERIES])));
-        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_TRANSACTIONS])));
+        updateUI(this.cSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_CLIENTS])));
+        updateUI(this.pSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_PROCESSES])));
+        updateUI(this.qSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_QUERIES])));
+        updateUI(this.tSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_TRANSACTIONS])));
         updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_EXECUTIONS])));
     }
 
     /**
-     * Update the average lifetime of a query
-     * @param lifeTime lifetime of queries
+     * Update the average timelife of a query
+     * @param lifeTime timelife of queries
      */
-    public void showGlobalAverageLifetimeQuery(double lifeTime){
-        updateUI(this.clockTxtAverageGlobal,String.valueOf(String.format("%.2f",lifeTime)));
+    public void showGlobalAverageTimelifeQuery(double lifeTime){
+        updateUI(this.timelifeAverageGlobal,String.valueOf(String.format("%.2f",lifeTime)));
     }
 
 
@@ -721,11 +732,11 @@ public class InterfaceController implements Initializable{
     }
 
     /**
-     * Update the average lifetime of a query
-     * @param lifeTime lifetime of queries
+     * Update the average timelife of a query
+     * @param lifeTime timelife of queries
      */
-    public void showAverageLifetimeQuery(double lifeTime){
-        updateUI(this.clockTxtAverage,String.valueOf(String.format("%.2f",lifeTime)));
+    public void showAverageTimelifeQuery(double lifeTime){
+        updateUI(this.timelifeAverage,String.valueOf(String.format("%.2f",lifeTime)));
     }
 
 
@@ -734,9 +745,25 @@ public class InterfaceController implements Initializable{
      */
     public void hideNextButton(){
         this.btnNextAverageStats.setVisible(false);
-        this.btnNextGlobal.setVisible(false);
+        this.btnNextAverageRealtime.setVisible(false);
         this.btnGlobalStats.setVisible(true);
         this.btnShowGlobalStats.setVisible(true);
     }
 
+    /**
+     * Update the number of connections that left the system by timeout.
+     * @param timeoutNumber  Number of connections that made timeout
+     */
+    public void updateGlobalAverageTimeoutNumber(double timeoutNumber){
+        updateUI(this.timeoutTxtAverageGlobal,String.valueOf(timeoutNumber));
+    }
+
+    /**
+     * show de confidence interval of de simulation
+     * @param lowerConfidence lower end of the interval
+     * @param higherConfidence upper end of the interval
+     */
+    public void showConfidenceInterval(double lowerConfidence, double higherConfidence){
+        updateUI(this.confidenceIntervalTxt,"[ "+String.format("%.2f",lowerConfidence)+" , "+String.format("%.2f",higherConfidence)+" ]");
+    }
 }

@@ -220,6 +220,9 @@ public class Simulator {
                 this.updateData();
             delay();
         }
+
+        this.simulationStatistics.setTimeoutQueries(timeoutNumber);
+
         if (!delay)
             this.updateData();
 
@@ -445,7 +448,7 @@ public class Simulator {
      * Method that shows the average of the data of each run.
      */
     public void updateAverageData(){
-        this.interfaceController.showAverageLifetimeQuery(this.clockTime);
+        this.interfaceController.showAverageTimelifeQuery(this.simulationStatistics.getTimeLifeOfQuery());
         this.interfaceController.showDDLAverageTime(this.getAverageTimeDDL());
         this.interfaceController.showJoinAverageTime(this.getAverageTimeJoin());
         this.interfaceController.showSelectAverageTime(this.getAverageTimeSelect());

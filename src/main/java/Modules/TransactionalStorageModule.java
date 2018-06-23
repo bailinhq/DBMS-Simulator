@@ -78,8 +78,6 @@ public class TransactionalStorageModule extends Module {
                     ++busyServers;
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
-                    if(queue.size()>5) {
-                    }
                     queue.add(event);
                     processedEvent = false;
                 }
