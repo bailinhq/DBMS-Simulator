@@ -71,6 +71,13 @@ public class Application extends Thread {
             }
         }
         systemStatistics.generateSystemStatistics();
+
+        this.updateAverageGlobalData();
+
+        //Show buttons to see global statistics
+        this.interfaceController.hideNextButton();
+
+
         System.out.println("Voy a esperar");
         System.out.println("Voy a morir");
 

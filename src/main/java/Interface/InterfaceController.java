@@ -1,10 +1,12 @@
 package main.java.Interface;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import main.java.Application;
 import com.jfoenix.controls.JFXTextField;
@@ -44,6 +46,13 @@ public class InterfaceController implements Initializable{
     private static final int T = 7;
 
     //Graphic interface elements
+
+    //Button
+    @FXML private JFXButton btnGlobalStats;
+    @FXML private JFXButton btnNextGlobal;
+    @FXML private JFXButton btnShowGlobalStats;
+    @FXML private JFXButton btnNextAverageStats;
+
     //arrows
     @FXML private ImageView welcomeArrow;
     @FXML private ImageView simulatorArrow;
@@ -60,7 +69,7 @@ public class InterfaceController implements Initializable{
     @FXML private AnchorPane runPanel;
     @FXML private AnchorPane runPanelAverage;
     @FXML private AnchorPane statsPanel;
-    @FXML private AnchorPane averageGlobal;
+    @FXML private AnchorPane averageGlobalPanel;
 
     //Text Field
     @FXML private JFXTextField numberSimulationsText;
@@ -293,6 +302,20 @@ public class InterfaceController implements Initializable{
     }
 
     /**
+     * Method to show the global statistics, by pressing the
+     * show global statistics button in the simulator settings panel.
+     * @param mouseEvent Mouse click event
+     */
+    public void onShowGlobalStatisticClicked(MouseEvent mouseEvent){
+        hideAll();
+
+        averageGlobalPanel.setVisible(true);
+        statsArrow.setVisible(true);
+    }
+
+
+
+    /**
      * Method to make signal, by pressing the next button, to show the simulation
      * @param mouseEvent Mouse click event
      */
@@ -352,7 +375,7 @@ public class InterfaceController implements Initializable{
 
         runPanelAverage.setVisible(false);
 
-        averageGlobal.setVisible(false);
+        averageGlobalPanel.setVisible(false);
     }
 
     /**
@@ -706,5 +729,14 @@ public class InterfaceController implements Initializable{
     }
 
 
+    /**
+     * Hide the next button and show the global statistics button.
+     */
+    public void hideNextButton(){
+        this.btnNextAverageStats.setVisible(false);
+        this.btnNextGlobal.setVisible(false);
+        this.btnGlobalStats.setVisible(true);
+        this.btnShowGlobalStats.setVisible(true);
+    }
 
 }
