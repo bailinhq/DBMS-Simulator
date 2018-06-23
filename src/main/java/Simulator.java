@@ -171,10 +171,10 @@ public class Simulator {
     /**
      * Method that runs through the module's queue (indicated in parameter) and eliminates events that have timeout,
      * also updates statistics data.
-     * @param queue Queue of the module to review.
+     * @param queueR Queue of the module to review.
      */
-    public void checkTimeOutQueue(PriorityQueue<Event> queue){
-        Iterator<Event> iterator = queue.iterator();
+    public void checkTimeOutQueue(PriorityQueue<Event> queueR){
+        Iterator<Event> iterator = queueR.iterator();
         while (iterator.hasNext())
         {
             Event event = iterator.next();
@@ -193,7 +193,7 @@ public class Simulator {
      * @return Boolean indicating whether it is timeout or not.
      */
     public boolean isTimeOut(Event event){
-        if(event.getQuery().getQueryStatistics().getTimeInSystem()> this.timeout){
+        if(event.getQuery().getQueryStatistics().getTimeInSystem() > this.timeout){
             return true;
         }else{
             return false;
@@ -226,7 +226,7 @@ public class Simulator {
         }
         if (!delay)
             this.updateData();
-
+       
         /*
         System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
         System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getTotalQueries());

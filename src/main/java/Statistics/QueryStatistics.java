@@ -21,6 +21,8 @@ public class QueryStatistics {
      * @return Duration in the system.
      */
     public double getTimeInSystem(){
+        if(departureTime-arrivalTime > 2 )
+            System.out.println("Aca");
         return departureTime-arrivalTime;
     }
 
