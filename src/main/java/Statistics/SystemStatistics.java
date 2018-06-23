@@ -136,7 +136,12 @@ public class SystemStatistics {
             summaryStatistics.addValue(value);
         }
         try{
-            TDistribution tDistribution = new TDistribution(summaryStatistics.getN() -1);
+            TDistribution tDistribution;
+            if(summaryStatistics.getN() == 1){
+                tDistribution = new TDistribution(summaryStatistics.getN());
+            } else{
+                tDistribution = new TDistribution(summaryStatistics.getN() -1);
+            }
             //0.95 confidence interval
             criticalValue = tDistribution.inverseCumulativeProbability(1.0 - (1 - 0.95)/2);
             criticalValue = criticalValue * summaryStatistics.getStandardDeviation()/Math.sqrt(summaryStatistics.getN());
