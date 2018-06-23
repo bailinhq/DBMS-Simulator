@@ -88,16 +88,20 @@ public class ModuleStatistics {
         double timeTemp = 0.0;
         switch (query){
             case UPDATE:
-                timeTemp = timeOfUPDATE/numberOfUPDATE;
+                if( numberOfUPDATE != 0 )
+                    timeTemp = timeOfUPDATE/numberOfUPDATE;
                 break;
             case DDL:
-                timeTemp = timeOfDDL/numberOfDDL;
+                if(numberOfDDL != 0 )
+                    timeTemp = timeOfDDL/numberOfDDL;
                 break;
             case JOIN:
-                timeTemp = timeOfJOIN/numberOfJOIN;
+                if( numberOfJOIN != 0 )
+                    timeTemp = timeOfJOIN/numberOfJOIN;
                 break;
             case SELECT:
-                timeTemp = timeOfSELECT/numberOfSELECT;
+                if( numberOfSELECT != 0 )
+                    timeTemp = timeOfSELECT/numberOfSELECT;
                 break;
         }
         return timeTemp;

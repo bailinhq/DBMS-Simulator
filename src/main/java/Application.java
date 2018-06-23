@@ -35,6 +35,15 @@ public class Application extends Thread {
     }
 
     /**
+     * Updates graphical user interface data.
+     */
+    private void updateGUI(){
+        //update interface
+        this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
+        this.simulator.updateAverageData();
+    }
+
+    /**
      * Method that controls the amount of simulation (parameter), also initializes data from one simulation to another
      * to have the independence of the information.
      * Also stores the statistics at the end of each simulation.
@@ -43,17 +52,28 @@ public class Application extends Thread {
     @Override
     public void run(){
         while(numberOfSimulationsActual < this.numberOfSimulations) {
-            this.interfaceController.updateSimulationNumber(this.numberOfSimulationsActual+1);
+
             simulator.initialize();
             simulator.simulate();
+
+            updateGUI();
+
             systemStatistics.addToList(simulator.getSimulationStatistics());
             ++numberOfSimulationsActual;
+            try {
+                this.interfaceController.semaphore.acquire();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                System.err.println("Application : error waiting for signal");
+            }
         }
         systemStatistics.generateSystemStatistics();
         System.out.println("Voy a esperar");
         System.out.println("Voy a morir");
 
     }
+
+
 
 
 }

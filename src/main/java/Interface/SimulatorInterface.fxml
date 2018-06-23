@@ -79,7 +79,7 @@
                 </VBox>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="welcomePanel" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="welcomePanel" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="345.0" layoutY="189.0" prefHeight="51.0" prefWidth="199.0" text="Welcome!" textFill="#c5e2e0" AnchorPane.leftAnchor="345.0" AnchorPane.topAnchor="189.0">
                     <font>
@@ -164,7 +164,7 @@
             <Separator layoutX="33.0" layoutY="37.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
             </children>
       </AnchorPane>
-        <AnchorPane fx:id="systemPanel" layoutX="74.60000000000002" layoutY="5.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <AnchorPane fx:id="systemPanel" layoutX="74.60000000000002" layoutY="5.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
             <children>
                 <Label layoutX="347.0" layoutY="8.0" opacity="0.7" text="System configuration" textFill="#c5e2e0" AnchorPane.leftAnchor="347.0">
                     <font>
@@ -276,7 +276,7 @@
                 <Image url="@../../resources/Images/icons_right.png" />
             </image>
         </ImageView>
-        <AnchorPane fx:id="runPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="runPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="36.0" layoutY="199.0" opacity="0.6" prefHeight="20.0" prefWidth="118.0" text="Queue Length" textFill="#a8edeb" wrapText="true">
                <font>
@@ -533,7 +533,7 @@
                   <Font name="System Bold" size="18.0" />
                </font>
             </JFXTextField>
-            <Label layoutX="490.0" layoutY="109.0" opacity="0.6" prefHeight="20.0" prefWidth="62.0" text="Discarted" textFill="#a8edeb" wrapText="true">
+            <Label layoutX="490.0" layoutY="109.0" opacity="0.6" prefHeight="20.0" prefWidth="62.0" text="Discarded" textFill="#a8edeb" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -598,7 +598,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="356.0" layoutY="564.0" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="564.0" onMouseClicked="#onShowStatsButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -608,8 +608,314 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <JFXButton buttonType="RAISED" layoutX="545.0" layoutY="564.0" onMouseClicked="#onNextButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="next" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
         <AnchorPane fx:id="statsPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="runPanelAverage" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Separator layoutX="34.0" layoutY="33.0" opacity="0.4" prefHeight="14.0" prefWidth="805.0" />
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="70.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_queue.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="44.0" layoutX="457.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_fullTrashcan.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="51.0" fitWidth="51.0" layoutX="250.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_timelife.png" />
+               </image>
+            </ImageView>
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-95.0" layoutY="-23.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-95.0" layoutY="27.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-95.0" layoutY="75.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-94.0" layoutY="-73.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-95.0" layoutY="121.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-93.0" layoutY="-95.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.199951171875" endY="737.6000366210938" layoutX="-105.0" layoutY="-235.0" opacity="0.4" startX="262.199951171875" startY="413.20001220703125" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="20.0" layoutX="138.0" layoutY="212.0" stroke="TRANSPARENT" strokeType="INSIDE" width="713.0" />
+            <Label layoutX="28.0" layoutY="212.0" opacity="0.6" prefHeight="20.0" prefWidth="142.0" text="Average queue Length" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="85.0" layoutY="451.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Select" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="42.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_select.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="85.0" layoutY="405.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Join" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="38.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_join.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="85.0" layoutY="356.0" opacity="0.6" prefHeight="54.0" prefWidth="62.0" text="Update" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="36.0" layoutY="362.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_update.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="85.0" layoutY="314.0" opacity="0.6" prefHeight="39.0" prefWidth="42.0" text="DDL" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="39.0" layoutY="313.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_ddl.png" />
+               </image>
+            </ImageView>
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-93.0" layoutY="-148.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-93.0" layoutY="-171.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-92.0" layoutY="-204.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.1999816894531" endY="423.0" layoutX="33.0" layoutY="78.0" opacity="0.4" startX="262.1999816894531" startY="100.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.1999816894531" endY="455.60003662109375" layoutX="170.0" layoutY="47.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="263.00006103515625" endY="454.39996337890625" layoutX="308.0" layoutY="46.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Line endX="262.20001220703125" endY="455.0" layoutX="447.0" layoutY="46.0" opacity="0.4" startX="262.1999816894531" startY="131.7786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="20.0" layoutX="152.0" layoutY="287.0" stroke="TRANSPARENT" strokeType="INSIDE" width="704.0" />
+            <Label layoutX="27.0" layoutY="286.0" opacity="0.6" prefHeight="20.0" prefWidth="127.0" text="Average query time" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="cQueueAverage" alignment="CENTER" disable="true" layoutX="159.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pQueueAverage" alignment="CENTER" disable="true" layoutX="297.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qQueueAverage" alignment="CENTER" disable="true" layoutX="435.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tQueueAverage" alignment="CENTER" disable="true" layoutX="571.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eQueueAverage" alignment="CENTER" disable="true" layoutX="711.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cDDLAverage" alignment="CENTER" disable="true" layoutX="158.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pDDLAverage" alignment="CENTER" disable="true" layoutX="296.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qDDLAverage" alignment="CENTER" disable="true" layoutX="434.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tDDLAverage" alignment="CENTER" disable="true" layoutX="571.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eDDLAverage" alignment="CENTER" disable="true" layoutX="711.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cUpdateAverage" alignment="CENTER" disable="true" layoutX="158.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pUpdateAverage" alignment="CENTER" disable="true" layoutX="296.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qUpdateAverage" alignment="CENTER" disable="true" layoutX="434.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tUpdateAverage" alignment="CENTER" disable="true" layoutX="571.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eUpdateAverage" alignment="CENTER" disable="true" layoutX="711.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cJoinAverage" alignment="CENTER" disable="true" layoutX="158.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pJoinAverage" alignment="CENTER" disable="true" layoutX="296.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qJoinAverage" alignment="CENTER" disable="true" layoutX="434.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tJoinAverage" alignment="CENTER" disable="true" layoutX="571.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eJoinAverage" alignment="CENTER" disable="true" layoutX="711.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="cSelectAverage" alignment="CENTER" disable="true" layoutX="158.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="pSelectAverage" alignment="CENTER" disable="true" layoutX="296.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="qSelectAverage" alignment="CENTER" disable="true" layoutX="434.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="tSelectAverage" alignment="CENTER" disable="true" layoutX="571.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="eSelectAverage" alignment="CENTER" disable="true" layoutX="711.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="clockTxtAverage" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="295.0" layoutY="66.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="#7e8c8b">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </JFXTextField>
+            <JFXTextField fx:id="discardedTxtAverage" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="495.0" layoutY="78.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="493.0" layoutY="121.0" opacity="0.6" prefHeight="20.0" prefWidth="118.0" text="Queries discarded " textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="297.0" layoutY="122.0" opacity="0.6" prefHeight="20.0" prefWidth="118.0" text="Life time of query" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="161.0" layoutY="184.0" opacity="0.6" prefHeight="20.0" prefWidth="134.0" text="Connections Module" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="314.0" layoutY="184.0" opacity="0.6" prefHeight="20.0" prefWidth="118.0" text="Process Module" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="456.0" layoutY="184.0" opacity="0.6" prefHeight="20.0" prefWidth="96.0" text="Query Module" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="573.0" layoutY="184.0" opacity="0.6" prefHeight="20.0" prefWidth="142.0" text="Transactional Module" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="725.0" layoutY="184.0" opacity="0.6" prefHeight="20.0" prefWidth="107.0" text="Executor Module" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="33.0" layoutY="79.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_simulator.png" />
+               </image>
+            </ImageView>
+            <Label contentDisplay="CENTER" layoutX="72.0" layoutY="121.0" opacity="0.6" prefHeight="20.0" prefWidth="134.0" text="Simulation Number" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXTextField fx:id="simulationNumberTxtAverage" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="85.0" layoutY="72.0" prefHeight="21.0" prefWidth="134.0" style="-fx-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="#7e8c8b">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <ImageView fitHeight="42.0" fitWidth="44.0" layoutX="659.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/Images/icons_sandClock.png" />
+               </image>
+            </ImageView>
+            <JFXTextField fx:id="timeoutTxtAverage" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="79.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </JFXTextField>
+            <Label layoutX="711.0" layoutY="122.0" opacity="0.6" prefHeight="20.0" prefWidth="107.0" text="Queries timeout" textFill="#a8edeb" wrapText="true">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="349.0" layoutY="12.0" opacity="0.7" text="Execution averages" textFill="#c5e2e0">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+            <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="564.0" onMouseClicked="#onShowRealtimeButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show realtime" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton buttonType="RAISED" layoutX="545.0" layoutY="564.0" onMouseClicked="#onNextButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="next" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

@@ -24,13 +24,14 @@ import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.Semaphore;
 
 
 import static main.java.Simulator.*;
 
 public class InterfaceController implements Initializable{
     Application application;
-
+    public Semaphore semaphore;
 
     //constant values
     private static final int NUMBER_SIMULATION = 0;
@@ -57,12 +58,14 @@ public class InterfaceController implements Initializable{
     @FXML private AnchorPane simulatorPanel;
     @FXML private AnchorPane systemPanel;
     @FXML private AnchorPane runPanel;
+    @FXML private AnchorPane runPanelAverage;
     @FXML private AnchorPane statsPanel;
 
     //Text Field
     @FXML private JFXTextField numberSimulationsText;
     @FXML private JFXTextField simulationTimeText;
     @FXML private JFXTextField timeoutTxt;
+    @FXML private JFXTextField timeoutTxtAverage;
 
     @FXML private JFXTextField kText;
     @FXML private JFXTextField nText;
@@ -121,6 +124,49 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField tSelect;
     @FXML private JFXTextField eSelect;
 
+
+    //-----------------------------------------------------------//
+    //                      Statistics by run
+    //----------------------------------------------------------//
+    @FXML private JFXTextField clockTxtAverage;
+    @FXML private JFXTextField discardedTxtAverage;
+    @FXML private JFXTextField simulationNumberTxtAverage;
+
+    //queue length
+    @FXML private JFXTextField cQueueAverage;
+    @FXML private JFXTextField pQueueAverage;
+    @FXML private JFXTextField qQueueAverage;
+    @FXML private JFXTextField tQueueAverage;
+    @FXML private JFXTextField eQueueAverage;
+
+    //DDL
+    @FXML private JFXTextField cDDLAverage;
+    @FXML private JFXTextField pDDLAverage;
+    @FXML private JFXTextField qDDLAverage;
+    @FXML private JFXTextField tDDLAverage;
+    @FXML private JFXTextField eDDLAverage;
+
+    //Update
+    @FXML private JFXTextField cUpdateAverage;
+    @FXML private JFXTextField pUpdateAverage;
+    @FXML private JFXTextField qUpdateAverage;
+    @FXML private JFXTextField tUpdateAverage;
+    @FXML private JFXTextField eUpdateAverage;
+
+    //Join
+    @FXML private JFXTextField cJoinAverage;
+    @FXML private JFXTextField pJoinAverage;
+    @FXML private JFXTextField qJoinAverage;
+    @FXML private JFXTextField tJoinAverage;
+    @FXML private JFXTextField eJoinAverage;
+
+    //Select
+    @FXML private JFXTextField cSelectAverage;
+    @FXML private JFXTextField pSelectAverage;
+    @FXML private JFXTextField qSelectAverage;
+    @FXML private JFXTextField tSelectAverage;
+    @FXML private JFXTextField eSelectAverage;
+
     /**
      * Called to initialize a controller after its root element has been completely processed.
      * @param location  The location used to resolve relative paths for the root object, or null if the location is not known
@@ -128,6 +174,9 @@ public class InterfaceController implements Initializable{
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        semaphore = new Semaphore(0);
+
         hideAll();
         //Show welcome panel
         welcomePanel.setVisible(true);
@@ -196,7 +245,15 @@ public class InterfaceController implements Initializable{
 
         systemPanel.setVisible(true);
         systemArrow.setVisible(true);
+    }
 
+    /**
+     * Method to show the panel of system configurations, by pressing the
+     * continue button in the simulator settings panel.
+     * @param mouseEvent Mouse click event
+     */
+    public void onNextButtonClicked(MouseEvent mouseEvent){
+        this.semaphore.release();
     }
 
     /**
@@ -248,8 +305,29 @@ public class InterfaceController implements Initializable{
 
         statsArrow.setVisible(false);
         statsPanel.setVisible(false);
+
+        runPanelAverage.setVisible(false);
     }
 
+    /**
+     * Method to show statistics by execution.
+     * @param mouseEvent Mouse click event
+     */
+    public void onShowStatsButtonClicked(MouseEvent mouseEvent){
+        hideAll();
+        runPanelAverage.setVisible(true);
+        runArrow.setVisible(true);
+    }
+
+    /**
+     * Method to show run panel.
+     * @param mouseEvent Mouse click event
+     */
+    public void onShowRealtimeButtonClicked(MouseEvent mouseEvent){
+        hideAll();
+        runPanel.setVisible(true);
+        runArrow.setVisible(true);
+    }
 
     /**
      * Validator of whole numbers.
@@ -382,6 +460,9 @@ public class InterfaceController implements Initializable{
         updateUI(this.eSelect,String.valueOf(selectQuantity[M_EXECUTIONS]));
     }
 
+
+
+
     /**
      * Update the graphical interface clock.
      * @param clock Simulator clock time
@@ -397,6 +478,7 @@ public class InterfaceController implements Initializable{
      */
     public void updateDiscarded(int discardedConnections){
         updateUI(discardedTxt,String.valueOf(discardedConnections));
+        updateUI(discardedTxtAverage,String.valueOf(discardedConnections));
     }
 
     private void updateUI(JFXTextField jfxTextField, String data){
@@ -421,7 +503,7 @@ public class InterfaceController implements Initializable{
      */
     public synchronized void updateSimulationNumber(int simulationNumber){
         updateUI(simulationNumberTxt, String.valueOf(simulationNumber));
-
+        updateUI(simulationNumberTxtAverage, String.valueOf(simulationNumber));
     }
 
     /**
@@ -430,5 +512,81 @@ public class InterfaceController implements Initializable{
      */
     public void updateTimeoutNumber(int timeoutNumber){
         updateUI(this.timeoutTxt,String.valueOf(timeoutNumber));
+        updateUI(this.timeoutTxtAverage,String.valueOf(timeoutNumber));
     }
+
+
+    //---------------------------------------
+    //             run average panel
+    //---------------------------------------
+    /**
+     * Shows the average size of the current queue of each module.
+     * @param averageQueueLength Array with the size of queue of each module
+     */
+    public void showQueueAverageLength(double averageQueueLength[]){ 
+        updateUI(this.cQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_CLIENTS])));
+        updateUI(this.pQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_PROCESSES])));
+        updateUI(this.qQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_QUERIES])));
+        updateUI(this.tQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_TRANSACTIONS])));
+        updateUI(this.eQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of DDL queries currently processed.
+     * @param DDLAverageTime Number of DDL queries processed by each module.
+     */
+    public void showDDLAverageTime(double DDLAverageTime[]){ 
+        updateUI(this.cDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_CLIENTS])));
+        updateUI(this.pDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_PROCESSES])));
+        updateUI(this.qDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_QUERIES])));
+        updateUI(this.tDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_TRANSACTIONS])));
+        updateUI(this.eDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of UPDATE queries currently processed.
+     * @param UpdateQuantity Number of UPDATE queries processed by each module.
+     */
+    public void showUpdateAverageTime(double UpdateQuantity[]){
+        updateUI(this.cUpdateAverage,String.valueOf(String.format("%.2f",UpdateQuantity[M_CLIENTS])));
+        updateUI(this.pUpdateAverage,String.valueOf(String.format("%.2f",UpdateQuantity[M_PROCESSES])));
+        updateUI(this.qUpdateAverage,String.valueOf(String.format("%.2f",UpdateQuantity[M_QUERIES])));
+        updateUI(this.tUpdateAverage,String.valueOf(String.format("%.2f",UpdateQuantity[M_TRANSACTIONS])));
+        updateUI(this.eUpdateAverage,String.valueOf(String.format("%.2f",UpdateQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of JOIN queries currently processed.
+     * @param joinQuantity Number of JOIN queries processed by each module.
+     */
+    public void showJoinAverageTime(double joinQuantity[]){
+        updateUI(this.cJoinAverage,String.valueOf(String.format("%.2f",joinQuantity[M_CLIENTS])));
+        updateUI(this.pJoinAverage,String.valueOf(String.format("%.2f",joinQuantity[M_PROCESSES])));
+        updateUI(this.qJoinAverage,String.valueOf(String.format("%.2f",joinQuantity[M_QUERIES])));
+        updateUI(this.tJoinAverage,String.valueOf(String.format("%.2f",joinQuantity[M_TRANSACTIONS])));
+        updateUI(this.eJoinAverage,String.valueOf(String.format("%.2f",joinQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of SELECT queries currently processed.
+     * @param selectQuantity Number of SELECT queries processed by each module.
+     */
+    public void showSelectAverageTime(double selectQuantity[]){
+        updateUI(this.cSelectAverage,String.valueOf(String.format("%.2f",selectQuantity[M_CLIENTS])));
+        updateUI(this.pSelectAverage,String.valueOf(String.format("%.2f",selectQuantity[M_PROCESSES])));
+        updateUI(this.qSelectAverage,String.valueOf(String.format("%.2f",selectQuantity[M_QUERIES])));
+        updateUI(this.tSelectAverage,String.valueOf(String.format("%.2f",selectQuantity[M_TRANSACTIONS])));
+        updateUI(this.eSelectAverage,String.valueOf(String.format("%.2f",selectQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Update the average lifetime of a query
+     * @param lifeTime lifetime of queries
+     */
+    public void showAverageLifetimeQuery(double lifeTime){
+        updateUI(this.clockTxtAverage,String.valueOf(String.format("%.2f",lifeTime)));
+    }
+
+
+
 }
