@@ -60,6 +60,7 @@ public class InterfaceController implements Initializable{
     @FXML private AnchorPane runPanel;
     @FXML private AnchorPane runPanelAverage;
     @FXML private AnchorPane statsPanel;
+    @FXML private AnchorPane averageGlobal;
 
     //Text Field
     @FXML private JFXTextField numberSimulationsText;
@@ -166,6 +167,50 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField qSelectAverage;
     @FXML private JFXTextField tSelectAverage;
     @FXML private JFXTextField eSelectAverage;
+
+    //----------------------------------------//
+    //                Global stats            // 
+    //----------------------------------------//
+
+    @FXML private JFXTextField clockTxtAverageGlobal;
+    @FXML private JFXTextField discardedTxtAverageGlobal;
+    @FXML private JFXTextField timeoutTxtAverageGlobal;
+
+    //queue length
+    @FXML private JFXTextField cQueueAverageGlobal;
+    @FXML private JFXTextField pQueueAverageGlobal;
+    @FXML private JFXTextField qQueueAverageGlobal;
+    @FXML private JFXTextField tQueueAverageGlobal;
+    @FXML private JFXTextField eQueueAverageGlobal;
+
+    //DDL
+    @FXML private JFXTextField cDDLAverageGlobal;
+    @FXML private JFXTextField pDDLAverageGlobal;
+    @FXML private JFXTextField qDDLAverageGlobal;
+    @FXML private JFXTextField tDDLAverageGlobal;
+    @FXML private JFXTextField eDDLAverageGlobal;
+
+    //Update
+    @FXML private JFXTextField cUpdateAverageGlobal;
+    @FXML private JFXTextField pUpdateAverageGlobal;
+    @FXML private JFXTextField qUpdateAverageGlobal;
+    @FXML private JFXTextField tUpdateAverageGlobal;
+    @FXML private JFXTextField eUpdateAverageGlobal;
+
+    //Join
+    @FXML private JFXTextField cJoinAverageGlobal;
+    @FXML private JFXTextField pJoinAverageGlobal;
+    @FXML private JFXTextField qJoinAverageGlobal;
+    @FXML private JFXTextField tJoinAverageGlobal;
+    @FXML private JFXTextField eJoinAverageGlobal;
+
+    //Select
+    @FXML private JFXTextField cSelectAverageGlobal;
+    @FXML private JFXTextField pSelectAverageGlobal;
+    @FXML private JFXTextField qSelectAverageGlobal;
+    @FXML private JFXTextField tSelectAverageGlobal;
+    @FXML private JFXTextField eSelectAverageGlobal;
+
 
     /**
      * Called to initialize a controller after its root element has been completely processed.
@@ -306,6 +351,8 @@ public class InterfaceController implements Initializable{
         statsPanel.setVisible(false);
 
         runPanelAverage.setVisible(false);
+
+        averageGlobal.setVisible(false);
     }
 
     /**
@@ -516,13 +563,85 @@ public class InterfaceController implements Initializable{
 
 
     //---------------------------------------
+    //            global average panel
+    //---------------------------------------
+    /**
+     * Shows the average size of the current queue of each module.
+     * @param averageQueueLength Array with the size of queue of each module
+     */
+    public void showQueueGlobalAverageLength(double averageQueueLength[]){
+        updateUI(this.cQueueAverageGlobal,String.valueOf(String.format("%.2f",averageQueueLength[M_CLIENTS])));
+        updateUI(this.pQueueAverageGlobal,String.valueOf(String.format("%.2f",averageQueueLength[M_PROCESSES])));
+        updateUI(this.qQueueAverageGlobal,String.valueOf(String.format("%.2f",averageQueueLength[M_QUERIES])));
+        updateUI(this.tQueueAverageGlobal,String.valueOf(String.format("%.2f",averageQueueLength[M_TRANSACTIONS])));
+        updateUI(this.eQueueAverageGlobal,String.valueOf(String.format("%.2f",averageQueueLength[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of DDL queries currently processed.
+     * @param DDLAverageTime Number of DDL queries processed by each module.
+     */
+    public void showDDLGlobalAverageTime(double DDLAverageTime[]){
+        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_CLIENTS])));
+        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_PROCESSES])));
+        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_QUERIES])));
+        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_TRANSACTIONS])));
+        updateUI(this.cDDLAverageGlobal,String.valueOf(String.format("%.2f",DDLAverageTime[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of UPDATE queries currently processed.
+     * @param UpdateQuantity Number of UPDATE queries processed by each module.
+     */
+    public void showUpdateGlobalAverageTime(double UpdateQuantity[]){
+        updateUI(this.cUpdateAverageGlobal,String.valueOf(String.format("%.2f",UpdateQuantity[M_CLIENTS])));
+        updateUI(this.pUpdateAverageGlobal,String.valueOf(String.format("%.2f",UpdateQuantity[M_PROCESSES])));
+        updateUI(this.qUpdateAverageGlobal,String.valueOf(String.format("%.2f",UpdateQuantity[M_QUERIES])));
+        updateUI(this.tUpdateAverageGlobal,String.valueOf(String.format("%.2f",UpdateQuantity[M_TRANSACTIONS])));
+        updateUI(this.eUpdateAverageGlobal,String.valueOf(String.format("%.2f",UpdateQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of JOIN queries currently processed.
+     * @param joinQuantity Number of JOIN queries processed by each module.
+     */
+    public void showJoinGlobalAverageTime(double joinQuantity[]){
+        updateUI(this.cJoinAverageGlobal,String.valueOf(String.format("%.2f",joinQuantity[M_CLIENTS])));
+        updateUI(this.pJoinAverageGlobal,String.valueOf(String.format("%.2f",joinQuantity[M_PROCESSES])));
+        updateUI(this.qJoinAverageGlobal,String.valueOf(String.format("%.2f",joinQuantity[M_QUERIES])));
+        updateUI(this.tJoinAverageGlobal,String.valueOf(String.format("%.2f",joinQuantity[M_TRANSACTIONS])));
+        updateUI(this.eJoinAverageGlobal,String.valueOf(String.format("%.2f",joinQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Shows the average number of SELECT queries currently processed.
+     * @param selectQuantity Number of SELECT queries processed by each module.
+     */
+    public void showSelectGlobalAverageTime(double selectQuantity[]){
+        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_CLIENTS])));
+        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_PROCESSES])));
+        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_QUERIES])));
+        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_TRANSACTIONS])));
+        updateUI(this.eSelectAverageGlobal,String.valueOf(String.format("%.2f",selectQuantity[M_EXECUTIONS])));
+    }
+
+    /**
+     * Update the average lifetime of a query
+     * @param lifeTime lifetime of queries
+     */
+    public void showGlobalAverageLifetimeQuery(double lifeTime){
+        updateUI(this.clockTxtAverageGlobal,String.valueOf(String.format("%.2f",lifeTime)));
+    }
+
+
+    //---------------------------------------
     //             run average panel
     //---------------------------------------
     /**
      * Shows the average size of the current queue of each module.
      * @param averageQueueLength Array with the size of queue of each module
      */
-    public void showQueueAverageLength(double averageQueueLength[]){ 
+    public void showQueueAverageLength(double averageQueueLength[]){
         updateUI(this.cQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_CLIENTS])));
         updateUI(this.pQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_PROCESSES])));
         updateUI(this.qQueueAverage,String.valueOf(String.format("%.2f",averageQueueLength[M_QUERIES])));
@@ -534,7 +653,7 @@ public class InterfaceController implements Initializable{
      * Shows the average number of DDL queries currently processed.
      * @param DDLAverageTime Number of DDL queries processed by each module.
      */
-    public void showDDLAverageTime(double DDLAverageTime[]){ 
+    public void showDDLAverageTime(double DDLAverageTime[]){
         updateUI(this.cDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_CLIENTS])));
         updateUI(this.pDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_PROCESSES])));
         updateUI(this.qDDLAverage,String.valueOf(String.format("%.2f",DDLAverageTime[M_QUERIES])));

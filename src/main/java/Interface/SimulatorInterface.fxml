@@ -917,7 +917,7 @@
          </children>
       </AnchorPane>
         <AnchorPane fx:id="statsPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="runPanelAverage1" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="averageGlobal" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="34.0" layoutY="33.0" opacity="0.4" prefHeight="14.0" prefWidth="805.0" />
             <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="70.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
@@ -1001,137 +1001,137 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="cQueueAverage1" alignment="CENTER" disable="true" layoutX="159.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="cQueueAverageGlobal" alignment="CENTER" disable="true" layoutX="159.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="pQueueAverage1" alignment="CENTER" disable="true" layoutX="297.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="pQueueAverageGlobal" alignment="CENTER" disable="true" layoutX="297.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="qQueueAverage1" alignment="CENTER" disable="true" layoutX="435.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="qQueueAverageGlobal" alignment="CENTER" disable="true" layoutX="435.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tQueueAverage1" alignment="CENTER" disable="true" layoutX="571.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="tQueueAverageGlobal" alignment="CENTER" disable="true" layoutX="571.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="eQueueAverage1" alignment="CENTER" disable="true" layoutX="711.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="eQueueAverageGlobal" alignment="CENTER" disable="true" layoutX="711.0" layoutY="241.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cDDLAverage1" alignment="CENTER" disable="true" layoutX="158.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="cDDLAverageGlobal" alignment="CENTER" disable="true" layoutX="158.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="pDDLAverage1" alignment="CENTER" disable="true" layoutX="296.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="pDDLAverageGlobal" alignment="CENTER" disable="true" layoutX="296.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="qDDLAverage1" alignment="CENTER" disable="true" layoutX="434.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="qDDLAverageGlobal" alignment="CENTER" disable="true" layoutX="434.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tDDLAverage1" alignment="CENTER" disable="true" layoutX="571.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="tDDLAverageGlobal" alignment="CENTER" disable="true" layoutX="571.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="eDDLAverage1" alignment="CENTER" disable="true" layoutX="711.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="eDDLAverageGlobal" alignment="CENTER" disable="true" layoutX="711.0" layoutY="322.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cUpdateAverage1" alignment="CENTER" disable="true" layoutX="158.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="cUpdateAverageGlobal" alignment="CENTER" disable="true" layoutX="158.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="pUpdateAverage1" alignment="CENTER" disable="true" layoutX="296.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="pUpdateAverageGlobal" alignment="CENTER" disable="true" layoutX="296.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="qUpdateAverage1" alignment="CENTER" disable="true" layoutX="434.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="qUpdateAverageGlobal" alignment="CENTER" disable="true" layoutX="434.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tUpdateAverage1" alignment="CENTER" disable="true" layoutX="571.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="tUpdateAverageGlobal" alignment="CENTER" disable="true" layoutX="571.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="eUpdateAverage1" alignment="CENTER" disable="true" layoutX="711.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="eUpdateAverageGlobal" alignment="CENTER" disable="true" layoutX="711.0" layoutY="373.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cJoinAverage1" alignment="CENTER" disable="true" layoutX="158.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="cJoinAverageGlobal" alignment="CENTER" disable="true" layoutX="158.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="pJoinAverage1" alignment="CENTER" disable="true" layoutX="296.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="pJoinAverageGlobal" alignment="CENTER" disable="true" layoutX="296.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="qJoinAverage1" alignment="CENTER" disable="true" layoutX="434.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="qJoinAverageGlobal" alignment="CENTER" disable="true" layoutX="434.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tJoinAverage1" alignment="CENTER" disable="true" layoutX="571.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="tJoinAverageGlobal" alignment="CENTER" disable="true" layoutX="571.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="eJoinAverage1" alignment="CENTER" disable="true" layoutX="711.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="eJoinAverageGlobal" alignment="CENTER" disable="true" layoutX="711.0" layoutY="421.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="cSelectAverage1" alignment="CENTER" disable="true" layoutX="158.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="cSelectAverageGlobal" alignment="CENTER" disable="true" layoutX="158.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="pSelectAverage1" alignment="CENTER" disable="true" layoutX="296.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="pSelectAverageGlobal" alignment="CENTER" disable="true" layoutX="296.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="qSelectAverage1" alignment="CENTER" disable="true" layoutX="434.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="qSelectAverageGlobal" alignment="CENTER" disable="true" layoutX="434.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="tSelectAverage1" alignment="CENTER" disable="true" layoutX="571.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="tSelectAverageGlobal" alignment="CENTER" disable="true" layoutX="571.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="eSelectAverage1" alignment="CENTER" disable="true" layoutX="711.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
+            <JFXTextField fx:id="eSelectAverageGlobal" alignment="CENTER" disable="true" layoutX="711.0" layoutY="466.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="clockTxtAverage1" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="295.0" layoutY="66.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="#7e8c8b">
+            <JFXTextField fx:id="clockTxtAverageGlobal" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="295.0" layoutY="66.0" prefHeight="34.0" prefWidth="134.0" style="-fx-text-fill: #ffffff; -fx-text-inner-color: #ffffff;" unFocusColor="#7e8c8b">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </JFXTextField>
-            <JFXTextField fx:id="discardedTxtAverage1" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="495.0" layoutY="78.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+            <JFXTextField fx:id="discardedTxtAverageGlobal" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="495.0" layoutY="78.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -1191,7 +1191,7 @@
                   <Image url="@../../resources/Images/icons_sandClock.png" />
                </image>
             </ImageView>
-            <JFXTextField fx:id="timeoutTxtAverage1" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="79.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
+            <JFXTextField fx:id="timeoutTxtAverageGlobal" alignment="CENTER" disable="true" focusColor="#05bfb9" layoutX="708.0" layoutY="79.0" prefHeight="39.0" prefWidth="134.0" style="-fx-text-fill: #ffffff;" unFocusColor="#7e8c8b">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -1201,7 +1201,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label layoutX="349.0" layoutY="12.0" opacity="0.7" text="Execution averages" textFill="#c5e2e0">
+            <Label layoutX="349.0" layoutY="12.0" opacity="0.7" text="Global run average" textFill="#c5e2e0">
                <font>
                   <Font size="20.0" />
                </font>

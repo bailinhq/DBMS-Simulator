@@ -1,7 +1,10 @@
 package main.java;
 
+import main.java.Event.QueryType;
 import main.java.Statistics.SystemStatistics;
 import main.java.Interface.InterfaceController;
+
+import static main.java.Simulator.*;
 
 
 public class Application extends Thread {
@@ -73,7 +76,88 @@ public class Application extends Thread {
 
     }
 
+    /**
+     * method that saves and returns in a vector the average life time of each type of query in each module.
+     * @return Array with the queue average sizes in the modules.
+     */
+    public double[] getAverageModulesQueueLength(){
+        double queueLength[] = new double[5];
+        queueLength[M_CLIENTS] = this.systemStatistics.getClientCommunicationsManagerQueueLength();
+        queueLength[M_PROCESSES] = this.systemStatistics.getProcessManagerQueueLength();
+        queueLength[M_QUERIES] = this.systemStatistics.getQueryProcessorQueueLength();
+        queueLength[M_TRANSACTIONS] = this.systemStatistics.getTransactionalStorageQueueLength();
+        queueLength[M_EXECUTIONS] = this.systemStatistics.getExecutorQueueLength();
+        return queueLength;
+    }
+/*
+    /**
+     * method that saves and returns in a vector the average life time of each type of query in each module.
+     * @return Array with the average life time of each type of query in each module.
+     */
+    /*public double[] getAverageTimeDDL(){
+        double DDLNumber[] = new double[5];
+        DDLNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL);
+        DDLNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL);
+        DDLNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL);
+        DDLNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL);
+        DDLNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL);
+        return DDLNumber;
+    }*/
 
+    /**
+     * method that saves and returns in a vector the average life time of each type of query in each module.
+     * @return Array with the average life time of each type of query in each module.
+     */
+    /*public double[] getAverageTimeUpdate(){
+        double updateNumber[] = new double[5];
+        updateNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+        updateNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+        updateNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+        updateNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+        updateNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE);
+        return updateNumber;
+    }*/
+
+    /**
+     * method that saves and returns in a vector the average life time of each type of query in each module.
+     * @return Array with the average life time of each type of query in each module.
+     */
+    /*public double[] getAverageTimeJoin(){
+        double joinNumber[] = new double[5];
+        joinNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+        joinNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+        joinNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+        joinNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+        joinNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN);
+        return joinNumber;
+    }*/
+
+    /**
+     * method that saves and returns in a vector the average life time of each type of query in each module.
+     * @return Array with the average life time of each type of query in each module.
+     */
+    /*public double[] getAverageTimeSelect(){
+        double selectNumber[] = new double[5];
+        selectNumber[M_CLIENTS] = this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+        selectNumber[M_PROCESSES] = this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+        selectNumber[M_QUERIES] = this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+        selectNumber[M_TRANSACTIONS] = this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+        selectNumber[M_EXECUTIONS] = this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT);
+        return selectNumber;
+    }*/
+
+    /**
+     * Method that shows the average of the data of each run.
+     */
+    public void updateAverageGlobalData(){
+        //this.interfaceController.showAverageLifetimeQuery(this.clockTime);
+        //this.interfaceController.showDDLAverageTime(this.getAverageTimeDDL());
+        //this.interfaceController.showJoinAverageTime(this.getAverageTimeJoin());
+        //this.interfaceController.showSelectAverageTime(this.getAverageTimeSelect());
+        //this.interfaceController.showUpdateAverageTime(this.getAverageTimeUpdate());
+        this.interfaceController.showQueueGlobalAverageLength(this.getAverageModulesQueueLength());
+        //this.interfaceController.updateTimeoutNumber(timeoutNumber);
+    }
 
 
 }
