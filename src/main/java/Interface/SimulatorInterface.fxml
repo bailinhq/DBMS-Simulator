@@ -164,7 +164,7 @@
             <Separator layoutX="33.0" layoutY="37.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
             </children>
       </AnchorPane>
-        <AnchorPane fx:id="systemPanel" layoutX="74.60000000000002" layoutY="5.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+        <AnchorPane fx:id="systemPanel" layoutX="74.60000000000002" layoutY="5.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
             <children>
                 <Label layoutX="347.0" layoutY="8.0" opacity="0.7" text="System configuration" textFill="#c5e2e0" AnchorPane.leftAnchor="347.0">
                     <font>
@@ -615,8 +615,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="statsPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="runPanelAverage" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="runPanelAverage" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Separator layoutX="34.0" layoutY="33.0" opacity="0.4" prefHeight="14.0" prefWidth="805.0" />
             <ImageView fitHeight="39.0" fitWidth="41.0" layoutX="70.0" layoutY="239.0" pickOnBounds="true" preserveRatio="true">
@@ -642,7 +641,7 @@
             <Line endX="936.2000122070312" endY="381.2786865234375" layoutX="-93.0" layoutY="-95.0" opacity="0.4" startX="122.67865753173828" startY="381.2786865234375" stroke="#f2f1f1" strokeWidth="3.0" />
             <Line endX="262.199951171875" endY="737.6000366210938" layoutX="-105.0" layoutY="-235.0" opacity="0.4" startX="262.199951171875" startY="413.20001220703125" stroke="#f2f1f1" strokeWidth="3.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0b3532" height="20.0" layoutX="138.0" layoutY="212.0" stroke="TRANSPARENT" strokeType="INSIDE" width="713.0" />
-            <Label layoutX="28.0" layoutY="212.0" opacity="0.6" prefHeight="20.0" prefWidth="142.0" text="Average queue Length" textFill="#a8edeb" wrapText="true">
+            <Label layoutX="28.0" layoutY="212.0" opacity="0.6" prefHeight="20.0" prefWidth="142.0" text="Average queue length" textFill="#a8edeb" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -917,5 +916,6 @@
             </JFXButton>
          </children>
       </AnchorPane>
+        <AnchorPane fx:id="statsPanel" layoutX="10.0" layoutY="10.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
     </children>
 </AnchorPane>

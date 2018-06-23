@@ -248,8 +248,7 @@ public class InterfaceController implements Initializable{
     }
 
     /**
-     * Method to show the panel of system configurations, by pressing the
-     * continue button in the simulator settings panel.
+     * Method to make signal, by pressing the next button, to show the simulation
      * @param mouseEvent Mouse click event
      */
     public void onNextButtonClicked(MouseEvent mouseEvent){
@@ -384,7 +383,7 @@ public class InterfaceController implements Initializable{
         parameters[N] = Integer.parseInt(this.nText.getText());
         parameters[P] = Integer.parseInt(this.pText.getText());
         parameters[M] = Integer.parseInt(this.mText.getText());
-        parameters[T] = Double.parseDouble(this.kText.getText());
+        parameters[T] = Double.parseDouble(this.tText.getText());
         return parameters;
     }
 

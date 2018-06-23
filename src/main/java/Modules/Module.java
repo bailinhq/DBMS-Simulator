@@ -105,4 +105,8 @@ public abstract class Module {
     public PriorityQueue<Event> getQueue() {
         return queue;
     }
+
+    public void processTimeoutEvent(){
+        --this.busyServers;
+    }
 }

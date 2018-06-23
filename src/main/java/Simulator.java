@@ -73,7 +73,6 @@ public class Simulator {
     public void initialize(){
         this.valueGenerator = new RandomValueGenerator();
         this.queue = new PriorityQueue<>(new ComparatorNormalEvent());
-        this.timeout =0;
         this.firstEvent = true;
         this.clockTime = 0;
         this.timeoutNumber = 0;
@@ -151,8 +150,9 @@ public class Simulator {
      */
     public void addEvent(Event event){
         if(isTimeOut(event)){
-            this.timeoutNumber++;
-            this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
+            ++this.timeoutNumber;
+            //this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
+            this.clientCommunicationsManagerModule.processTimeoutEvent();
         }else {
             queue.offer(event);
         }
@@ -179,9 +179,10 @@ public class Simulator {
         {
             Event event = iterator.next();
             if(isTimeOut(event)){
-                this.timeoutNumber++;
-                this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
+                ++this.timeoutNumber;
+                //this.simulationStatistics.increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
                 iterator.remove();
+                this.clientCommunicationsManagerModule.processTimeoutEvent();
             }
         }
     }
@@ -212,22 +213,22 @@ public class Simulator {
         generateNewEvent();
         while (this.clockTime <= this.maxSimulationTime){
             Event event = queue.poll();
-            //checkTimeOutSystemQueues();
+            checkTimeOutSystemQueues();
             if(event!=null){
                 this.clockTime = event.getTimeClock();
-                if(delay)
-                    this.updateData();
-                System.out.println(clockTime);
-                delay();
                 event.getCurrentModule().processEvent(event);
             }else{
                 clockTime = maxSimulationTime+1;
             }
+            if(delay)
+                this.updateData();
+            delay();
         }
         if (!delay)
             this.updateData();
 
-        /*System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
+        /*
+        System.out.println("Clientes atendidos " + numClientes + "\n Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries()+"\nLlega "+ llegan);
         System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getTotalQueries());
         System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageSizeQueue());
         System.out.println("El tiempo de DDL en Clientes es "+ this.clientCommunicationsManagerModule.statisticsOfModule.getAverageTimeInModuleOfQuery(QueryType.DDL));
