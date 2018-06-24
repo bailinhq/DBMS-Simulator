@@ -76,7 +76,7 @@ public class QueryProcessorModule extends Module {
         processingTime += this.randomValueGenerator.generateUniformDistributionValue(0,2);
 
         //permit verification --> exponential random value with mean 0.7 seconds -> 0.7 = 1/lambda -> lambda = 1/0.7
-        processingTime+= this.randomValueGenerator.generateExponentialDistributionValue(1.0/0.7);
+        processingTime += this.randomValueGenerator.generateExponentialDistributionValue(1.0/0.7);
 
         //query optimization
         processingTime += event.getQuery().getTimeOptimization();

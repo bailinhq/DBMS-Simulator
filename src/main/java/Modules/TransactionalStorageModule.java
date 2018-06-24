@@ -57,9 +57,6 @@ public class TransactionalStorageModule extends Module {
         switch (event.getQuery().getType()){
             case DDL:
                 ++queryDDL;
-                System.out.println("Se aumenta " + queryDDL);
-                if(queryDDL == 2)
-                    System.out.println("I find you");
                 if(busyServers > 0){
 
                     queue.offer(event);
@@ -104,7 +101,7 @@ public class TransactionalStorageModule extends Module {
         double timeTemp = numberServers*0.3;
 
         //time to load the blocks
-        timeTemp += event.getQuery().getNumberOfBlocks()*(0.1/10);
+        timeTemp += event.getQuery().getNumberOfBlocks()*(0.1);
 
         return timeTemp;
     }
@@ -127,7 +124,6 @@ public class TransactionalStorageModule extends Module {
 
         if(event.getQuery().getType() == QueryType.DDL) {
             --queryDDL;
-            System.out.println("Se disminuye " + queryDDL);
             processingDDL = false;
         }
 
@@ -144,13 +140,6 @@ public class TransactionalStorageModule extends Module {
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
 
 
-        /*if(queue.size()>0){
-            Event temporal = queue.poll();
-            if(temporal.getQuery().getType() == QueryType.DDL) {
-                --queryDDL;
-            }
-            processClient(temporal);
-        }*/
         //Check the local queue
         this.processNextLocalQueueEvent();
     }
@@ -163,7 +152,6 @@ public class TransactionalStorageModule extends Module {
     @Override
     public void processTimeoutEvent(Event event, boolean isQueue){
         if(event.getQuery().getType() == QueryType.DDL){
-            System.out.println("Se disminuye en timeout " + queryDDL);
             --queryDDL;
         }
         if(!isQueue){
