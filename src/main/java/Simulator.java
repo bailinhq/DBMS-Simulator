@@ -223,53 +223,6 @@ public class Simulator {
             this.updateData();
 
 
-        System.out.println(simulationStatistics.getNumberOfArrivals()+"Arrivals\n\n");
-
-        /*
-        System.out.println("Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries());
-        System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getTotalQueries());
-        System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageSizeQueue());
-        System.out.println("El tiempo de DDL en Clientes es "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL));
-        System.out.println("El tiempo de SE en Clientes es "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT));
-        System.out.println("El tiempo de UP en Clientes es "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE));
-        System.out.println("El tiempo de JOIN en Clientes es "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN));
-        //clientCommunicationsManagerModule.getStatisticsOfModule().printData();
-
-        System.out.println("\n\nEl total de consultas atendidas en Modulo Procesos fue "+ this.processManagerModule.getStatisticsOfModule().getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Procesos fue "+ this.processManagerModule.getStatisticsOfModule().getAverageSizeQueue());
-        System.out.println("El tiempo de DDL en Procesos es "+ this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL));
-        System.out.println("El tiempo de SE en Procesos es "+ this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT));
-        System.out.println("El tiempo de UP en Procesos es "+ this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE));
-        System.out.println("El tiempo de JOIN en Procesos es "+ this.processManagerModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN));
-        //processManagerModule.statisticsOfModule.printData();
-
-        System.out.println("\n\nEl total de consultas atendidas en Modulo Consultas fue "+ this.queryProcessorModule.getStatisticsOfModule().getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Consultas fue "+ this.queryProcessorModule.getStatisticsOfModule().getAverageSizeQueue());
-        System.out.println("El tiempo de DDL en Consultas es "+ this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL));
-        System.out.println("El tiempo de SE en Consultas es "+ this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT));
-        System.out.println("El tiempo de UP en Consultas es "+ this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE));
-        System.out.println("El tiempo de JOIN en Consultas es "+ this.queryProcessorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN));
-        //queryProcessorModule.statisticsOfModule.printData();
-
-
-        System.out.println("\n\nEl total de consultas atendidas en Modulo Transacciones fue "+ this.transactionalStorageModule.getStatisticsOfModule().getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Transacciones fue "+ this.transactionalStorageModule.getStatisticsOfModule().getAverageSizeQueue());
-        System.out.println("El tiempo de DDL en Transacciones es "+ this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL));
-        System.out.println("El tiempo de SE en Transacciones es "+ this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT));
-        System.out.println("El tiempo de UP en Transacciones es "+ this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE));
-        System.out.println("El tiempo de JOIN en Transacciones es "+ this.transactionalStorageModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN));
-        //transactionalStorageModule.statisticsOfModule.printData();
-
-        System.out.println("\n\nEl total de consultas atendidas en Modulo Exe fue "+ this.executorModule.getStatisticsOfModule().getTotalQueries());
-        System.out.println("El tamanio de cola promedio  en Modulo Exe fue "+ this.executorModule.getStatisticsOfModule().getAverageSizeQueue());
-        System.out.println("El tiempo de DDL en Exe es "+ this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.DDL));
-        System.out.println("El tiempo de SE en Exe es "+ this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.SELECT));
-        System.out.println("El tiempo de UP en Exe es "+ this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.UPDATE));
-        System.out.println("El tiempo de JOIN en Exe es "+ this.executorModule.getStatisticsOfModule().getAverageTimeInModuleOfQuery(QueryType.JOIN));
-        //executorModule.statisticsOfModule.printData();
-
-        System.out.println("\nEl tiempo de vida promedio de una consulta es "+ this.simulationStatistics.getTimeLifeOfQuery());
-        System.out.println("FIN");*/
     }
 
 
@@ -447,6 +400,7 @@ public class Simulator {
      * Method that shows the average of the data of each run.
      */
     public void updateAverageData(){
+        this.interfaceController.showTotalQueries(this.simulationStatistics.getNumberOfArrivals());
         this.interfaceController.showAverageTimelifeQuery(this.simulationStatistics.getTimeLifeOfQuery());
         this.interfaceController.showDDLAverageTime(this.getAverageTimeDDL());
         this.interfaceController.showJoinAverageTime(this.getAverageTimeJoin());

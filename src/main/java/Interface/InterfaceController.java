@@ -6,8 +6,10 @@ import javafx.beans.binding.Bindings;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.StageStyle;
 import main.java.Application;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
@@ -221,7 +223,7 @@ public class InterfaceController implements Initializable{
     @FXML private JFXTextField eSelectAverageGlobal;
 
     @FXML private JFXTextField confidenceIntervalTxt;
-
+    @FXML private JFXTextField totalTxt;
 
     /**
      * Called to initialize a controller after its root element has been completely processed.
@@ -352,7 +354,7 @@ public class InterfaceController implements Initializable{
             //The simulation starts running
             application.start();
         }else{
-            System.out.print("Faltan cosas");
+            showAlertMessage();
         }
     }
 
@@ -765,5 +767,22 @@ public class InterfaceController implements Initializable{
      */
     public void showConfidenceInterval(double lowerConfidence, double higherConfidence){
         updateUI(this.confidenceIntervalTxt,"[ "+String.format("%.2f",lowerConfidence)+" , "+String.format("%.2f",higherConfidence)+" ]");
+    }
+
+    public void showAlertMessage(){
+        Alert message = new Alert(Alert.AlertType.ERROR);
+        message.setTitle("Error");
+        message.setHeaderText(null);
+        message.setContentText("Incomplete parameters.\nThere can not be empty fields.");
+        message.initStyle(StageStyle.UTILITY);
+        message.showAndWait();
+    }
+
+    /**
+     * Show de numbers of queries per simulation
+     * @param total number of queries
+     */
+    public void showTotalQueries(int total){
+        updateUI(totalTxt, String.valueOf(total));
     }
 }
