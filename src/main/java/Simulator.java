@@ -398,6 +398,7 @@ public class Simulator {
      * Method that shows the average of the data of each run.
      */
     public void updateAverageData(){
+        this.interfaceController.showTotalQueries(this.simulationStatistics.getNumberOfArrivals());
         this.interfaceController.showAverageTimelifeQuery(this.simulationStatistics.getTimeLifeOfQuery());
         this.interfaceController.showDDLAverageTime(this.getAverageTimeDDL());
         this.interfaceController.showJoinAverageTime(this.getAverageTimeJoin());
