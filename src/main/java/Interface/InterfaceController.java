@@ -352,7 +352,7 @@ public class InterfaceController implements Initializable{
             //The simulation starts running
             application.start();
         }else{
-            System.out.print("Faltan cosas");
+
         }
     }
 

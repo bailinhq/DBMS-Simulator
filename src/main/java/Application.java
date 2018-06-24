@@ -63,7 +63,6 @@ public class Application extends Thread {
                 this.interfaceController.semaphore.acquire();
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                System.err.println("Application : error waiting for signal");
             }
         }
         systemStatistics.generateSystemStatistics();
@@ -72,11 +71,6 @@ public class Application extends Thread {
 
         //Show buttons to see global statistics
         this.interfaceController.hideNextButton();
-
-
-        System.out.println("Voy a esperar");
-        System.out.println("Voy a morir");
-
     }
 
     /**

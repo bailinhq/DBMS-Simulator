@@ -71,7 +71,6 @@ public abstract class Module {
                 processDeparture(event);
             break;
             default:
-                System.out.println("Error, processEvent");
                 break;
         }
     }
