@@ -30,6 +30,7 @@ public class Interface extends Application {
      * Method invoked automatically when the application is launched from the main
      * @param primaryStage Scenario or main container of the graphical interface
      * @throws Exception
+     * @throws Exception
      */
     @Override
     public void start(Stage primaryStage) throws Exception{

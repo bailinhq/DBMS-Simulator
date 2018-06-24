@@ -236,8 +236,6 @@ public class Simulator {
 
         if (!delay)
             this.updateData();
-
-
     }
 
 

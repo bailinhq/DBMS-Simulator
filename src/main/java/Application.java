@@ -77,8 +77,6 @@ public class Application extends Thread {
         this.interfaceController.showStatsButton(true);
 
 
-        System.out.println("Voy a esperar");
-        System.out.println("Voy a morir");
 
     }
 
