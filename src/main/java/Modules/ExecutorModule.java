@@ -74,11 +74,12 @@ public class ExecutorModule extends Module {
                 //Update database schema 1/2 second
                 timeTemp += 0.5;
                 break;
+            case SELECT:
+                break;
             case UPDATE:
                 //Update database schema 1 second
                 timeTemp += 1.0;
                 break;
-            case SELECT:
             case JOIN:
                 break;
         }
@@ -97,15 +98,11 @@ public class ExecutorModule extends Module {
 
         --busyServers;
 
-        //Exit to the next event
-        //event.setCurrentModule(simulator.getTransactionalStorageModule());
+         //Exit to the next event
+         event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
+         event.setEventType(EventType.RETURN);
+         this.simulator.addEvent(event);
 
-        if (!this.simulator.isTimeOut(event)) {
-            //Exit to the next event
-            event.setCurrentModule(simulator.getClientCommunicationsManagerModule());
-            event.setEventType(EventType.RETURN);
-            this.simulator.addEvent(event);
-        }
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
@@ -114,7 +111,6 @@ public class ExecutorModule extends Module {
 
         //Check the local queue
         this.processNextLocalQueueEvent();
-
-        }
+    }
 
 }
