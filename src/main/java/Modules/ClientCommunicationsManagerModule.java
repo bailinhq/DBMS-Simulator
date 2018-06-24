@@ -78,7 +78,7 @@ public class ClientCommunicationsManagerModule extends Module {
         //transmission time R = numbers of blocks of the result of the sentence.
         //B/64 blocks is returned to the connection management module.
         //double timeTemp = event.getQuery().getNumberOfBlocks();  //Interpretation 1
-        double timeTemp = event.getQuery().getNumberOfBlocks()/64; //Interpretation 2
+        double timeTemp = event.getQuery().getNumberOfBlocks()/64.0; //Interpretation 2
 
         event.setTimeClock(event.getTimeClock()+timeTemp);
         event.setEventType(EventType.DEPARTURE);

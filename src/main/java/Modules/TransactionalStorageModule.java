@@ -144,15 +144,15 @@ public class TransactionalStorageModule extends Module {
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
 
 
-        if(queue.size()>0){
+        /*if(queue.size()>0){
             Event temporal = queue.poll();
             if(temporal.getQuery().getType() == QueryType.DDL) {
                 --queryDDL;
             }
             processClient(temporal);
-        }
+        }*/
         //Check the local queue
-        //this.processNextLocalQueueEvent();
+        this.processNextLocalQueueEvent();
     }
 
     /**

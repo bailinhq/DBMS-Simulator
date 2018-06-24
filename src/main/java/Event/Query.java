@@ -52,16 +52,12 @@ public class Query {
         switch (type){
             //Read Only
             case SELECT:
-                timeOptimization = 0.1;
-                break;
             case JOIN:
                 timeOptimization = 0.1;
                 break;
 
              // No read only
             case UPDATE:
-                timeOptimization = 0.25;
-                break;
             case DDL:
                 timeOptimization = 0.25;
                 break;
@@ -87,6 +83,7 @@ public class Query {
                 break;
             case SELECT:
                 priority = 4;
+                break;
         }
         return priority;
     }

@@ -88,9 +88,9 @@ public abstract class Module {
             Event temporal = this.queue.poll();
             if (!this.simulator.isTimeOut(temporal)) {
                 if(temporal.getCurrentModule() == simulator.getTransactionalStorageModule() && temporal.getQuery().getType() == QueryType.DDL) {
-                    System.out.println("Se saca de la cola " + temporal.getEventType());
                     this.simulator.getTransactionalStorageModule().decreaseDDLNumber();
                 }
+                temporal.setTimeClock(this.simulator.getClockTime());
                 temporal.getCurrentModule().processClient(temporal);
                 isTimeOut = false;
             }else {

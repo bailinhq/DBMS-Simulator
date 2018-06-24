@@ -131,14 +131,13 @@ public class Simulator {
         Random randomGenerator = new Random();
         double random = randomGenerator.nextDouble();
         Query query;
-        if (random <= 0.30){
+        if (random < 0.30){
             query = new Query(QueryType.SELECT);
-        } else if (random <= 0.55){
+        } else if (random < 0.55){
             query = new Query(QueryType.UPDATE);
-        } else if (random <= 0.90){
+        } else if (random < 0.90){
             query = new Query(QueryType.JOIN);
         } else {
-            //query = new Query(QueryType.JOIN);
             query = new Query(QueryType.DDL);
         }
         return query;
