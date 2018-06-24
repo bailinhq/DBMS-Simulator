@@ -4,7 +4,6 @@ public class QueryStatistics {
     private double arrivalTime;
     private double arrivalTimeModule;
     private double departureTime;
-    private double timeOfQuery;
 
     /**
      * Initializes an empty QueryStatistics.
@@ -13,7 +12,6 @@ public class QueryStatistics {
         this.arrivalTime = 0.0;
         this.arrivalTimeModule = 0.0;
         this.departureTime = 0.0;
-        this.timeOfQuery = 0.0;
     }
 
     /**
@@ -54,14 +52,6 @@ public class QueryStatistics {
      */
     public void setDepartureTime(double departureTime) {
         this.departureTime = departureTime;
-    }
-
-    public double getTimeOfQuery() {
-        return timeOfQuery;
-    }
-
-    public void setTimeOfQuery(double timeOfQuery) {
-        this.timeOfQuery = timeOfQuery;
     }
 
     /**

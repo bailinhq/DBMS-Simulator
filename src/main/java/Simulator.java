@@ -222,9 +222,10 @@ public class Simulator {
         if (!delay)
             this.updateData();
 
-        /*
+
         System.out.println(simulationStatistics.getNumberOfArrivals()+"Arrivals\n\n");
 
+        /*
         System.out.println("Rechazados " + this.simulationStatistics.getDiscardedNumberOfQueries());
         System.out.println("El total de consultas atendidas en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getTotalQueries());
         System.out.println("El tamanio de cola promedio en Modulo Clientes fue "+ this.clientCommunicationsManagerModule.getStatisticsOfModule().getAverageSizeQueue());
