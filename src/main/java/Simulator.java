@@ -39,6 +39,7 @@ public class Simulator {
     private double timeout;
     private double clockTime;
     private boolean firstEvent;
+    private boolean stopSimulation;
 
     private SimulationStatistics simulationStatistics;
     private InterfaceController interfaceController;
@@ -65,6 +66,7 @@ public class Simulator {
         maxQueriesInTransactions = (Integer) parameters[5];
         maxQueriesInExecutor = (Integer) parameters[6];
         timeout = (Double) parameters[7];
+        stopSimulation = (Boolean)parameters[8];
     }
 
     /**
@@ -98,8 +100,21 @@ public class Simulator {
                                                         queryProcessorModule.getStatisticsOfModule(),
                                                         transactionalStorageModule.getStatisticsOfModule(),
                                                         executorModule.getStatisticsOfModule());
+
+        if(stopSimulation){
+            this.interfaceController.hideNextButton(true);
+            this.interfaceController.showStatsButton(false);
+        }
+
     }
 
+    /**
+     * returns true if the simulation has to be stopped
+     * @return boolean with de values
+     */
+    public boolean getStopSimulation(){
+        return stopSimulation;
+    }
 
     /**
      * Method that creates a new event (arrival to the connections module), assigns it an arrival

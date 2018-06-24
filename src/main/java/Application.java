@@ -59,11 +59,13 @@ public class Application extends Thread {
 
             systemStatistics.addToList(simulator.getSimulationStatistics());
             ++numberOfSimulationsActual;
-            try {
-                this.interfaceController.semaphore.acquire();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                System.err.println("Application : error waiting for signal");
+            if(simulator.getStopSimulation() && numberOfSimulationsActual < numberOfSimulations-1) {
+                try {
+                    this.interfaceController.semaphore.acquire();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.err.println("Application : error waiting for signal");
+                }
             }
         }
         systemStatistics.generateSystemStatistics();
@@ -71,7 +73,8 @@ public class Application extends Thread {
         this.updateAverageGlobalData();
 
         //Show buttons to see global statistics
-        this.interfaceController.hideNextButton();
+        this.interfaceController.hideNextButton(false);
+        this.interfaceController.showStatsButton(true);
 
 
         System.out.println("Voy a esperar");

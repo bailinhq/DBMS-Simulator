@@ -146,7 +146,7 @@
                     </font>
                 </Label>
                 <Separator layoutX="31.0" layoutY="517.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
-                <JFXToggleButton fx:id="delayToggle" layoutX="369.0" layoutY="364.0" prefHeight="62.0" prefWidth="142.0" text="Delay" textFill="#a8edeb">
+                <JFXToggleButton fx:id="delayToggle" layoutX="488.0" layoutY="363.0" prefHeight="62.0" prefWidth="142.0" text="Delay" textFill="#a8edeb">
                     <font>
                         <Font size="18.0" />
                     </font>
@@ -162,6 +162,11 @@
                </image>
             </ImageView>
             <Separator layoutX="33.0" layoutY="37.0" opacity="0.4" prefHeight="3.0" prefWidth="818.0" />
+            <JFXToggleButton fx:id="stopToggle" layoutX="133.0" layoutY="363.0" prefHeight="62.0" prefWidth="271.0" text="stop at each simulation" textFill="#a8edeb">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXToggleButton>
             </children>
       </AnchorPane>
         <AnchorPane fx:id="systemPanel" layoutX="74.60000000000002" layoutY="5.0" prefHeight="621.0" prefWidth="882.0" style="-fx-background-color: #0b3532;" AnchorPane.bottomAnchor="-5.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
@@ -598,7 +603,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <JFXButton buttonType="RAISED" layoutX="206.0" layoutY="564.0" onMouseClicked="#onShowStatsButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="354.0" layoutY="564.0" onMouseClicked="#onShowStatsButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show statistics" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
@@ -608,12 +613,12 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnNextAverageRealtime" buttonType="RAISED" layoutX="545.0" layoutY="564.0" onMouseClicked="#onNextButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="next" textFill="WHITE">
+            <JFXButton fx:id="btnNextAverageRealtime" buttonType="RAISED" layoutX="690.0" layoutY="564.0" onMouseClicked="#onNextButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="next" textFill="WHITE">
                <font>
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnGlobalStats" buttonType="RAISED" layoutX="538.0" layoutY="564.0" onMouseClicked="#onShowGlobalStatisticClicked" prefHeight="42.0" prefWidth="199.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show global statistics" textFill="WHITE" visible="false">
+            <JFXButton fx:id="btnGlobalStats" buttonType="RAISED" layoutX="644.0" layoutY="564.0" onMouseClicked="#onShowGlobalStatisticClicked" prefHeight="42.0" prefWidth="199.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show global statistics" textFill="WHITE" visible="false">
                <font>
                   <Font size="18.0" />
                </font>
@@ -919,7 +924,7 @@
                   <Font size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btnShowGlobalStats" buttonType="RAISED" layoutX="530.0" layoutY="564.0" onMouseClicked="#onShowGlobalStatisticClicked" prefHeight="42.0" prefWidth="199.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show global statistics" textFill="WHITE" visible="false">
+            <JFXButton fx:id="btnShowGlobalStats" buttonType="RAISED" layoutX="644.0" layoutY="564.0" onMouseClicked="#onShowGlobalStatisticClicked" prefHeight="42.0" prefWidth="199.0" style="-fx-background-color: #044c23; -fx-border-color: #ffffff;" text="show global statistics" textFill="WHITE" visible="false">
                <font>
                   <Font size="18.0" />
                </font>
@@ -1231,6 +1236,11 @@
                   <Font size="20.0" />
                </font>
             </Label>
+            <JFXButton fx:id="btnNextAverageStats1" buttonType="RAISED" layoutX="362.0" layoutY="555.0" onMouseClicked="#onExitButtonClicked" prefHeight="42.0" prefWidth="155.0" style="-fx-background-color: #700606; -fx-border-color: #ffffff;" text="Close" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </JFXButton>
          </children>
       </AnchorPane>
     </children>

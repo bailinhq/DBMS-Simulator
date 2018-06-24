@@ -87,6 +87,7 @@ public class InterfaceController implements Initializable{
 
     //delay
     @FXML private JFXToggleButton delayToggle;
+    @FXML private JFXToggleButton stopToggle;
 
 
     @FXML private JFXTextField clockTxt;
@@ -449,7 +450,7 @@ public class InterfaceController implements Initializable{
      * @return Array with system configuration
      */
     private Object[] parametersToArray(){
-        Object parameters[] = new Object[8];
+        Object parameters[] = new Object[9];
         parameters[NUMBER_SIMULATION] = Integer.parseInt(this.numberSimulationsText.getText());
         parameters[MAX_SIMULATION_TIME] = Double.parseDouble(this.simulationTimeText.getText());
         parameters[DELAY] = this.delayToggle.isSelected();
@@ -458,6 +459,7 @@ public class InterfaceController implements Initializable{
         parameters[P] = Integer.parseInt(this.pText.getText());
         parameters[M] = Integer.parseInt(this.mText.getText());
         parameters[T] = Double.parseDouble(this.tText.getText());
+        parameters[T+1] = this.stopToggle.isSelected();
         return parameters;
     }
 
@@ -744,12 +746,20 @@ public class InterfaceController implements Initializable{
 
     /**
      * Hide the next button and show the global statistics button.
+     * @param visible boolean to show de button
      */
-    public void hideNextButton(){
-        this.btnNextAverageStats.setVisible(false);
-        this.btnNextAverageRealtime.setVisible(false);
-        this.btnGlobalStats.setVisible(true);
-        this.btnShowGlobalStats.setVisible(true);
+    public void hideNextButton(boolean visible){
+        this.btnNextAverageStats.setVisible(visible);
+        this.btnNextAverageRealtime.setVisible(visible);
+    }
+
+    /**
+     * Hide the next button and show the global statistics button.
+     * @param visible boolean to show de button
+     */
+    public void showStatsButton(boolean visible){
+        this.btnGlobalStats.setVisible(visible);
+        this.btnShowGlobalStats.setVisible(visible);
     }
 
     /**
