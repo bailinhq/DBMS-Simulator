@@ -29,6 +29,7 @@ public class ClientCommunicationsManagerModule extends Module {
      */
     @Override
     public void processArrival(Event event) {
+        System.out.println(busyServers);
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTime(this.simulator.getClockTime());
 

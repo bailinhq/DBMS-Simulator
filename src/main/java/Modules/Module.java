@@ -64,13 +64,11 @@ public abstract class Module {
      */
     public void processEvent(Event event){
         switch (event.getEventType()){
-            case ARRIVAL: processArrival(event);
-                if(event.getCurrentModule() == simulator.getTransactionalStorageModule() && event.getQuery().getType() == QueryType.DDL)
-                    System.out.println("Se procesa "+event.getEventType());
+            case ARRIVAL:
+                processArrival(event);
             break;
-            case DEPARTURE: processDeparture(event);
-                if(event.getCurrentModule() == simulator.getTransactionalStorageModule() && event.getQuery().getType() == QueryType.DDL)
-                    System.out.println("Se procesa "+event.getEventType());
+            case DEPARTURE:
+                processDeparture(event);
             break;
             default:
                 System.out.println("Error, processEvent");
@@ -83,19 +81,13 @@ public abstract class Module {
      * Method to check the module's queue, so that those events that are on hold can be processed.
      */
     public void processNextLocalQueueEvent() {
-        boolean isTimeOut = true;
-        while (this.queue.size() > 0 && isTimeOut) {
+        if(this.queue.size() > 0 ) {
             Event temporal = this.queue.poll();
-            if (!this.simulator.isTimeOut(temporal)) {
-                if(temporal.getCurrentModule() == simulator.getTransactionalStorageModule() && temporal.getQuery().getType() == QueryType.DDL) {
-                    this.simulator.getTransactionalStorageModule().decreaseDDLNumber();
-                }
-                temporal.setTimeClock(this.simulator.getClockTime());
-                temporal.getCurrentModule().processClient(temporal);
-                isTimeOut = false;
-            }else {
-                temporal.getCurrentModule().processTimeoutEvent(temporal, true);
-            }
+            if(temporal.getCurrentModule() == simulator.getTransactionalStorageModule() && temporal.getQuery().getType() == QueryType.DDL) {
+                this.simulator.getTransactionalStorageModule().decreaseDDLNumber();
+             }
+             temporal.setTimeClock(this.simulator.getClockTime());
+             temporal.getCurrentModule().processClient(temporal);
         }
     }
 

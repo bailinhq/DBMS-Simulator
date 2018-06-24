@@ -149,12 +149,8 @@ public class Simulator {
      * @param event Event to be inserted into the list.
      */
     public void addEvent(Event event){
-        if(event.getCurrentModule() == transactionalStorageModule && event.getQuery().getType() == QueryType.DDL)
-            System.out.println("Se agrega a la lista de evento "+event.getEventType());
         if(!isTimeOut(event)){
             queue.offer(event);
-            if(event.getCurrentModule() == transactionalStorageModule && event.getQuery().getType() == QueryType.DDL)
-                System.out.println("No era timeout ");
         }else{
             event.getCurrentModule().processTimeoutEvent(event, false);
         }
@@ -164,7 +160,7 @@ public class Simulator {
      * Method that sends the queue of each module to be reviewed, to eliminate the timeout events that may be waiting.
      */
     public void checkTimeOutSystemQueues(){
-        checkTimeOutQueue(this.queryProcessorModule.getQueue());
+        checkTimeOutQueue(this.processManagerModule.getQueue());
         checkTimeOutQueue(this.queryProcessorModule.getQueue());
         checkTimeOutQueue(this.transactionalStorageModule.getQueue());
         checkTimeOutQueue(this.executorModule.getQueue());
@@ -176,15 +172,7 @@ public class Simulator {
      * @param queueR Queue of the module to review.
      */
     public void checkTimeOutQueue(PriorityQueue<Event> queueR){
-        Iterator<Event> iterator = queueR.iterator();
-        while (iterator.hasNext())
-        {
-            Event event = iterator.next();
-            if(isTimeOut(event)){
-                event.getCurrentModule().processTimeoutEvent(event, true);
-                iterator.remove();
-            }
-        }
+        queueR.removeIf(this::isTimeOut);
     }
 
     /**
@@ -197,9 +185,6 @@ public class Simulator {
             ++this.timeoutNumber;
             if(event.getCurrentModule()!= this.clientCommunicationsManagerModule)
                 this.clientCommunicationsManagerModule.decreaseBusyServer();
-            if(event.getQuery().getType() == QueryType.DDL && event.getCurrentModule() == transactionalStorageModule){
-                System.out.println("\n\n\nEs super timeout\n\n\n\n ");
-            }
             return true;
         }else{
             return false;
@@ -379,7 +364,7 @@ public class Simulator {
     public void delay(){
         if(delay){
             try {
-                Thread.sleep(100);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
