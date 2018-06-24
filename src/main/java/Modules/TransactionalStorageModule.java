@@ -38,11 +38,8 @@ public class TransactionalStorageModule extends Module {
         //Statistics
         event.getQuery().getQueryStatistics().setArrivalTimeModule(this.simulator.getClockTime());
 
-        if(busyServers < numberServers){
-            processClient(event);
-        }else{
-            queue.offer(event);
-        }
+
+         processClient(event);
 
         //Statistics
         this.statisticsOfModule.increaseTotalQueueSize(this.queue.size());
@@ -60,9 +57,12 @@ public class TransactionalStorageModule extends Module {
         switch (event.getQuery().getType()){
             case DDL:
                 ++queryDDL;
+                System.out.println("Se aumenta " + queryDDL);
+                if(queryDDL == 2)
+                    System.out.println("I find you");
                 if(busyServers > 0){
 
-                    queue.add(event);
+                    queue.offer(event);
                     processedEvent = false;
                 }else{
                     ++busyServers;
@@ -74,11 +74,11 @@ public class TransactionalStorageModule extends Module {
             case UPDATE:
             case SELECT:
             case JOIN:
-                if(busyServers<numberServers && !processingDDL && queryDDL == 0){
+                if(busyServers<numberServers && queryDDL==0 && !processingDDL ){
                     ++busyServers;
                     event.setTimeClock(event.getTimeClock()+getServiceTime(event));
                 }else {
-                    queue.add(event);
+                    queue.offer(event);
                     processedEvent = false;
                 }
 
@@ -119,29 +119,66 @@ public class TransactionalStorageModule extends Module {
     public void processDeparture(Event event) {
         //Exit to the next event
         --busyServers;
+        if(event.getQuery().getType() == QueryType.DDL)
+            System.out.println(" ");
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
         if(event.getQuery().getType() == QueryType.DDL) {
             --queryDDL;
+            System.out.println("Se disminuye " + queryDDL);
             processingDDL = false;
         }
 
-        if (!this.simulator.isTimeOut(event)) {
-            //Exit to the next event
-            event.setCurrentModule(simulator.getExecutorModule());
-            event.setEventType(EventType.ARRIVAL);
-            this.simulator.addEvent(event);
-        }
+
+         //Exit to the next event
+         event.setCurrentModule(simulator.getExecutorModule());
+         event.setEventType(EventType.ARRIVAL);
+         this.simulator.addEvent(event);
+
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTimeModule(),this.simulator.getClockTime());
 
+
+        if(queue.size()>0){
+            Event temporal = queue.poll();
+            if(temporal.getQuery().getType() == QueryType.DDL) {
+                --queryDDL;
+            }
+            processClient(temporal);
+        }
         //Check the local queue
-        this.processNextLocalQueueEvent();
+        //this.processNextLocalQueueEvent();
+    }
+
+    /**
+     * Process event that made a different "timeout"
+     * @param event event that made timeout
+     * @param isQueue Boolean to know if it made timeout in queue
+     */
+    @Override
+    public void processTimeoutEvent(Event event, boolean isQueue){
+        if(event.getQuery().getType() == QueryType.DDL){
+            System.out.println("Se disminuye en timeout " + queryDDL);
+            --queryDDL;
+        }
+        if(!isQueue){
+            --this.busyServers;
+            if(event.getQuery().getType() == QueryType.DDL){
+                processingDDL = false;
+            }
+        }
+    }
+
+    /**
+     * Decrease DDL number
+     */
+    public void decreaseDDLNumber(){
+        --queryDDL;
     }
 
 }

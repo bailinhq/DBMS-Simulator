@@ -83,7 +83,6 @@ public class ClientCommunicationsManagerModule extends Module {
         event.setTimeClock(event.getTimeClock()+timeTemp);
         event.setEventType(EventType.DEPARTURE);
         this.simulator.addEvent(event);
-        System.out.println(event.getTimeClock()+"Time Return\n");
     }
 
 
@@ -98,7 +97,6 @@ public class ClientCommunicationsManagerModule extends Module {
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
-        System.out.println(event.getQuery().getQueryStatistics().getDepartureTime()+"Time Departure\n");
         this.statisticsOfModule.increaseNumberOfQuery(event.getQuery().getType());
         this.statisticsOfModule.increaseTimeOfQuery(event.getQuery().getType(),event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
         this.simulator.getSimulationStatistics().increaseTimeLife(event.getQuery().getQueryStatistics().getArrivalTime(),event.getQuery().getQueryStatistics().getDepartureTime());
@@ -123,8 +121,12 @@ public class ClientCommunicationsManagerModule extends Module {
         }
     }
 
-    public void processTimeoutEvent(){
-        --this.busyServers;
+    /**
+     * decrease busy servers
+     */
+    public void decreaseBusyServer(){
+        --busyServers;
     }
+
 
 }

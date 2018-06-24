@@ -77,12 +77,12 @@ public class ProcessManagerModule extends Module {
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
-        if (!this.simulator.isTimeOut(event)) {
-            //Exit to the next event
-            event.setCurrentModule(simulator.getQueryProcessorModule());
-            event.setEventType(EventType.ARRIVAL);
-            this.simulator.addEvent(event);
-        }
+
+         //Exit to the next event
+         event.setCurrentModule(simulator.getQueryProcessorModule());
+         event.setEventType(EventType.ARRIVAL);
+         this.simulator.addEvent(event);
+
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());

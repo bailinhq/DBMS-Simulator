@@ -78,7 +78,6 @@ public class QueryProcessorModule extends Module {
         //permit verification --> exponential random value with mean 0.7 seconds -> 0.7 = 1/lambda -> lambda = 1/0.7
         processingTime+= this.randomValueGenerator.generateExponentialDistributionValue(1.0/0.7);
 
-        //TODO definir si realmente la consulta debe saber cuanto dura para que la optimizen.
         //query optimization
         processingTime += event.getQuery().getTimeOptimization();
 
@@ -101,12 +100,12 @@ public class QueryProcessorModule extends Module {
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());
 
 
-        if (!this.simulator.isTimeOut(event)) {
-            //Exit to the next event
-            event.setCurrentModule(simulator.getTransactionalStorageModule());
-            event.setEventType(EventType.ARRIVAL);
-            this.simulator.addEvent(event);
-        }
+
+        //Exit to the next event
+        event.setCurrentModule(simulator.getTransactionalStorageModule());
+        event.setEventType(EventType.ARRIVAL);
+        this.simulator.addEvent(event);
+
 
         //Statistics
         event.getQuery().getQueryStatistics().setDepartureTime(this.simulator.getClockTime());

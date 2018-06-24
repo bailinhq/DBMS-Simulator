@@ -138,6 +138,7 @@ public class Simulator {
         } else if (random <= 0.90){
             query = new Query(QueryType.JOIN);
         } else {
+            //query = new Query(QueryType.JOIN);
             query = new Query(QueryType.DDL);
         }
         return query;
@@ -149,8 +150,14 @@ public class Simulator {
      * @param event Event to be inserted into the list.
      */
     public void addEvent(Event event){
+        if(event.getCurrentModule() == transactionalStorageModule && event.getQuery().getType() == QueryType.DDL)
+            System.out.println("Se agrega a la lista de evento "+event.getEventType());
         if(!isTimeOut(event)){
             queue.offer(event);
+            if(event.getCurrentModule() == transactionalStorageModule && event.getQuery().getType() == QueryType.DDL)
+                System.out.println("No era timeout ");
+        }else{
+            event.getCurrentModule().processTimeoutEvent(event, false);
         }
     }
 
@@ -175,6 +182,7 @@ public class Simulator {
         {
             Event event = iterator.next();
             if(isTimeOut(event)){
+                event.getCurrentModule().processTimeoutEvent(event, true);
                 iterator.remove();
             }
         }
@@ -188,7 +196,11 @@ public class Simulator {
     public boolean isTimeOut(Event event){
         if((event.getTimeClock() - event.getQuery().getQueryStatistics().getArrivalTime())>this.timeout){
             ++this.timeoutNumber;
-            this.clientCommunicationsManagerModule.processTimeoutEvent();
+            if(event.getCurrentModule()!= this.clientCommunicationsManagerModule)
+                this.clientCommunicationsManagerModule.decreaseBusyServer();
+            if(event.getQuery().getType() == QueryType.DDL && event.getCurrentModule() == transactionalStorageModule){
+                System.out.println("\n\n\nEs super timeout\n\n\n\n ");
+            }
             return true;
         }else{
             return false;

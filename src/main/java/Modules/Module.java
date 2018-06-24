@@ -1,6 +1,7 @@
 package main.java.Modules;
 
 import main.java.Event.Event;
+import main.java.Event.QueryType;
 import main.java.RandomValueGenerator;
 import main.java.Simulator;
 import main.java.Statistics.ModuleStatistics;
@@ -64,8 +65,12 @@ public abstract class Module {
     public void processEvent(Event event){
         switch (event.getEventType()){
             case ARRIVAL: processArrival(event);
+                if(event.getCurrentModule() == simulator.getTransactionalStorageModule() && event.getQuery().getType() == QueryType.DDL)
+                    System.out.println("Se procesa "+event.getEventType());
             break;
             case DEPARTURE: processDeparture(event);
+                if(event.getCurrentModule() == simulator.getTransactionalStorageModule() && event.getQuery().getType() == QueryType.DDL)
+                    System.out.println("Se procesa "+event.getEventType());
             break;
             default:
                 System.out.println("Error, processEvent");
@@ -82,8 +87,14 @@ public abstract class Module {
         while (this.queue.size() > 0 && isTimeOut) {
             Event temporal = this.queue.poll();
             if (!this.simulator.isTimeOut(temporal)) {
-                processClient(temporal);
+                if(temporal.getCurrentModule() == simulator.getTransactionalStorageModule() && temporal.getQuery().getType() == QueryType.DDL) {
+                    System.out.println("Se saca de la cola " + temporal.getEventType());
+                    this.simulator.getTransactionalStorageModule().decreaseDDLNumber();
+                }
+                temporal.getCurrentModule().processClient(temporal);
                 isTimeOut = false;
+            }else {
+                temporal.getCurrentModule().processTimeoutEvent(temporal, true);
             }
         }
     }
@@ -104,5 +115,14 @@ public abstract class Module {
         return queue;
     }
 
-
+    /**
+     * Process event that made a different "timeout"
+     * @param event event that made timeout
+     * @param isQueue Boolean to know if it made timeout in queue
+     */
+    public void processTimeoutEvent(Event event, boolean isQueue){
+        if(!isQueue){
+            --this.busyServers;
+        }
+    }
 }
